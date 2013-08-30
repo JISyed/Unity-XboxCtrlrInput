@@ -12,4 +12,4 @@ This repo includes `XboxCtrlrInput.cs` and an example project using Unity 4.2 to
 
 `XboxCtrlrInput.cs` itself is not a Unity script and thus does not need to be attached to any GameObject. Unity's `Input` class works in a similar way. Also like `Input`, you cannot inherit from `XboxCtrlrInput` because it's a sealed class. `XboxCtrlrInput` should work on older versions of Unity that support joystick input.
 
-For documentation, refer to the [wiki](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki "XboxCtrlrInput Wiki") (*also a work in progress*).
+For documentation, refer to the [wiki](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki "XboxCtrlrInput Wiki") ( *also a work in progress* ).
