@@ -44,6 +44,8 @@ public class MovePlayer : MonoBehaviour
 		
 		newPosition = transform.position;
 		
+		playerNumber = 0;
+		
 		//XboxCtrlrInput.DEBUGLogControllerNames();
 	}
 	

@@ -264,7 +264,7 @@ public sealed class XboxCtrlrInput
 	
 	private static bool IsControllerNumberValid(int ctrlrNum)
 	{
-		if(ctrlrNum > 0 && ctrlrNum <= 4)
+		if(ctrlrNum >= 0 && ctrlrNum <= 4)
 		{
 			return true;
 		}
