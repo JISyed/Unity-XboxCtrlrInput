@@ -276,6 +276,14 @@ public sealed class XboxCtrlrInput
 		return false;
 	}
 	
+	private static float RefactorRange(float oldRangeValue)
+	{
+		// Assumes you want to take a number from -1 to 1 range
+		// And turn it into a number from a 0 to 1 range
+		
+		return ((oldRangeValue + 1.0f) / 2.0f );
+	}
+	
 	private static string DetermineButtonCode(XboxButton btn, int ctrlrNum)
 	{
 		string r = "";
@@ -427,6 +435,11 @@ public sealed class XboxCtrlrInput
 			if(axis == XboxAxis.LeftTrigger)
 			{
 				newAxisValue = -newAxisValue;
+				newAxisValue = RefactorRange(newAxisValue);
+			}
+			else if(axis == XboxAxis.RightTrigger)
+			{
+				newAxisValue = RefactorRange(newAxisValue);
 			}
 			else if(axis == XboxAxis.RightStickY)
 			{
@@ -438,8 +451,13 @@ public sealed class XboxCtrlrInput
 			if(axis == XboxAxis.RightTrigger)
 			{
 				newAxisValue = -newAxisValue;
+				newAxisValue = RefactorRange(newAxisValue);
 			}
-			if(axis == XboxAxis.RightStickY)
+			else if(axis == XboxAxis.LeftTrigger)
+			{
+				newAxisValue = RefactorRange(newAxisValue);
+			}
+			else if(axis == XboxAxis.RightStickY)
 			{
 				newAxisValue = -newAxisValue;
 			}
