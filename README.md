@@ -22,6 +22,8 @@ The goals of `XboxCtrlrInput` are:
 
 Download the [XboxCtrlrInput class file](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/XboxCtrlrInput.cs) and then put it into your Unity project under the `Assets/` folder. It can be anywhere in that folder.
 
+Next, take the [copy of the Unity Input Manager](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/InputManagerCopy.txt) and replace the contents of your project's `/ProjectSettings/InputManager.asset` with the contents of the copy.
+
 It's not a `MonoBehavior`, so no need to attach it like a script.
 
 **Note for Mac users:** Be sure to install [Tattie Bogle drivers](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver).  
