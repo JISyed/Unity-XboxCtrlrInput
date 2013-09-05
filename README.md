@@ -1,5 +1,5 @@
-Unity-XboxCtrlrInput
-====================
+XboxCtrlrInput for Unity
+========================
 
 __*Note: This is a work in progress! It's not ready for production use.*__
 
