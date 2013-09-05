@@ -37,7 +37,7 @@ public sealed class XboxCtrlrInput
 {
 	// ------------------------ Members ----------------------- //
 	
-	private static int NumOfControllers = -1;
+	//private static int NumOfControllers = -1;
 	
 	
 	// ------------------------ Methods ----------------------- //
