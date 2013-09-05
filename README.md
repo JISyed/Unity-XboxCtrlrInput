@@ -29,7 +29,7 @@ It's not a `MonoBehavior`, so no need to attach it like a script.
 
 ### Documentation
 
-For documentation, refer to the [wiki](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki "XboxCtrlrInput Wiki").
+For documentation, refer to the [wiki](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki#reference "XboxCtrlrInput Wiki").
 
 ### Issues
 
