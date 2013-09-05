@@ -1,7 +1,7 @@
 XboxCtrlrInput for Unity
 ========================
 
-__*Note: This is a work in progress! It's not ready for production use.*__
+__*Note: This is a work in progress! It's not ready for production use.*__  
 Feel free to contribute. You'll need at least Unity 4.2 or greater.
 
 ### Decription
