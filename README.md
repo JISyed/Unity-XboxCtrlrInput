@@ -3,13 +3,34 @@ Unity-XboxCtrlrInput
 
 __*Note: This is a work in progress! It's not ready for production use.*__
 
-`XboxCtrlrInput` is a C# class for Unity3D that handles Xbox 360 controller input. It's used in the same way as Unity's `Input` class. The goals of `XboxCtrlrInput` are:
+### Decription
+
+`XboxCtrlrInput` is a C# class for Unity3D that handles Xbox 360 controller input. It's used in the same way as Unity's `Input` class. It's not a Unity script and thus does not need to be attached to any GameObject. Unity's `Input` class works in a similar way.
+
+This repo includes `XboxCtrlrInput.cs` and an example project using Unity 4.2 to demonstrate Xbox controller input. 
+
+
+### Goals
+
+The goals of `XboxCtrlrInput` are:
 
 1.   To be able to make simple calls to Xbox controller input that works on Mac, Windows, and Linux (Ubuntu),
 2.   And to be able to handle multiple Xbox controllers that works as you expect.
 
-This repo includes `XboxCtrlrInput.cs` and an example project using Unity 4.2 to demonstrate Xbox controller input. 
 
-`XboxCtrlrInput.cs` itself is not a Unity script and thus does not need to be attached to any GameObject. Unity's `Input` class works in a similar way. Also like `Input`, you cannot inherit from `XboxCtrlrInput` because it's a sealed class. `XboxCtrlrInput` should work on older versions of Unity that support joystick input.
+### How To Use
 
-For documentation, refer to the [wiki](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki "XboxCtrlrInput Wiki") ( *also a work in progress* ).
+Download the [XboxCtrlrInput class file](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/XboxCtrlrInput.cs) and then put it into your Unity project under the `Assets/` folder. It can be anywhere in that folder.
+
+It's not a `MonoBehavior`, so no need to attach it like a script.
+
+**Note for Mac users:** Be sure to install [Tattie Bogle drivers](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver).  
+
+
+### Documentation
+
+For documentation, refer to the [wiki](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki "XboxCtrlrInput Wiki").
+
+### Issues
+
+Refer to the [Issues page](https://github.com/JISyed/Unity-XboxCtrlrInput/issues).
