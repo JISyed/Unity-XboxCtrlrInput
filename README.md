@@ -37,3 +37,7 @@ For documentation, refer to the [wiki](https://github.com/JISyed/Unity-XboxCtrlr
 ### Issues
 
 Refer to the [Issues page](https://github.com/JISyed/Unity-XboxCtrlrInput/issues).
+
+### License
+
+Everything in this repository is public domain, including the code. I encourage everyone to use and even modify the code to your own specifications, and of course to contribute to this repo by forking the project. See [UNLICENSE.md](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/UNLICENSE.md).
