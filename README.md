@@ -20,6 +20,10 @@ The goals of `XboxCtrlrInput` are:
 
 You can read on the motivation for starting this project [here](http://jibransyed.wordpress.com/2013/09/07/the-motivation-behind-xboxctrlrinput/).
 
+### What Works
+
+If you want to find out what currently works (such as button mappings), refer to the [What Works](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/What-Works) page.
+
 ### How To Use
 
 Download the [XboxCtrlrInput class file](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/XboxCtrlrInput.cs) and then put it into your Unity project under the `Assets/` folder. It can be anywhere in that folder.
