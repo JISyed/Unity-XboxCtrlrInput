@@ -18,6 +18,7 @@ The goals of `XboxCtrlrInput` are:
 1.   To be able to make simple calls to Xbox controller input that works on Mac, Windows, and Linux (Ubuntu),
 2.   And to be able to handle multiple Xbox controllers that works as you expect.
 
+You can read on the motivation for starting this project [here](http://jibransyed.wordpress.com/2013/09/07/the-motivation-behind-xboxctrlrinput/).
 
 ### How To Use
 
