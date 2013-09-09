@@ -49,7 +49,7 @@ If you want to find out what currently works (such as button mappings), refer to
 
 ### Documentation
 
-For documentation, including information about the included enumerations and methods, refer to the [Coding References](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/Coding-Reference) page on the wiki.
+For documentation, including information about the included enumerations and methods, refer to the [Coding References](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/Coding-Reference) page on the wiki. A diagram showing all the labeled Xbox inputs can also be found there.
 
 ### Issues
 
