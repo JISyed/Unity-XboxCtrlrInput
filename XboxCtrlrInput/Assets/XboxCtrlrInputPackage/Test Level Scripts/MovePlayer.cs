@@ -113,8 +113,8 @@ public class MovePlayer : MonoBehaviour
 		newPosition = transform.position;
 		axisX = XCI.GetAxis(XboxAxis.RightStickX, playerNumber);
 		axisY = XCI.GetAxis(XboxAxis.RightStickY, playerNumber);
-		newPosX = newPosition.x + (axisX * maxMoveSpeed * Time.deltaTime);
-		newPosZ = newPosition.z + (axisY * maxMoveSpeed * Time.deltaTime);
+		newPosX = newPosition.x + (axisX * maxMoveSpeed * 0.3f * Time.deltaTime);
+		newPosZ = newPosition.z + (axisY * maxMoveSpeed * 0.3f * Time.deltaTime);
 		newPosition = new Vector3(newPosX, transform.position.y, newPosZ);
 		transform.position = newPosition;
 		
