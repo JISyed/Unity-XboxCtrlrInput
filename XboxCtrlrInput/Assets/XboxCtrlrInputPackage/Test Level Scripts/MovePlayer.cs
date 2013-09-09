@@ -64,7 +64,7 @@ public class MovePlayer : MonoBehaviour
 		// Slam
 		if(XCI.GetButtonDown(XboxButton.RightStick, playerNumber) && !canJump)
 		{
-			rigidbody.AddRelativeForce(0.0f, -jumpImpulse, 0.0f, ForceMode.Impulse);
+			rigidbody.AddRelativeForce(0.0f, -jumpImpulse * 1.5f, 0.0f, ForceMode.Impulse);
 		}
 		
 		
