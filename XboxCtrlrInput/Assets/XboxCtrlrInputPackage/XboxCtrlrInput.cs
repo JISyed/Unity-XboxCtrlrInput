@@ -5,6 +5,9 @@ namespace XboxCtrlrInput
 	
 	// ================= Enumerations ==================== //
 	
+	/// <summary>
+	/// List of enumerated identifiers for Xbox buttons.
+	/// </summary>
 	public enum XboxButton
 	{
 		A,
@@ -19,6 +22,9 @@ namespace XboxCtrlrInput
 		RightBumper
 	}
 	
+	/// <summary>
+	/// List of enumerated identifiers for Xbox D-Pad directions.
+	/// </summary>
 	public enum XboxDPad
 	{
 		Up,
@@ -27,6 +33,9 @@ namespace XboxCtrlrInput
 		Right
 	}
 	
+	/// <summary>
+	/// List of enumerated identifiers for Xbox axis.
+	/// </summary>
 	public enum XboxAxis
 	{
 		LeftStickX,
@@ -50,6 +59,8 @@ namespace XboxCtrlrInput
 		
 		// >>> For Buttons <<< //
 		
+		/// <summary> Returns <c>true</c> if the specified button is held down by any controller. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
 		public static bool GetButton(XboxButton button)
 		{
 			string btnCode = DetermineButtonCode(button, 0);
@@ -62,6 +73,9 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
+		/// <summary> Returns <c>true</c> if the specified button is held down by a specified controller. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. </param>
 		public static bool GetButton(XboxButton button, int controllerNumber)
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
@@ -76,6 +90,8 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
+		/// <summary> Returns <c>true</c> at the frame the specified button starts to press down (not held down) by any controller. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
 		public static bool GetButtonDown(XboxButton button)
 		{
 			string btnCode = DetermineButtonCode(button, 0);
@@ -88,6 +104,9 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
+		/// <summary> Returns <c>true</c> at the frame the specified button starts to press down (not held down) by a specified controller. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. </param>
 		public static bool GetButtonDown(XboxButton button, int controllerNumber)
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
@@ -102,6 +121,8 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
+		/// <summary> Returns <c>true</c> at the frame the specified button is released by any controller. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
 		public static bool GetButtonUp(XboxButton button)
 		{
 			string btnCode = DetermineButtonCode(button, 0);
@@ -114,6 +135,9 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
+		/// <summary> Returns <c>true</c> at the frame the specified button is released by a specified controller. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. </param>
 		public static bool GetButtonUp(XboxButton button, int controllerNumber)
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
@@ -130,6 +154,8 @@ namespace XboxCtrlrInput
 		
 		// >>> For D-Pad <<< //
 		
+		/// <summary> Returns <c>true</c> if the specified D-Pad direction is pressed down by any controller. </summary>
+		/// <param name='padDirection'> An identifier for the specified D-Pad direction to be tested. </param>
 		public static bool GetDPad(XboxDPad padDirection)
 		{
 			bool r = false;
@@ -158,6 +184,9 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
+		/// <summary> Returns <c>true</c> if the specified D-Pad direction is pressed down by a specified controller. </summary>
+		/// <param name='padDirection'> An identifier for the specified D-Pad direction to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the D-Pad. </param>
 		public static bool GetDPad(XboxDPad padDirection, int controllerNumber)
 		{
 			bool r = false;
@@ -188,6 +217,8 @@ namespace XboxCtrlrInput
 		
 		// >>> For Axis <<< //
 		
+		/// <summary> Returns the analog number of the specified axis from any controller. </summary>
+		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
 		public static float GetAxis(XboxAxis axis)
 		{
 			float r = 0.0f;
@@ -199,6 +230,9 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
+		/// <summary> Returns the float number of the specified axis from a specified controller. </summary>
+		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the axis. </param>
 		public static float GetAxis(XboxAxis axis, int controllerNumber)
 		{
 			float r = 0.0f;
@@ -210,6 +244,8 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
+		/// <summary> Returns the float number of the specified axis from any controller without Unity's smoothing filter. </summary>
+		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
 		public static float GetAxisRaw(XboxAxis axis)
 		{
 			float r = 0.0f;
@@ -221,6 +257,9 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
+		/// <summary> Returns the float number of the specified axis from a specified controller without Unity's smoothing filter. </summary>
+		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the axis. </param>
 		public static float GetAxisRaw(XboxAxis axis, int controllerNumber)
 		{
 			float r = 0.0f;
@@ -233,12 +272,15 @@ namespace XboxCtrlrInput
 		}
 		
 		// >>> Other important functions <<< //
+		// NOTE: These need inprovement/refactoring. Not recommended to use these yet.
 		
+		/// <summary> For testing. Not recommended to use. </summary>
 		public static int GetNumPluggedCtrlrs()
 		{
 			return Input.GetJoystickNames().Length;
 		}
 		
+		/// <summary> For testing. Not recommended to use. </summary>
 		public static void DEBUGLogControllerNames()
 		{
 			string[] cNames = Input.GetJoystickNames();
