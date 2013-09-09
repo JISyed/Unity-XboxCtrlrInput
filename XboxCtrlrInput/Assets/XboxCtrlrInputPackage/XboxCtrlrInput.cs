@@ -1,546 +1,553 @@
 ﻿using UnityEngine;
 
-
-public enum XboxButton
+namespace XboxCtrlrInput
 {
-	A,
-	B,
-	X,
-	Y,
-	Start,
-	Back,
-	LeftStick,
-	RightStick,
-	LeftBumper,
-	RightBumper
-}
-
-public enum XboxDPad
-{
-	Up,
-	Down,
-	Left,
-	Right
-}
-
-public enum XboxAxis
-{
-	LeftStickX,
-	LeftStickY,
-	RightStickX,
-	RightStickY,
-	LeftTrigger,
-	RightTrigger
-}
-
-public sealed class XboxCtrlrInput 
-{
-	// ------------------------ Members ----------------------- //
 	
-	//private static int NumOfControllers = -1;
+	// ================= Enumerations ==================== //
 	
-	
-	// ------------------------ Methods ----------------------- //
-	
-	// For buttons
-	
-	public static bool GetButton(XboxButton button)
+	public enum XboxButton
 	{
-		string btnCode = DetermineButtonCode(button, 0);
+		A,
+		B,
+		X,
+		Y,
+		Start,
+		Back,
+		LeftStick,
+		RightStick,
+		LeftBumper,
+		RightBumper
+	}
+	
+	public enum XboxDPad
+	{
+		Up,
+		Down,
+		Left,
+		Right
+	}
+	
+	public enum XboxAxis
+	{
+		LeftStickX,
+		LeftStickY,
+		RightStickX,
+		RightStickY,
+		LeftTrigger,
+		RightTrigger
+	}
+	
+	// ================= Class ==================== //
+	
+	public sealed class XCI 
+	{
+		// ------------ Members --------------- //
 		
-		if(Input.GetKey(btnCode))
+		//private static int NumOfControllers = -1;
+		
+		
+		// ------------ Methods --------------- //
+		
+		// >>> For Buttons <<< //
+		
+		public static bool GetButton(XboxButton button)
 		{
-			return true;
-		}
+			string btnCode = DetermineButtonCode(button, 0);
 			
-		return false;
-	}
-	
-	public static bool GetButton(XboxButton button, int controllerNumber)
-	{
-		if(!IsControllerNumberValid(controllerNumber))  return false;
-		
-		string btnCode = DetermineButtonCode(button, controllerNumber);
-		
-		if(Input.GetKey(btnCode))
-		{
-			return true;
+			if(Input.GetKey(btnCode))
+			{
+				return true;
+			}
+				
+			return false;
 		}
+		
+		public static bool GetButton(XboxButton button, int controllerNumber)
+		{
+			if(!IsControllerNumberValid(controllerNumber))  return false;
 			
-		return false;
-	}
-	
-	public static bool GetButtonDown(XboxButton button)
-	{
-		string btnCode = DetermineButtonCode(button, 0);
-		
-		if(Input.GetKeyDown(btnCode))
-		{
-			return true;
-		}
+			string btnCode = DetermineButtonCode(button, controllerNumber);
 			
-		return false;
-	}
-	
-	public static bool GetButtonDown(XboxButton button, int controllerNumber)
-	{
-		if(!IsControllerNumberValid(controllerNumber))  return false;
-		
-		string btnCode = DetermineButtonCode(button, controllerNumber);
-		
-		if(Input.GetKeyDown(btnCode))
-		{
-			return true;
+			if(Input.GetKey(btnCode))
+			{
+				return true;
+			}
+				
+			return false;
 		}
+		
+		public static bool GetButtonDown(XboxButton button)
+		{
+			string btnCode = DetermineButtonCode(button, 0);
 			
-		return false;
-	}
-	
-	public static bool GetButtonUp(XboxButton button)
-	{
-		string btnCode = DetermineButtonCode(button, 0);
-		
-		if(Input.GetKeyUp(btnCode))
-		{
-			return true;
+			if(Input.GetKeyDown(btnCode))
+			{
+				return true;
+			}
+				
+			return false;
 		}
+		
+		public static bool GetButtonDown(XboxButton button, int controllerNumber)
+		{
+			if(!IsControllerNumberValid(controllerNumber))  return false;
 			
-		return false;
-	}
-	
-	public static bool GetButtonUp(XboxButton button, int controllerNumber)
-	{
-		if(!IsControllerNumberValid(controllerNumber))  return false;
-		
-		string btnCode = DetermineButtonCode(button, controllerNumber);
-		
-		if(Input.GetKeyUp(btnCode))
-		{
-			return true;
-		}
+			string btnCode = DetermineButtonCode(button, controllerNumber);
 			
-		return false;
-	}
-	
-	// For D-Pad
-	
-	public static bool GetDPad(XboxDPad padDirection)
-	{
-		bool r = false;
-		string inputCode = "";
-		
-		if(OnMac())
-		{
-			inputCode = DetermineDPadMac(padDirection, 0);
-			r = Input.GetKey(inputCode);
+			if(Input.GetKeyDown(btnCode))
+			{
+				return true;
+			}
+				
+			return false;
 		}
-		else
+		
+		public static bool GetButtonUp(XboxButton button)
 		{
-			inputCode = DetermineDPad(padDirection, 0);
+			string btnCode = DetermineButtonCode(button, 0);
 			
-			switch(padDirection)
+			if(Input.GetKeyUp(btnCode))
 			{
-				case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
-				case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
-				case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
-				case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
-				
-				default: r = false; break;
+				return true;
 			}
+				
+			return false;
 		}
 		
-		return r;
-	}
-	
-	public static bool GetDPad(XboxDPad padDirection, int controllerNumber)
-	{
-		bool r = false;
-		string inputCode = "";
-		
-		if(OnMac())
+		public static bool GetButtonUp(XboxButton button, int controllerNumber)
 		{
-			inputCode = DetermineDPadMac(padDirection, controllerNumber);
-			r = Input.GetKey(inputCode);
-		}
-		else
-		{
-			inputCode = DetermineDPad(padDirection, controllerNumber);
+			if(!IsControllerNumberValid(controllerNumber))  return false;
 			
-			switch(padDirection)
+			string btnCode = DetermineButtonCode(button, controllerNumber);
+			
+			if(Input.GetKeyUp(btnCode))
 			{
-				case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
-				case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
-				case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
-				case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
+				return true;
+			}
 				
-				default: r = false; break;
-			}
+			return false;
 		}
 		
-		return r;
-	}
-	
-	// For axis
-	
-	public static float GetAxis(XboxAxis axis)
-	{
-		float r = 0.0f;
-		string axisCode = DetermineAxisCode(axis, 0);
+		// >>> For D-Pad <<< //
 		
-		r = Input.GetAxis(axisCode);
-		r = AdjustAxisValues(r, axis);
-		
-		return r;
-	}
-	
-	public static float GetAxis(XboxAxis axis, int controllerNumber)
-	{
-		float r = 0.0f;
-		string axisCode = DetermineAxisCode(axis, controllerNumber);
-		
-		r = Input.GetAxis(axisCode);
-		r = AdjustAxisValues(r, axis);
-		
-		return r;
-	}
-	
-	public static float GetAxisRaw(XboxAxis axis)
-	{
-		float r = 0.0f;
-		string axisCode = DetermineAxisCode(axis, 0);
-		
-		r = Input.GetAxisRaw(axisCode);
-		r = AdjustAxisValues(r, axis);
-		
-		return r;
-	}
-	
-	public static float GetAxisRaw(XboxAxis axis, int controllerNumber)
-	{
-		float r = 0.0f;
-		string axisCode = DetermineAxisCode(axis, controllerNumber);
-		
-		r = Input.GetAxisRaw(axisCode);
-		r = AdjustAxisValues(r, axis);
-		
-		return r;
-	}
-	
-	// Other important functions
-	
-	public static int GetNumPluggedCtrlrs()
-	{
-		return Input.GetJoystickNames().Length;
-	}
-	
-	public static void DEBUGLogControllerNames()
-	{
-		string[] cNames = Input.GetJoystickNames();
-		
-		for(int i = 0; i < cNames.Length; i++)
+		public static bool GetDPad(XboxDPad padDirection)
 		{
-			Debug.Log(cNames[i]);
-		}
-	}
-	
-	// ------------------------ Private Methods ----------------------- //
-	
-	
-	private static bool OnMac()
-	{
-		// All Mac mappings are based off TattieBogle Xbox Controller drivers
-		// http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver
-		// http://wiki.unity3d.com/index.php?title=Xbox360Controller
-		return (Application.platform == RuntimePlatform.OSXEditor || 
-			    Application.platform == RuntimePlatform.OSXPlayer ||
-			    Application.platform == RuntimePlatform.OSXWebPlayer);
-	}
-	
-	private static bool OnLinux()
-	{
-		// Linux mapping based on observation of mapping from default drivers on Ubuntu 13.04
-		return Application.platform == RuntimePlatform.LinuxPlayer;
-	}
-	
-	private static bool IsControllerNumberValid(int ctrlrNum)
-	{
-		if(ctrlrNum >= 0 && ctrlrNum <= 4)
-		{
-			return true;
-		}
-		else
-		{
-			Debug.LogError("XboxCtrlrInput.IsControllerNumberValid(): " + 
-						   "Invalid contoller number! Should be between 1 and 4.");
-		}
-		return false;
-	}
-	
-	private static float RefactorRange(float oldRangeValue)
-	{
-		// Assumes you want to take a number from -1 to 1 range
-		// And turn it into a number from a 0 to 1 range
-		
-		return ((oldRangeValue + 1.0f) / 2.0f );
-	}
-	
-	private static string DetermineButtonCode(XboxButton btn, int ctrlrNum)
-	{
-		string r = "";
-		string sJoyCode = "";
-		string sKeyCode = "";
-		bool invalidCode = false;
-		
-		if(ctrlrNum == 0)
-		{
-			sJoyCode = "";
-		}
-		else
-		{
-			sJoyCode = " " + ctrlrNum.ToString();
-		}
-		
-		if(OnMac())
-		{
-			switch(btn)
+			bool r = false;
+			string inputCode = "";
+			
+			if(OnMac())
 			{
-				case XboxButton.A: 				sKeyCode = "16"; break;
-				case XboxButton.B:				sKeyCode = "17"; break;
-				case XboxButton.X:				sKeyCode = "18"; break;
-				case XboxButton.Y:				sKeyCode = "19"; break;
-				case XboxButton.Start:			sKeyCode = "9"; break;
-				case XboxButton.Back:			sKeyCode = "10"; break;
-				case XboxButton.LeftStick:		sKeyCode = "11"; break;
-				case XboxButton.RightStick:		sKeyCode = "12"; break;
-				case XboxButton.LeftBumper:		sKeyCode = "13"; break;
-				case XboxButton.RightBumper:	sKeyCode = "14"; break;
+				inputCode = DetermineDPadMac(padDirection, 0);
+				r = Input.GetKey(inputCode);
+			}
+			else
+			{
+				inputCode = DetermineDPad(padDirection, 0);
 				
-				default: invalidCode = true; break;
+				switch(padDirection)
+				{
+					case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
+					case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
+					case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
+					case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
+					
+					default: r = false; break;
+				}
 			}
+			
+			return r;
 		}
-		else if (OnLinux())
+		
+		public static bool GetDPad(XboxDPad padDirection, int controllerNumber)
 		{
-			switch(btn)
+			bool r = false;
+			string inputCode = "";
+			
+			if(OnMac())
 			{
-				case XboxButton.A: 				sKeyCode = "0"; break;
-				case XboxButton.B:				sKeyCode = "1"; break;
-				case XboxButton.X:				sKeyCode = "2"; break;
-				case XboxButton.Y:				sKeyCode = "3"; break;
-				case XboxButton.Start:			sKeyCode = "7"; break;
-				case XboxButton.Back:			sKeyCode = "6"; break;
-				case XboxButton.LeftStick:		sKeyCode = "9"; break;
-				case XboxButton.RightStick:		sKeyCode = "10"; break;
-				case XboxButton.LeftBumper:		sKeyCode = "4"; break;
-				case XboxButton.RightBumper:	sKeyCode = "5"; break;
+				inputCode = DetermineDPadMac(padDirection, controllerNumber);
+				r = Input.GetKey(inputCode);
+			}
+			else
+			{
+				inputCode = DetermineDPad(padDirection, controllerNumber);
 				
-				default: invalidCode = true; break;
+				switch(padDirection)
+				{
+					case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
+					case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
+					case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
+					case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
+					
+					default: r = false; break;
+				}
 			}
+			
+			return r;
 		}
-		else
+		
+		// >>> For Axis <<< //
+		
+		public static float GetAxis(XboxAxis axis)
 		{
-			switch(btn)
+			float r = 0.0f;
+			string axisCode = DetermineAxisCode(axis, 0);
+			
+			r = Input.GetAxis(axisCode);
+			r = AdjustAxisValues(r, axis);
+			
+			return r;
+		}
+		
+		public static float GetAxis(XboxAxis axis, int controllerNumber)
+		{
+			float r = 0.0f;
+			string axisCode = DetermineAxisCode(axis, controllerNumber);
+			
+			r = Input.GetAxis(axisCode);
+			r = AdjustAxisValues(r, axis);
+			
+			return r;
+		}
+		
+		public static float GetAxisRaw(XboxAxis axis)
+		{
+			float r = 0.0f;
+			string axisCode = DetermineAxisCode(axis, 0);
+			
+			r = Input.GetAxisRaw(axisCode);
+			r = AdjustAxisValues(r, axis);
+			
+			return r;
+		}
+		
+		public static float GetAxisRaw(XboxAxis axis, int controllerNumber)
+		{
+			float r = 0.0f;
+			string axisCode = DetermineAxisCode(axis, controllerNumber);
+			
+			r = Input.GetAxisRaw(axisCode);
+			r = AdjustAxisValues(r, axis);
+			
+			return r;
+		}
+		
+		// >>> Other important functions <<< //
+		
+		public static int GetNumPluggedCtrlrs()
+		{
+			return Input.GetJoystickNames().Length;
+		}
+		
+		public static void DEBUGLogControllerNames()
+		{
+			string[] cNames = Input.GetJoystickNames();
+			
+			for(int i = 0; i < cNames.Length; i++)
 			{
-				case XboxButton.A: 				sKeyCode = "0"; break;
-				case XboxButton.B:				sKeyCode = "1"; break;
-				case XboxButton.X:				sKeyCode = "2"; break;
-				case XboxButton.Y:				sKeyCode = "3"; break;
-				case XboxButton.Start:			sKeyCode = "7"; break;
-				case XboxButton.Back:			sKeyCode = "6"; break;
-				case XboxButton.LeftStick:		sKeyCode = "8"; break;
-				case XboxButton.RightStick:		sKeyCode = "9"; break;
-				case XboxButton.LeftBumper:		sKeyCode = "4"; break;
-				case XboxButton.RightBumper:	sKeyCode = "5"; break;
-				
-				default: invalidCode = true; break;
-			}
-		}
-		
-		r = "joystick" + sJoyCode + " button " + sKeyCode;
-		
-		if(invalidCode)
-		{
-			r = "";
-		}
-		
-		return r;
-	}
-	
-	private static string DetermineAxisCode(XboxAxis axs, int ctrlrNum)
-	{
-		string r = "";
-		string sJoyCode = ctrlrNum.ToString();
-		string sAxisCode = "";
-		bool invalidCode = false;
-		
-		
-		if(OnMac())
-		{
-			switch(axs)
-			{
-				case XboxAxis.LeftStickX: 		sAxisCode = "X"; break;
-				case XboxAxis.LeftStickY:		sAxisCode = "Y"; break;
-				case XboxAxis.RightStickX:		sAxisCode = "3"; break;
-				case XboxAxis.RightStickY:		sAxisCode = "4"; break;
-				case XboxAxis.LeftTrigger:		sAxisCode = "5"; break;
-				case XboxAxis.RightTrigger:		sAxisCode = "6"; break;
-				
-				default: invalidCode = true; break;
-			}
-		}
-		else if(OnLinux())
-		{
-			switch(axs)
-			{
-				case XboxAxis.LeftStickX: 		sAxisCode = "X"; break;
-				case XboxAxis.LeftStickY:		sAxisCode = "Y"; break;
-				case XboxAxis.RightStickX:		sAxisCode = "3"; break;
-				case XboxAxis.RightStickY:		sAxisCode = "4"; break;
-				case XboxAxis.LeftTrigger:		sAxisCode = "2"; break;
-				case XboxAxis.RightTrigger:		sAxisCode = "5"; break;
-				
-				default: invalidCode = true; break;
-			}
-		}
-		else
-		{
-			switch(axs)
-			{
-				case XboxAxis.LeftStickX: 		sAxisCode = "X"; break;
-				case XboxAxis.LeftStickY:		sAxisCode = "Y"; break;
-				case XboxAxis.RightStickX:		sAxisCode = "4"; break;
-				case XboxAxis.RightStickY:		sAxisCode = "5"; break;
-				case XboxAxis.LeftTrigger:		sAxisCode = "9"; break;
-				case XboxAxis.RightTrigger:		sAxisCode = "10"; break;
-				
-				default: invalidCode = true; break;
+				Debug.Log(cNames[i]);
 			}
 		}
 		
-		r = "XboxAxis" + sAxisCode + "Joy" + sJoyCode;
+		// ------------- Private Methods -------------- //
 		
-		if(invalidCode)
+		
+		private static bool OnMac()
 		{
-			r = "";
+			// All Mac mappings are based off TattieBogle Xbox Controller drivers
+			// http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver
+			// http://wiki.unity3d.com/index.php?title=Xbox360Controller
+			return (Application.platform == RuntimePlatform.OSXEditor || 
+				    Application.platform == RuntimePlatform.OSXPlayer ||
+				    Application.platform == RuntimePlatform.OSXWebPlayer);
 		}
 		
-		return r;
-	}
-	
-	private static float AdjustAxisValues(float axisValue, XboxAxis axis)
-	{
-		float newAxisValue = axisValue;
-		
-		if(OnMac())
+		private static bool OnLinux()
 		{
-			if(axis == XboxAxis.LeftTrigger)
-			{
-				newAxisValue = -newAxisValue;
-				newAxisValue = RefactorRange(newAxisValue);
-			}
-			else if(axis == XboxAxis.RightTrigger)
-			{
-				newAxisValue = RefactorRange(newAxisValue);
-			}
-			else if(axis == XboxAxis.RightStickY)
-			{
-				newAxisValue = -newAxisValue;
-			}
-		}
-		else if(OnLinux())
-		{
-			if(axis == XboxAxis.RightTrigger)
-			{
-				newAxisValue = -newAxisValue;
-				newAxisValue = RefactorRange(newAxisValue);
-			}
-			else if(axis == XboxAxis.LeftTrigger)
-			{
-				newAxisValue = RefactorRange(newAxisValue);
-			}
-			else if(axis == XboxAxis.RightStickY)
-			{
-				newAxisValue = -newAxisValue;
-			}
+			// Linux mapping based on observation of mapping from default drivers on Ubuntu 13.04
+			return Application.platform == RuntimePlatform.LinuxPlayer;
 		}
 		
-		return newAxisValue;
-	}
-	
-	private static string DetermineDPad(XboxDPad padDir, int ctrlrNum)
-	{
-		string r = "";
-		string sJoyCode = ctrlrNum.ToString();
-		string sPadCode = "";
-		bool invalidCode = false;
-		
-		if(OnLinux())
+		private static bool IsControllerNumberValid(int ctrlrNum)
 		{
+			if(ctrlrNum >= 0 && ctrlrNum <= 4)
+			{
+				return true;
+			}
+			else
+			{
+				Debug.LogError("XCI.IsControllerNumberValid(): " + 
+							   "Invalid contoller number! Should be between 1 and 4.");
+			}
+			return false;
+		}
+		
+		private static float RefactorRange(float oldRangeValue)
+		{
+			// Assumes you want to take a number from -1 to 1 range
+			// And turn it into a number from a 0 to 1 range
+			
+			return ((oldRangeValue + 1.0f) / 2.0f );
+		}
+		
+		private static string DetermineButtonCode(XboxButton btn, int ctrlrNum)
+		{
+			string r = "";
+			string sJoyCode = "";
+			string sKeyCode = "";
+			bool invalidCode = false;
+			
+			if(ctrlrNum == 0)
+			{
+				sJoyCode = "";
+			}
+			else
+			{
+				sJoyCode = " " + ctrlrNum.ToString();
+			}
+			
+			if(OnMac())
+			{
+				switch(btn)
+				{
+					case XboxButton.A: 				sKeyCode = "16"; break;
+					case XboxButton.B:				sKeyCode = "17"; break;
+					case XboxButton.X:				sKeyCode = "18"; break;
+					case XboxButton.Y:				sKeyCode = "19"; break;
+					case XboxButton.Start:			sKeyCode = "9"; break;
+					case XboxButton.Back:			sKeyCode = "10"; break;
+					case XboxButton.LeftStick:		sKeyCode = "11"; break;
+					case XboxButton.RightStick:		sKeyCode = "12"; break;
+					case XboxButton.LeftBumper:		sKeyCode = "13"; break;
+					case XboxButton.RightBumper:	sKeyCode = "14"; break;
+					
+					default: invalidCode = true; break;
+				}
+			}
+			else if (OnLinux())
+			{
+				switch(btn)
+				{
+					case XboxButton.A: 				sKeyCode = "0"; break;
+					case XboxButton.B:				sKeyCode = "1"; break;
+					case XboxButton.X:				sKeyCode = "2"; break;
+					case XboxButton.Y:				sKeyCode = "3"; break;
+					case XboxButton.Start:			sKeyCode = "7"; break;
+					case XboxButton.Back:			sKeyCode = "6"; break;
+					case XboxButton.LeftStick:		sKeyCode = "9"; break;
+					case XboxButton.RightStick:		sKeyCode = "10"; break;
+					case XboxButton.LeftBumper:		sKeyCode = "4"; break;
+					case XboxButton.RightBumper:	sKeyCode = "5"; break;
+					
+					default: invalidCode = true; break;
+				}
+			}
+			else
+			{
+				switch(btn)
+				{
+					case XboxButton.A: 				sKeyCode = "0"; break;
+					case XboxButton.B:				sKeyCode = "1"; break;
+					case XboxButton.X:				sKeyCode = "2"; break;
+					case XboxButton.Y:				sKeyCode = "3"; break;
+					case XboxButton.Start:			sKeyCode = "7"; break;
+					case XboxButton.Back:			sKeyCode = "6"; break;
+					case XboxButton.LeftStick:		sKeyCode = "8"; break;
+					case XboxButton.RightStick:		sKeyCode = "9"; break;
+					case XboxButton.LeftBumper:		sKeyCode = "4"; break;
+					case XboxButton.RightBumper:	sKeyCode = "5"; break;
+					
+					default: invalidCode = true; break;
+				}
+			}
+			
+			r = "joystick" + sJoyCode + " button " + sKeyCode;
+			
+			if(invalidCode)
+			{
+				r = "";
+			}
+			
+			return r;
+		}
+		
+		private static string DetermineAxisCode(XboxAxis axs, int ctrlrNum)
+		{
+			string r = "";
+			string sJoyCode = ctrlrNum.ToString();
+			string sAxisCode = "";
+			bool invalidCode = false;
+			
+			
+			if(OnMac())
+			{
+				switch(axs)
+				{
+					case XboxAxis.LeftStickX: 		sAxisCode = "X"; break;
+					case XboxAxis.LeftStickY:		sAxisCode = "Y"; break;
+					case XboxAxis.RightStickX:		sAxisCode = "3"; break;
+					case XboxAxis.RightStickY:		sAxisCode = "4"; break;
+					case XboxAxis.LeftTrigger:		sAxisCode = "5"; break;
+					case XboxAxis.RightTrigger:		sAxisCode = "6"; break;
+					
+					default: invalidCode = true; break;
+				}
+			}
+			else if(OnLinux())
+			{
+				switch(axs)
+				{
+					case XboxAxis.LeftStickX: 		sAxisCode = "X"; break;
+					case XboxAxis.LeftStickY:		sAxisCode = "Y"; break;
+					case XboxAxis.RightStickX:		sAxisCode = "3"; break;
+					case XboxAxis.RightStickY:		sAxisCode = "4"; break;
+					case XboxAxis.LeftTrigger:		sAxisCode = "2"; break;
+					case XboxAxis.RightTrigger:		sAxisCode = "5"; break;
+					
+					default: invalidCode = true; break;
+				}
+			}
+			else
+			{
+				switch(axs)
+				{
+					case XboxAxis.LeftStickX: 		sAxisCode = "X"; break;
+					case XboxAxis.LeftStickY:		sAxisCode = "Y"; break;
+					case XboxAxis.RightStickX:		sAxisCode = "4"; break;
+					case XboxAxis.RightStickY:		sAxisCode = "5"; break;
+					case XboxAxis.LeftTrigger:		sAxisCode = "9"; break;
+					case XboxAxis.RightTrigger:		sAxisCode = "10"; break;
+					
+					default: invalidCode = true; break;
+				}
+			}
+			
+			r = "XboxAxis" + sAxisCode + "Joy" + sJoyCode;
+			
+			if(invalidCode)
+			{
+				r = "";
+			}
+			
+			return r;
+		}
+		
+		private static float AdjustAxisValues(float axisValue, XboxAxis axis)
+		{
+			float newAxisValue = axisValue;
+			
+			if(OnMac())
+			{
+				if(axis == XboxAxis.LeftTrigger)
+				{
+					newAxisValue = -newAxisValue;
+					newAxisValue = RefactorRange(newAxisValue);
+				}
+				else if(axis == XboxAxis.RightTrigger)
+				{
+					newAxisValue = RefactorRange(newAxisValue);
+				}
+				else if(axis == XboxAxis.RightStickY)
+				{
+					newAxisValue = -newAxisValue;
+				}
+			}
+			else if(OnLinux())
+			{
+				if(axis == XboxAxis.RightTrigger)
+				{
+					newAxisValue = -newAxisValue;
+					newAxisValue = RefactorRange(newAxisValue);
+				}
+				else if(axis == XboxAxis.LeftTrigger)
+				{
+					newAxisValue = RefactorRange(newAxisValue);
+				}
+				else if(axis == XboxAxis.RightStickY)
+				{
+					newAxisValue = -newAxisValue;
+				}
+			}
+			
+			return newAxisValue;
+		}
+		
+		private static string DetermineDPad(XboxDPad padDir, int ctrlrNum)
+		{
+			string r = "";
+			string sJoyCode = ctrlrNum.ToString();
+			string sPadCode = "";
+			bool invalidCode = false;
+			
+			if(OnLinux())
+			{
+				switch(padDir)
+				{
+					case XboxDPad.Up: 		sPadCode = "7"; break;
+					case XboxDPad.Down:		sPadCode = "7"; break;
+					case XboxDPad.Left:		sPadCode = "6"; break;
+					case XboxDPad.Right:	sPadCode = "6"; break;
+					
+					default: invalidCode = true; break;
+				}
+			}
+			else
+			{
+				switch(padDir)
+				{
+					case XboxDPad.Up: 		sPadCode = "7"; break;
+					case XboxDPad.Down:		sPadCode = "7"; break;
+					case XboxDPad.Left:		sPadCode = "6"; break;
+					case XboxDPad.Right:	sPadCode = "6"; break;
+					
+					default: invalidCode = true; break;
+				}
+			}
+			
+			r = "XboxAxis" + sPadCode + "Joy" + sJoyCode;
+			
+			if(invalidCode)
+			{
+				r = "";
+			}
+			
+			return r;
+		}
+		
+		private static string DetermineDPadMac(XboxDPad padDir, int ctrlrNum)
+		{
+			string r = "";
+			string sJoyCode = "";
+			string sPadCode = "";
+			bool invalidCode = false;
+			
+			if(ctrlrNum == 0)
+			{
+				sJoyCode = "";
+			}
+			else
+			{
+				sJoyCode = " " + ctrlrNum.ToString();
+			}
+			
 			switch(padDir)
 			{
-				case XboxDPad.Up: 		sPadCode = "7"; break;
-				case XboxDPad.Down:		sPadCode = "7"; break;
-				case XboxDPad.Left:		sPadCode = "6"; break;
-				case XboxDPad.Right:	sPadCode = "6"; break;
+				case XboxDPad.Up: 		sPadCode = "5"; break;
+				case XboxDPad.Down:		sPadCode = "6"; break;
+				case XboxDPad.Left:		sPadCode = "7"; break;
+				case XboxDPad.Right:	sPadCode = "8"; break;
 				
 				default: invalidCode = true; break;
 			}
-		}
-		else
-		{
-			switch(padDir)
-			{
-				case XboxDPad.Up: 		sPadCode = "7"; break;
-				case XboxDPad.Down:		sPadCode = "7"; break;
-				case XboxDPad.Left:		sPadCode = "6"; break;
-				case XboxDPad.Right:	sPadCode = "6"; break;
-				
-				default: invalidCode = true; break;
-			}
-		}
-		
-		r = "XboxAxis" + sPadCode + "Joy" + sJoyCode;
-		
-		if(invalidCode)
-		{
-			r = "";
-		}
-		
-		return r;
-	}
-	
-	private static string DetermineDPadMac(XboxDPad padDir, int ctrlrNum)
-	{
-		string r = "";
-		string sJoyCode = "";
-		string sPadCode = "";
-		bool invalidCode = false;
-		
-		if(ctrlrNum == 0)
-		{
-			sJoyCode = "";
-		}
-		else
-		{
-			sJoyCode = " " + ctrlrNum.ToString();
-		}
-		
-		switch(padDir)
-		{
-			case XboxDPad.Up: 		sPadCode = "5"; break;
-			case XboxDPad.Down:		sPadCode = "6"; break;
-			case XboxDPad.Left:		sPadCode = "7"; break;
-			case XboxDPad.Right:	sPadCode = "8"; break;
 			
-			default: invalidCode = true; break;
+			r = "joystick" + sJoyCode + " button " + sPadCode;
+			
+			if(invalidCode)
+			{
+				r = "";
+			}
+			
+			return r;
 		}
-		
-		r = "joystick" + sJoyCode + " button " + sPadCode;
-		
-		if(invalidCode)
-		{
-			r = "";
-		}
-		
-		return r;
 	}
 }

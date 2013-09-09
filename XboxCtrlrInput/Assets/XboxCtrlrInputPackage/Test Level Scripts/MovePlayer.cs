@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XboxCtrlrInput;		// Be sure to include this if you want an object to have Xbox input
 
 public class MovePlayer : MonoBehaviour 
 {
@@ -44,7 +45,7 @@ public class MovePlayer : MonoBehaviour
 		
 		newPosition = transform.position;
 		
-		//XboxCtrlrInput.DEBUGLogControllerNames();
+		//XCI.DEBUGLogControllerNames();
 	}
 	
 	
@@ -52,14 +53,14 @@ public class MovePlayer : MonoBehaviour
 	void Update () 
 	{
 		// Jump
-		if(XboxCtrlrInput.GetButtonDown(XboxButton.LeftStick, playerNumber) && canJump)
+		if(XCI.GetButtonDown(XboxButton.LeftStick, playerNumber) && canJump)
 		{
 			canJump = false;
 			rigidbody.AddRelativeForce(0.0f, jumpImpulse, 0.0f, ForceMode.Impulse);
 		}
 		
 		// Slam
-		if(XboxCtrlrInput.GetButtonDown(XboxButton.RightStick, playerNumber) && !canJump)
+		if(XCI.GetButtonDown(XboxButton.RightStick, playerNumber) && !canJump)
 		{
 			rigidbody.AddRelativeForce(0.0f, -jumpImpulse, 0.0f, ForceMode.Impulse);
 		}
@@ -73,22 +74,22 @@ public class MovePlayer : MonoBehaviour
 		
 		if(bulletTimer <= 0.0f)
 		{
-			if(XboxCtrlrInput.GetButtonDown(XboxButton.A, playerNumber))
+			if(XCI.GetButtonDown(XboxButton.A, playerNumber))
 			{
 				Instantiate(laserAPrefab, transform.position, laserAPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
 			}
-			if(XboxCtrlrInput.GetButtonDown(XboxButton.B, playerNumber))
+			if(XCI.GetButtonDown(XboxButton.B, playerNumber))
 			{
 				Instantiate(laserBPrefab, transform.position, laserBPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
 			}
-			if(XboxCtrlrInput.GetButtonDown(XboxButton.X, playerNumber))
+			if(XCI.GetButtonDown(XboxButton.X, playerNumber))
 			{
 				Instantiate(laserXPrefab, transform.position, laserXPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
 			}
-			if(XboxCtrlrInput.GetButtonDown(XboxButton.Y, playerNumber))
+			if(XCI.GetButtonDown(XboxButton.Y, playerNumber))
 			{
 				Instantiate(laserYPrefab, transform.position, laserYPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
@@ -98,8 +99,8 @@ public class MovePlayer : MonoBehaviour
 		
 		// Left stick movement
 		newPosition = transform.position;
-		float axisX = XboxCtrlrInput.GetAxis(XboxAxis.LeftStickX, playerNumber);
-		float axisY = XboxCtrlrInput.GetAxis(XboxAxis.LeftStickY, playerNumber);
+		float axisX = XCI.GetAxis(XboxAxis.LeftStickX, playerNumber);
+		float axisY = XCI.GetAxis(XboxAxis.LeftStickY, playerNumber);
 		float newPosX = newPosition.x + (axisX * maxMoveSpeed * Time.deltaTime);
 		float newPosZ = newPosition.z + (axisY * maxMoveSpeed * Time.deltaTime);
 		newPosition = new Vector3(newPosX, transform.position.y, newPosZ);
@@ -108,8 +109,8 @@ public class MovePlayer : MonoBehaviour
 		
 		// Right stick movement
 		newPosition = transform.position;
-		axisX = XboxCtrlrInput.GetAxis(XboxAxis.RightStickX, playerNumber);
-		axisY = XboxCtrlrInput.GetAxis(XboxAxis.RightStickY, playerNumber);
+		axisX = XCI.GetAxis(XboxAxis.RightStickX, playerNumber);
+		axisY = XCI.GetAxis(XboxAxis.RightStickY, playerNumber);
 		newPosX = newPosition.x + (axisX * maxMoveSpeed * Time.deltaTime);
 		newPosZ = newPosition.z + (axisY * maxMoveSpeed * Time.deltaTime);
 		newPosition = new Vector3(newPosX, transform.position.y, newPosZ);
@@ -119,28 +120,28 @@ public class MovePlayer : MonoBehaviour
 		// D-Pad movement
 		float newPos = 0.0f;
 		
-		if(XboxCtrlrInput.GetDPad(XboxDPad.Up, playerNumber))
+		if(XCI.GetDPad(XboxDPad.Up, playerNumber))
 		{
 			newPosition = transform.position;
 			newPos = newPosition.z + (maxMoveSpeed * Time.deltaTime);
 			newPosition = new Vector3(transform.position.x, transform.position.y, newPos);
 			transform.position = newPosition;
 		}
-		if(XboxCtrlrInput.GetDPad(XboxDPad.Down, playerNumber))
+		if(XCI.GetDPad(XboxDPad.Down, playerNumber))
 		{
 			newPosition = transform.position;
 			newPos = newPosition.z - (maxMoveSpeed * Time.deltaTime);
 			newPosition = new Vector3(transform.position.x, transform.position.y, newPos);
 			transform.position = newPosition;
 		}
-		if(XboxCtrlrInput.GetDPad(XboxDPad.Left, playerNumber))
+		if(XCI.GetDPad(XboxDPad.Left, playerNumber))
 		{
 			newPosition = transform.position;
 			newPos = newPosition.x - (maxMoveSpeed * Time.deltaTime);
 			newPosition = new Vector3(newPos, transform.position.y, transform.position.z);
 			transform.position = newPosition;
 		}
-		if(XboxCtrlrInput.GetDPad(XboxDPad.Right, playerNumber))
+		if(XCI.GetDPad(XboxDPad.Right, playerNumber))
 		{
 			newPosition = transform.position;
 			newPos = newPosition.x + (maxMoveSpeed * Time.deltaTime);
@@ -152,29 +153,29 @@ public class MovePlayer : MonoBehaviour
 		// Trigger input
 		float trigSclX = triggerLeftPrefab.transform.localScale.x;
 		float trigSclZ = triggerLeftPrefab.transform.localScale.z;
-		float leftTrigHeight = MAX_TRG_SCL * (1.0f - XboxCtrlrInput.GetAxis(XboxAxis.LeftTrigger, playerNumber));
-		float rightTrigHeight = MAX_TRG_SCL * (1.0f - XboxCtrlrInput.GetAxis(XboxAxis.RightTrigger, playerNumber));
+		float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.LeftTrigger, playerNumber));
+		float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, playerNumber));
 		triggerLeftPrefab.transform.localScale = new Vector3(trigSclX, leftTrigHeight, trigSclZ);
 		triggerRightPrefab.transform.localScale = new Vector3(trigSclX, rightTrigHeight, trigSclZ);
 		
 		
 		// Bumper input
-		if(XboxCtrlrInput.GetButtonDown(XboxButton.LeftBumper, playerNumber))
+		if(XCI.GetButtonDown(XboxButton.LeftBumper, playerNumber))
 		{
 			Instantiate(laserBumpPrefab, triggerLeftPrefab.transform.position, laserBumpPrefab.transform.rotation);
 		}
-		if(XboxCtrlrInput.GetButtonDown(XboxButton.RightBumper, playerNumber))
+		if(XCI.GetButtonDown(XboxButton.RightBumper, playerNumber))
 		{
 			Instantiate(laserBumpPrefab, triggerRightPrefab.transform.position, laserBumpPrefab.transform.rotation);
 		}
 		
 		
 		// Start and back, same as bumpers
-		if(XboxCtrlrInput.GetButtonDown(XboxButton.Back, playerNumber))
+		if(XCI.GetButtonDown(XboxButton.Back, playerNumber))
 		{
 			Instantiate(laserBumpPrefab, triggerLeftPrefab.transform.position, laserBumpPrefab.transform.rotation);
 		}
-		if(XboxCtrlrInput.GetButtonDown(XboxButton.Start, playerNumber))
+		if(XCI.GetButtonDown(XboxButton.Start, playerNumber))
 		{
 			Instantiate(laserBumpPrefab, triggerRightPrefab.transform.position, laserBumpPrefab.transform.rotation);
 		}
