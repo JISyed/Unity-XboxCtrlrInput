@@ -54,21 +54,21 @@ public class MovePlayer : MonoBehaviour
 	{
 		GameObject bulletReference = null;
 		
-		// Jump
+		// Jump (Left Stick)
 		if(XCI.GetButtonDown(XboxButton.LeftStick, playerNumber) && canJump)
 		{
 			canJump = false;
 			rigidbody.AddRelativeForce(0.0f, jumpImpulse, 0.0f, ForceMode.Impulse);
 		}
 		
-		// Slam
+		// Slam (Right Stick)
 		if(XCI.GetButtonDown(XboxButton.RightStick, playerNumber) && !canJump)
 		{
 			rigidbody.AddRelativeForce(0.0f, -jumpImpulse * 1.5f, 0.0f, ForceMode.Impulse);
 		}
 		
 		
-		// Shoot colored laser
+		// Shoot colored laser (A,B,X,Y)
 		if(bulletTimer > 0.0f)
 		{
 			bulletTimer -= Time.deltaTime;
@@ -98,7 +98,6 @@ public class MovePlayer : MonoBehaviour
 			}
 		}
 		
-		
 		// Left stick movement
 		newPosition = transform.position;
 		float axisX = XCI.GetAxis(XboxAxis.LeftStickX, playerNumber);
@@ -119,36 +118,33 @@ public class MovePlayer : MonoBehaviour
 		transform.position = newPosition;
 		
 		
-		// D-Pad movement
-		float newPos = 0.0f;
-		
-		if(XCI.GetDPad(XboxDPad.Up, playerNumber))
+		// D-Pad testing
+		if(bulletTimer <= 0.0f)
 		{
-			newPosition = transform.position;
-			newPos = newPosition.z + (maxMoveSpeed * Time.deltaTime);
-			newPosition = new Vector3(transform.position.x, transform.position.y, newPos);
-			transform.position = newPosition;
-		}
-		if(XCI.GetDPad(XboxDPad.Down, playerNumber))
-		{
-			newPosition = transform.position;
-			newPos = newPosition.z - (maxMoveSpeed * Time.deltaTime);
-			newPosition = new Vector3(transform.position.x, transform.position.y, newPos);
-			transform.position = newPosition;
-		}
-		if(XCI.GetDPad(XboxDPad.Left, playerNumber))
-		{
-			newPosition = transform.position;
-			newPos = newPosition.x - (maxMoveSpeed * Time.deltaTime);
-			newPosition = new Vector3(newPos, transform.position.y, transform.position.z);
-			transform.position = newPosition;
-		}
-		if(XCI.GetDPad(XboxDPad.Right, playerNumber))
-		{
-			newPosition = transform.position;
-			newPos = newPosition.x + (maxMoveSpeed * Time.deltaTime);
-			newPosition = new Vector3(newPos, transform.position.y, transform.position.z);
-			transform.position = newPosition;
+			if(XCI.GetDPad(XboxDPad.Up, playerNumber))
+			{
+				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserYPrefab.transform.rotation) as GameObject;
+				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
+				bulletTimer = MAX_BUL_TME * 3;
+			}
+			if(XCI.GetDPad(XboxDPad.Down, playerNumber))
+			{
+				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserAPrefab.transform.rotation) as GameObject;
+				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
+				bulletTimer = MAX_BUL_TME * 3;
+			}
+			if(XCI.GetDPad(XboxDPad.Left, playerNumber))
+			{
+				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserXPrefab.transform.rotation) as GameObject;
+				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
+				bulletTimer = MAX_BUL_TME * 3;
+			}
+			if(XCI.GetDPad(XboxDPad.Right, playerNumber))
+			{
+				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserBPrefab.transform.rotation) as GameObject;
+				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
+				bulletTimer = MAX_BUL_TME * 3;
+			}
 		}
 		
 		
