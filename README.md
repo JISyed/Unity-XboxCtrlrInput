@@ -57,7 +57,7 @@ To see the latest bugs and limitations, refer to the repo's [Issues](https://git
 
 ### License
 
-Everything in this repository is public domain, including the code and documentation art. I encourage everyone to use and even modify the code to your own specifications, and of course to contribute to this repo by forking the project. See [UNLICENSE.md](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/UNLICENSE.md).
+Everything in this repository is public domain, including the code and documentation art. I encourage everyone to use and even modify the code to your own specifications, and of course to contribute to this repo by forking the project. See [`UNLICENSE.md`](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/UNLICENSE.md).
 
 ### About the Example Project
 
