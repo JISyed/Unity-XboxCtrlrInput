@@ -52,6 +52,8 @@ public class MovePlayer : MonoBehaviour
 	// Update
 	void Update () 
 	{
+		GameObject bulletReference = null;
+		
 		// Jump
 		if(XCI.GetButtonDown(XboxButton.LeftStick, playerNumber) && canJump)
 		{
@@ -170,18 +172,20 @@ public class MovePlayer : MonoBehaviour
 		}
 		
 		
-		// Start and back, same as bumpers
-		if(XCI.GetButtonDown(XboxButton.Back, playerNumber))
+		// Start and back, same as bumpers but smaller bullets
+		if(XCI.GetButtonUp(XboxButton.Back, playerNumber))
 		{
-			Instantiate(laserBumpPrefab, triggerLeftPrefab.transform.position, laserBumpPrefab.transform.rotation);
+			bulletReference = Instantiate(laserBumpPrefab, triggerLeftPrefab.transform.position, laserBumpPrefab.transform.rotation) as GameObject;
+			bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 		}
-		if(XCI.GetButtonDown(XboxButton.Start, playerNumber))
+		if(XCI.GetButtonUp(XboxButton.Start, playerNumber))
 		{
-			Instantiate(laserBumpPrefab, triggerRightPrefab.transform.position, laserBumpPrefab.transform.rotation);
+			bulletReference = Instantiate(laserBumpPrefab, triggerRightPrefab.transform.position, laserBumpPrefab.transform.rotation) as GameObject;
+			bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 		}
 		
 		
-		// To quit the program
+		// To quit the program (with keyboard)
 		if(Input.GetKeyUp(KeyCode.Escape))
 		{
 			Application.Quit();
