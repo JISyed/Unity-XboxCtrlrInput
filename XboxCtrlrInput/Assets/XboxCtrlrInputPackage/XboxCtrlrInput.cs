@@ -520,8 +520,8 @@ namespace XboxCtrlrInput
 			{
 				switch(padDir)
 				{
-					case XboxDPad.Up: 		sPadCode = "9"; break;
-					case XboxDPad.Down:		sPadCode = "9"; break;
+					case XboxDPad.Up: 		sPadCode = "8"; break;
+					case XboxDPad.Down:		sPadCode = "8"; break;
 					case XboxDPad.Left:		sPadCode = "7"; break;
 					case XboxDPad.Right:	sPadCode = "7"; break;
 					
