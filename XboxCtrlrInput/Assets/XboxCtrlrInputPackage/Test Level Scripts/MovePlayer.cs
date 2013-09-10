@@ -25,9 +25,13 @@ public class MovePlayer : MonoBehaviour
 	
 	private Vector3 newPosition;
 	private bool canJump = false;
-	private const float MAX_BUL_TME = 0.1f;
+	private const float MAX_BUL_TME = 0.3f;
 	private float bulletTimer = MAX_BUL_TME;
 	private const float MAX_TRG_SCL = 1.21f;
+	private float dpRightBulletTimer = MAX_BUL_TME * 2;
+	private float dpLeftBulletTimer = MAX_BUL_TME * 2;
+	private float dpUpBulletTimer = MAX_BUL_TME * 2;
+	private float dpDownBulletTimer = MAX_BUL_TME * 2;
 	
 	
 	// Start
@@ -76,22 +80,22 @@ public class MovePlayer : MonoBehaviour
 		
 		if(bulletTimer <= 0.0f)
 		{
-			if(XCI.GetButtonDown(XboxButton.A, playerNumber))
+			if(XCI.GetButton(XboxButton.A, playerNumber))
 			{
 				Instantiate(laserAPrefab, transform.position, laserAPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
 			}
-			if(XCI.GetButtonDown(XboxButton.B, playerNumber))
+			if(XCI.GetButton(XboxButton.B, playerNumber))
 			{
 				Instantiate(laserBPrefab, transform.position, laserBPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
 			}
-			if(XCI.GetButtonDown(XboxButton.X, playerNumber))
+			if(XCI.GetButton(XboxButton.X, playerNumber))
 			{
 				Instantiate(laserXPrefab, transform.position, laserXPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
 			}
-			if(XCI.GetButtonDown(XboxButton.Y, playerNumber))
+			if(XCI.GetButton(XboxButton.Y, playerNumber))
 			{
 				Instantiate(laserYPrefab, transform.position, laserYPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
@@ -119,31 +123,56 @@ public class MovePlayer : MonoBehaviour
 		
 		
 		// D-Pad testing
-		if(bulletTimer <= 0.0f)
+		if(dpUpBulletTimer > 0.0f)
+		{
+			dpUpBulletTimer -= Time.deltaTime;
+		}
+		if(dpDownBulletTimer > 0.0f)
+		{
+			dpDownBulletTimer -= Time.deltaTime;
+		}
+		if(dpLeftBulletTimer > 0.0f)
+		{
+			dpLeftBulletTimer -= Time.deltaTime;
+		}
+		if(dpRightBulletTimer > 0.0f)
+		{
+			dpRightBulletTimer -= Time.deltaTime;
+		}
+		if(dpUpBulletTimer <= 0.0f)
 		{
 			if(XCI.GetDPad(XboxDPad.Up, playerNumber))
 			{
 				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserYPrefab.transform.rotation) as GameObject;
 				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
-				bulletTimer = MAX_BUL_TME * 3;
+				dpUpBulletTimer = MAX_BUL_TME * 2;
 			}
+		}
+		if(dpDownBulletTimer <= 0.0f)
+		{
 			if(XCI.GetDPad(XboxDPad.Down, playerNumber))
 			{
 				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserAPrefab.transform.rotation) as GameObject;
 				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
-				bulletTimer = MAX_BUL_TME * 3;
+				dpDownBulletTimer = MAX_BUL_TME * 2;
 			}
+		}
+		if(dpLeftBulletTimer <= 0.0f)
+		{
 			if(XCI.GetDPad(XboxDPad.Left, playerNumber))
 			{
 				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserXPrefab.transform.rotation) as GameObject;
 				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
-				bulletTimer = MAX_BUL_TME * 3;
+				dpLeftBulletTimer = MAX_BUL_TME * 2;
 			}
+		}
+		if(dpRightBulletTimer <= 0.0f)
+		{
 			if(XCI.GetDPad(XboxDPad.Right, playerNumber))
 			{
 				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserBPrefab.transform.rotation) as GameObject;
 				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
-				bulletTimer = MAX_BUL_TME * 3;
+				dpRightBulletTimer = MAX_BUL_TME * 2;
 			}
 		}
 		
