@@ -441,10 +441,10 @@ namespace XboxCtrlrInput
 				{
 					case XboxAxis.LeftStickX: 		sAxisCode = "X"; break;
 					case XboxAxis.LeftStickY:		sAxisCode = "Y"; break;
-					case XboxAxis.RightStickX:		sAxisCode = "4"; break; //3
-					case XboxAxis.RightStickY:		sAxisCode = "5"; break; //4
-					case XboxAxis.LeftTrigger:		sAxisCode = "3"; break; //2
-					case XboxAxis.RightTrigger:		sAxisCode = "6"; break; //5
+					case XboxAxis.RightStickX:		sAxisCode = "4"; break;
+					case XboxAxis.RightStickY:		sAxisCode = "5"; break;
+					case XboxAxis.LeftTrigger:		sAxisCode = "3"; break;
+					case XboxAxis.RightTrigger:		sAxisCode = "6"; break;
 					
 					default: invalidCode = true; break;
 				}
@@ -520,10 +520,10 @@ namespace XboxCtrlrInput
 			{
 				switch(padDir)
 				{
-					case XboxDPad.Up: 		sPadCode = "7"; break;
-					case XboxDPad.Down:		sPadCode = "7"; break;
-					case XboxDPad.Left:		sPadCode = "8"; break; //6
-					case XboxDPad.Right:	sPadCode = "8"; break; //6
+					case XboxDPad.Up: 		sPadCode = "9"; break;
+					case XboxDPad.Down:		sPadCode = "9"; break;
+					case XboxDPad.Left:		sPadCode = "7"; break;
+					case XboxDPad.Right:	sPadCode = "7"; break;
 					
 					default: invalidCode = true; break;
 				}
