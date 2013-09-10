@@ -498,16 +498,11 @@ namespace XboxCtrlrInput
 			{
 				if(axis == XboxAxis.RightTrigger)
 				{
-					newAxisValue = -newAxisValue;
 					newAxisValue = RefactorRange(newAxisValue);
 				}
 				else if(axis == XboxAxis.LeftTrigger)
 				{
 					newAxisValue = RefactorRange(newAxisValue);
-				}
-				else if(axis == XboxAxis.RightStickY)
-				{
-					newAxisValue = -newAxisValue;
 				}
 			}
 			
