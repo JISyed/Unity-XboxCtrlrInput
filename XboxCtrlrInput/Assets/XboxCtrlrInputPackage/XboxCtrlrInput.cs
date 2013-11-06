@@ -52,8 +52,7 @@ namespace XboxCtrlrInput
 	{
 		// ------------ Members --------------- //
 		
-		//private static int NumOfControllers = -1;
-		
+
 		
 		// ------------ Methods --------------- //
 		
@@ -166,6 +165,11 @@ namespace XboxCtrlrInput
 				inputCode = DetermineDPadMac(padDirection, 0);
 				r = Input.GetKey(inputCode);
 			}
+			else if(OnLinux() && IsControllerWireless())
+			{
+				inputCode = DetermineDPadWirelessLinux(padDirection, 0);
+				r = Input.GetKey(inputCode);
+			}
 			else
 			{
 				inputCode = DetermineDPad(padDirection, 0);
@@ -195,6 +199,11 @@ namespace XboxCtrlrInput
 			if(OnMac())
 			{
 				inputCode = DetermineDPadMac(padDirection, controllerNumber);
+				r = Input.GetKey(inputCode);
+			}
+			else if(OnLinux() && IsControllerWireless(controllerNumber))
+			{
+				inputCode = DetermineDPadWirelessLinux(padDirection, controllerNumber);
 				r = Input.GetKey(inputCode);
 			}
 			else
@@ -287,7 +296,7 @@ namespace XboxCtrlrInput
 			
 			for(int i = 0; i < cNames.Length; i++)
 			{
-				Debug.Log(cNames[i]);
+				Debug.Log(i.ToString()+ ": " + cNames[i]);
 			}
 		}
 		
@@ -304,10 +313,37 @@ namespace XboxCtrlrInput
 				    Application.platform == RuntimePlatform.OSXWebPlayer);
 		}
 		
+		private static bool OnWindows()
+		{
+			return (Application.platform == RuntimePlatform.WindowsEditor || 
+				    Application.platform == RuntimePlatform.WindowsPlayer ||
+				    Application.platform == RuntimePlatform.WindowsWebPlayer);
+		}
+		
 		private static bool OnLinux()
 		{
 			// Linux mapping based on observation of mapping from default drivers on Ubuntu 13.04
 			return Application.platform == RuntimePlatform.LinuxPlayer;
+		}
+		
+		private static bool IsControllerWireless()
+		{
+			// 0 means for any controller
+			return IsControllerWireless(0);
+		}
+		
+		private static bool IsControllerWireless(int ctrlNum)
+		{
+			// Get the joystick names
+			//string[] listOfJoyStkNames = Input.GetJoystickNames();
+			
+			// If 0 is passed in, that assumes that only 1 controller is plugged in.
+			if(ctrlNum == 0)
+			{
+				return ( (string) Input.GetJoystickNames()[0]).Contains("Wireless");
+			}
+			
+			return ( (string) Input.GetJoystickNames()[ctrlNum-1]).Contains("Wireless");
 		}
 		
 		private static bool IsControllerNumberValid(int ctrlrNum)
@@ -573,6 +609,42 @@ namespace XboxCtrlrInput
 				case XboxDPad.Down:		sPadCode = "6"; break;
 				case XboxDPad.Left:		sPadCode = "7"; break;
 				case XboxDPad.Right:	sPadCode = "8"; break;
+				
+				default: invalidCode = true; break;
+			}
+			
+			r = "joystick" + sJoyCode + " button " + sPadCode;
+			
+			if(invalidCode)
+			{
+				r = "";
+			}
+			
+			return r;
+		}
+		
+		private static string DetermineDPadWirelessLinux(XboxDPad padDir, int ctrlrNum)
+		{
+			string r = "";
+			string sJoyCode = "";
+			string sPadCode = "";
+			bool invalidCode = false;
+			
+			if(ctrlrNum == 0)
+			{
+				sJoyCode = "";
+			}
+			else
+			{
+				sJoyCode = " " + ctrlrNum.ToString();
+			}
+			
+			switch(padDir)
+			{
+				case XboxDPad.Up: 		sPadCode = "13"; break;
+				case XboxDPad.Down:		sPadCode = "14"; break;
+				case XboxDPad.Left:		sPadCode = "11"; break;
+				case XboxDPad.Right:	sPadCode = "12"; break;
 				
 				default: invalidCode = true; break;
 			}
