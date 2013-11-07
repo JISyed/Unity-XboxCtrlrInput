@@ -10,3 +10,7 @@
 *.userprefs
 *.booproj
 *.project
+
+# These files should not be ignored!
+!XInputDotNetPure.dll
+!XInputInterface.dll
