@@ -48,8 +48,6 @@ public class MovePlayer : MonoBehaviour
 		}
 		
 		newPosition = transform.position;
-		
-		//XCI.DEBUGLogControllerNames();
 	}
 	
 	

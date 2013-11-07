@@ -53,7 +53,7 @@ namespace XboxCtrlrInput
 	{
 		// ------------ Members --------------- //
 		
-
+		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
 		
 		// ------------ Methods --------------- //
 		
@@ -75,7 +75,7 @@ namespace XboxCtrlrInput
 		
 		/// <summary> Returns <c>true</c> if the specified button is held down by a specified controller. </summary>
 		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
 		public static bool GetButton(XboxButton button, int controllerNumber)
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
@@ -94,11 +94,25 @@ namespace XboxCtrlrInput
 		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
 		public static bool GetButtonDown(XboxButton button)
 		{
-			string btnCode = DetermineButtonCode(button, 0);
-			
-			if(Input.GetKeyDown(btnCode))
+			if(OnWindowsNative())
 			{
-				return true;
+				XInputUpdateSingleState();
+				GamePadState ctrlrState = XInputGetSingleState();
+				
+				if( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed)
+				{
+					return true;
+				}
+			}
+			
+			else
+			{
+				string btnCode = DetermineButtonCode(button, 0);
+				
+				if(Input.GetKeyDown(btnCode))
+				{
+					return true;
+				}
 			}
 				
 			return false;
@@ -106,16 +120,30 @@ namespace XboxCtrlrInput
 		
 		/// <summary> Returns <c>true</c> at the frame the specified button starts to press down (not held down) by a specified controller. </summary>
 		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
 		public static bool GetButtonDown(XboxButton button, int controllerNumber)
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
 			
-			string btnCode = DetermineButtonCode(button, controllerNumber);
-			
-			if(Input.GetKeyDown(btnCode))
+			if(OnWindowsNative())
 			{
-				return true;
+				XInputUpdatePaticularState(controllerNumber);
+				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
+				
+				if( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed)
+				{
+					return true;
+				}
+			}
+			
+			else
+			{
+				string btnCode = DetermineButtonCode(button, controllerNumber);
+				
+				if(Input.GetKeyDown(btnCode))
+				{
+					return true;
+				}
 			}
 				
 			return false;
@@ -137,7 +165,7 @@ namespace XboxCtrlrInput
 		
 		/// <summary> Returns <c>true</c> at the frame the specified button is released by a specified controller. </summary>
 		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
 		public static bool GetButtonUp(XboxButton button, int controllerNumber)
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
@@ -191,7 +219,7 @@ namespace XboxCtrlrInput
 		
 		/// <summary> Returns <c>true</c> if the specified D-Pad direction is pressed down by a specified controller. </summary>
 		/// <param name='padDirection'> An identifier for the specified D-Pad direction to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the D-Pad. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the D-Pad. An int between 1 and 4. </param>
 		public static bool GetDPad(XboxDPad padDirection, int controllerNumber)
 		{
 			bool r = false;
@@ -242,7 +270,7 @@ namespace XboxCtrlrInput
 		
 		/// <summary> Returns the float number of the specified axis from a specified controller. </summary>
 		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the axis. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the axis. An int between 1 and 4. </param>
 		public static float GetAxis(XboxAxis axis, int controllerNumber)
 		{
 			float r = 0.0f;
@@ -269,7 +297,7 @@ namespace XboxCtrlrInput
 		
 		/// <summary> Returns the float number of the specified axis from a specified controller without Unity's smoothing filter. </summary>
 		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the axis. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the axis. An int between 1 and 4. </param>
 		public static float GetAxisRaw(XboxAxis axis, int controllerNumber)
 		{
 			float r = 0.0f;
@@ -283,7 +311,7 @@ namespace XboxCtrlrInput
 		
 		// >>> Other important functions <<< //
 		// NOTE: These need inprovement/refactoring. Not recommended to use these yet.
-		
+		/*
 		/// <summary> For testing. Not recommended to use. </summary>
 		public static int GetNumPluggedCtrlrs()
 		{
@@ -300,6 +328,7 @@ namespace XboxCtrlrInput
 				Debug.Log(i.ToString()+ ": " + cNames[i]);
 			}
 		}
+		*/
 		
 		// ------------- Private Methods -------------- //
 		
@@ -666,6 +695,65 @@ namespace XboxCtrlrInput
 			}
 			
 			return r;
+		}
+		
+		
+		// ------------- Private XInput Wrappers (for Windows only) -------------- //
+		
+		
+		private static void XInputUpdateSingleState()
+		{
+			PlayerIndex plyNum = PlayerIndex.One;
+			xInputCtrlrs[0] = GamePad.GetState(plyNum);
+		}
+		
+		private static void XInputUpdatePaticularState(int ctrlNum)
+		{
+			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
+			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum);
+		}
+		
+		private static void XInputUpdateSingleStateRaw()
+		{
+			PlayerIndex plyNum = PlayerIndex.One;
+			xInputCtrlrs[0] = GamePad.GetState(plyNum, GamePadDeadZone.None);
+		}
+		
+		private static void XInputUpdatePaticularStateRaw(int ctrlNum)
+		{
+			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
+			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum, GamePadDeadZone.None);
+		}
+		
+		private static GamePadState XInputGetSingleState()
+		{
+			return xInputCtrlrs[0];
+		}
+		
+		private static GamePadState XInputGetPaticularState(int ctrlNum)
+		{
+			return xInputCtrlrs[ctrlNum-1];
+		}
+		
+		private static ButtonState XInputGetButtonState(GamePadButtons xiButtons, XboxButton xciBtn)
+		{
+			ButtonState stateToReturn = ButtonState.Released;
+			
+			switch(xciBtn)
+			{
+				case XboxButton.A: 				stateToReturn = xiButtons.A; break;
+				case XboxButton.B: 				stateToReturn = xiButtons.B; break;
+				case XboxButton.X: 				stateToReturn = xiButtons.X; break;
+				case XboxButton.Y: 				stateToReturn = xiButtons.Y; break;
+				case XboxButton.Start: 			stateToReturn = xiButtons.Start; break;
+				case XboxButton.Back: 			stateToReturn = xiButtons.Back; break;
+				case XboxButton.LeftBumper: 	stateToReturn = xiButtons.LeftShoulder; break;
+				case XboxButton.RightBumper: 	stateToReturn = xiButtons.RightShoulder; break;
+				case XboxButton.LeftStick: 		stateToReturn = xiButtons.LeftStick; break;
+				case XboxButton.RightStick: 	stateToReturn = xiButtons.RightStick; break;
+			}
+			
+			return stateToReturn;
 		}
 	}
 }
