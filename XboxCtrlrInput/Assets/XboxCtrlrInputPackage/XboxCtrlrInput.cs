@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using XInputDotNetPure;
 
 namespace XboxCtrlrInput
 {
@@ -320,6 +321,17 @@ namespace XboxCtrlrInput
 				    Application.platform == RuntimePlatform.WindowsWebPlayer);
 		}
 		
+		private static bool OnWindowsWebPlayer()
+		{
+			return (Application.platform == RuntimePlatform.WindowsWebPlayer);
+		}
+		
+		private static bool OnWindowsNative()
+		{
+			return (Application.platform == RuntimePlatform.WindowsEditor || 
+				    Application.platform == RuntimePlatform.WindowsPlayer);
+		}
+		
 		private static bool OnLinux()
 		{
 			// Linux mapping based on observation of mapping from default drivers on Ubuntu 13.04
@@ -333,10 +345,7 @@ namespace XboxCtrlrInput
 		}
 		
 		private static bool IsControllerWireless(int ctrlNum)
-		{
-			// Get the joystick names
-			//string[] listOfJoyStkNames = Input.GetJoystickNames();
-			
+		{	
 			// If 0 is passed in, that assumes that only 1 controller is plugged in.
 			if(ctrlNum == 0)
 			{
