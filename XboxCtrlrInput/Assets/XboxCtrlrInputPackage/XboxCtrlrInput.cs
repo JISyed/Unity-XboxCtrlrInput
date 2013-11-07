@@ -54,6 +54,7 @@ namespace XboxCtrlrInput
 		// ------------ Members --------------- //
 		
 		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
+		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
 		
 		// ------------ Methods --------------- //
 		
@@ -63,11 +64,25 @@ namespace XboxCtrlrInput
 		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
 		public static bool GetButton(XboxButton button)
 		{
-			string btnCode = DetermineButtonCode(button, 0);
-			
-			if(Input.GetKey(btnCode))
+			if(OnWindowsNative())
 			{
-				return true;
+				XInputUpdateSingleState();
+				GamePadState ctrlrState = XInputGetSingleState();
+				
+				if( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed )
+				{
+					return true;
+				}
+			}
+			
+			else
+			{	
+				string btnCode = DetermineButtonCode(button, 0);
+				
+				if(Input.GetKey(btnCode))
+				{
+					return true;
+				}
 			}
 				
 			return false;
@@ -80,13 +95,27 @@ namespace XboxCtrlrInput
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
 			
-			string btnCode = DetermineButtonCode(button, controllerNumber);
-			
-			if(Input.GetKey(btnCode))
+			if(OnWindowsNative())
 			{
-				return true;
-			}
+				XInputUpdatePaticularState(controllerNumber);
+				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
 				
+				if( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed )
+				{
+					return true;
+				}
+			}
+			
+			else
+			{
+				string btnCode = DetermineButtonCode(button, controllerNumber);
+				
+				if(Input.GetKey(btnCode))
+				{
+					return true;
+				}
+			}
+			
 			return false;
 		}
 		
@@ -98,8 +127,10 @@ namespace XboxCtrlrInput
 			{
 				XInputUpdateSingleState();
 				GamePadState ctrlrState = XInputGetSingleState();
+				GamePadState ctrlrStatePrev = XInputGetSingleStatePrev();
 				
-				if( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed)
+				if( ( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed ) &&
+					( XInputGetButtonState(ctrlrStatePrev.Buttons, button) == ButtonState.Released ) )
 				{
 					return true;
 				}
@@ -129,8 +160,10 @@ namespace XboxCtrlrInput
 			{
 				XInputUpdatePaticularState(controllerNumber);
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
+				GamePadState ctrlrStatePrev = XInputGetPaticularStatePrev(controllerNumber);
 				
-				if( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed)
+				if( ( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed ) &&
+					( XInputGetButtonState(ctrlrStatePrev.Buttons, button) == ButtonState.Released ) )
 				{
 					return true;
 				}
@@ -153,13 +186,29 @@ namespace XboxCtrlrInput
 		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
 		public static bool GetButtonUp(XboxButton button)
 		{
-			string btnCode = DetermineButtonCode(button, 0);
-			
-			if(Input.GetKeyUp(btnCode))
+			if(OnWindowsNative())
 			{
-				return true;
-			}
+				XInputUpdateSingleState();
+				GamePadState ctrlrState = XInputGetSingleState();
+				GamePadState ctrlrStatePrev = XInputGetSingleStatePrev();
 				
+				if( ( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Released ) &&
+					( XInputGetButtonState(ctrlrStatePrev.Buttons, button) == ButtonState.Pressed ) )
+				{
+					return true;
+				}
+			}
+			
+			else
+			{
+				string btnCode = DetermineButtonCode(button, 0);
+				
+				if(Input.GetKeyUp(btnCode))
+				{
+					return true;
+				}
+			}
+			
 			return false;
 		}
 		
@@ -170,13 +219,29 @@ namespace XboxCtrlrInput
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
 			
-			string btnCode = DetermineButtonCode(button, controllerNumber);
-			
-			if(Input.GetKeyUp(btnCode))
+			if(OnWindowsNative())
 			{
-				return true;
+					XInputUpdatePaticularState(controllerNumber);
+					GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
+					GamePadState ctrlrStatePrev = XInputGetPaticularStatePrev(controllerNumber);
+					
+					if( ( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Released ) &&
+					    ( XInputGetButtonState(ctrlrStatePrev.Buttons, button) == ButtonState.Pressed ) )
+					{
+						return true;
+					}
 			}
+			
+			else
+			{
+				string btnCode = DetermineButtonCode(button, controllerNumber);
 				
+				if(Input.GetKeyUp(btnCode))
+				{
+					return true;
+				}
+			}
+			
 			return false;
 		}
 		
@@ -187,33 +252,42 @@ namespace XboxCtrlrInput
 		public static bool GetDPad(XboxDPad padDirection)
 		{
 			bool r = false;
-			string inputCode = "";
 			
-			if(OnMac())
+			if(OnWindowsNative())
 			{
-				inputCode = DetermineDPadMac(padDirection, 0);
-				r = Input.GetKey(inputCode);
-			}
-			else if(OnLinux() && IsControllerWireless())
-			{
-				inputCode = DetermineDPadWirelessLinux(padDirection, 0);
-				r = Input.GetKey(inputCode);
-			}
-			else
-			{
-				inputCode = DetermineDPad(padDirection, 0);
 				
-				switch(padDirection)
+			}
+			
+			else
+			{				
+				string inputCode = "";
+				
+				if(OnMac())
 				{
-					case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
-					case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
+					inputCode = DetermineDPadMac(padDirection, 0);
+					r = Input.GetKey(inputCode);
+				}
+				else if(OnLinux() && IsControllerWireless())
+				{
+					inputCode = DetermineDPadWirelessLinux(padDirection, 0);
+					r = Input.GetKey(inputCode);
+				}
+				else
+				{
+					inputCode = DetermineDPad(padDirection, 0);
 					
-					default: r = false; break;
+					switch(padDirection)
+					{
+						case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
+						case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
+						case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
+						case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
+						
+						default: r = false; break;
+					}
 				}
 			}
-			
+				
 			return r;
 		}
 		
@@ -223,30 +297,39 @@ namespace XboxCtrlrInput
 		public static bool GetDPad(XboxDPad padDirection, int controllerNumber)
 		{
 			bool r = false;
-			string inputCode = "";
 			
-			if(OnMac())
+			if(OnWindowsNative())
 			{
-				inputCode = DetermineDPadMac(padDirection, controllerNumber);
-				r = Input.GetKey(inputCode);
+				
 			}
-			else if(OnLinux() && IsControllerWireless(controllerNumber))
-			{
-				inputCode = DetermineDPadWirelessLinux(padDirection, controllerNumber);
-				r = Input.GetKey(inputCode);
-			}
+			
 			else
 			{
-				inputCode = DetermineDPad(padDirection, controllerNumber);
+				string inputCode = "";
 				
-				switch(padDirection)
+				if(OnMac())
 				{
-					case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
-					case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
+					inputCode = DetermineDPadMac(padDirection, controllerNumber);
+					r = Input.GetKey(inputCode);
+				}
+				else if(OnLinux() && IsControllerWireless(controllerNumber))
+				{
+					inputCode = DetermineDPadWirelessLinux(padDirection, controllerNumber);
+					r = Input.GetKey(inputCode);
+				}
+				else
+				{
+					inputCode = DetermineDPad(padDirection, controllerNumber);
 					
-					default: r = false; break;
+					switch(padDirection)
+					{
+						case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
+						case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
+						case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
+						case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
+						
+						default: r = false; break;
+					}
 				}
 			}
 			
@@ -260,11 +343,20 @@ namespace XboxCtrlrInput
 		public static float GetAxis(XboxAxis axis)
 		{
 			float r = 0.0f;
-			string axisCode = DetermineAxisCode(axis, 0);
 			
-			r = Input.GetAxis(axisCode);
-			r = AdjustAxisValues(r, axis);
+			if(OnWindowsNative())
+			{
+				
+			}
 			
+			else
+			{
+				string axisCode = DetermineAxisCode(axis, 0);
+				
+				r = Input.GetAxis(axisCode);
+				r = AdjustAxisValues(r, axis);
+			}
+				
 			return r;
 		}
 		
@@ -274,10 +366,19 @@ namespace XboxCtrlrInput
 		public static float GetAxis(XboxAxis axis, int controllerNumber)
 		{
 			float r = 0.0f;
-			string axisCode = DetermineAxisCode(axis, controllerNumber);
 			
-			r = Input.GetAxis(axisCode);
-			r = AdjustAxisValues(r, axis);
+			if(OnWindowsNative())
+			{
+				
+			}
+			
+			else
+			{
+				string axisCode = DetermineAxisCode(axis, controllerNumber);
+				
+				r = Input.GetAxis(axisCode);
+				r = AdjustAxisValues(r, axis);
+			}
 			
 			return r;
 		}
@@ -287,11 +388,20 @@ namespace XboxCtrlrInput
 		public static float GetAxisRaw(XboxAxis axis)
 		{
 			float r = 0.0f;
-			string axisCode = DetermineAxisCode(axis, 0);
 			
-			r = Input.GetAxisRaw(axisCode);
-			r = AdjustAxisValues(r, axis);
+			if(OnWindowsNative())
+			{
+				
+			}
 			
+			else
+			{
+				string axisCode = DetermineAxisCode(axis, 0);
+				
+				r = Input.GetAxisRaw(axisCode);
+				r = AdjustAxisValues(r, axis);
+			}
+				
 			return r;
 		}
 		
@@ -301,11 +411,20 @@ namespace XboxCtrlrInput
 		public static float GetAxisRaw(XboxAxis axis, int controllerNumber)
 		{
 			float r = 0.0f;
-			string axisCode = DetermineAxisCode(axis, controllerNumber);
 			
-			r = Input.GetAxisRaw(axisCode);
-			r = AdjustAxisValues(r, axis);
+			if(OnWindowsNative())
+			{
+				
+			}
 			
+			else
+			{
+				string axisCode = DetermineAxisCode(axis, controllerNumber);
+				
+				r = Input.GetAxisRaw(axisCode);
+				r = AdjustAxisValues(r, axis);
+			}
+				
 			return r;
 		}
 		
@@ -701,30 +820,37 @@ namespace XboxCtrlrInput
 		// ------------- Private XInput Wrappers (for Windows only) -------------- //
 		
 		
+		//>> For updating states <<
 		private static void XInputUpdateSingleState()
 		{
 			PlayerIndex plyNum = PlayerIndex.One;
+			xInputCtrlrsPrev[0] = xInputCtrlrs[0];
 			xInputCtrlrs[0] = GamePad.GetState(plyNum);
 		}
 		
 		private static void XInputUpdatePaticularState(int ctrlNum)
 		{
 			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
+			xInputCtrlrsPrev[ctrlNum-1] = xInputCtrlrs[ctrlNum-1];
 			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum);
 		}
 		
 		private static void XInputUpdateSingleStateRaw()
 		{
 			PlayerIndex plyNum = PlayerIndex.One;
+			xInputCtrlrsPrev[0] = xInputCtrlrs[0];
 			xInputCtrlrs[0] = GamePad.GetState(plyNum, GamePadDeadZone.None);
 		}
 		
 		private static void XInputUpdatePaticularStateRaw(int ctrlNum)
 		{
 			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
+			xInputCtrlrsPrev[ctrlNum-1] = xInputCtrlrs[ctrlNum-1];
 			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum, GamePadDeadZone.None);
 		}
 		
+		
+		//>> For getting states <<
 		private static GamePadState XInputGetSingleState()
 		{
 			return xInputCtrlrs[0];
@@ -735,6 +861,17 @@ namespace XboxCtrlrInput
 			return xInputCtrlrs[ctrlNum-1];
 		}
 		
+		private static GamePadState XInputGetSingleStatePrev()
+		{
+			return xInputCtrlrsPrev[0];
+		}
+		
+		private static GamePadState XInputGetPaticularStatePrev(int ctrlNum)
+		{
+			return xInputCtrlrsPrev[ctrlNum-1];
+		}
+		
+		//>> For getting input <<
 		private static ButtonState XInputGetButtonState(GamePadButtons xiButtons, XboxButton xciBtn)
 		{
 			ButtonState stateToReturn = ButtonState.Released;
