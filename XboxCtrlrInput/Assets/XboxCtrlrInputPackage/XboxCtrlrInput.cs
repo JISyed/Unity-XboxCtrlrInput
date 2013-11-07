@@ -255,7 +255,13 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				XInputUpdateSingleState();
+				GamePadState ctrlrState = XInputGetSingleState();
 				
+				if( XInputGetDPadState(ctrlrState.DPad, padDirection) == ButtonState.Pressed )
+				{
+					return true;
+				}
 			}
 			
 			else
@@ -300,7 +306,13 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				XInputUpdatePaticularState(controllerNumber);
+				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
 				
+				if( XInputGetDPadState(ctrlrState.DPad, padDirection) == ButtonState.Pressed )
+				{
+					return true;
+				}
 			}
 			
 			else
@@ -346,7 +358,17 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				XInputUpdateSingleState();
+				GamePadState ctrlrState = XInputGetSingleState();
 				
+				if(axis == XboxAxis.LeftTrigger || axis == XboxAxis.RightTrigger)
+				{
+					r = XInputGetAxisState(ctrlrState.Triggers, axis);
+				}
+				else
+				{
+					r = XInputGetAxisState(ctrlrState.ThumbSticks, axis);
+				}
 			}
 			
 			else
@@ -369,7 +391,17 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				XInputUpdatePaticularState(controllerNumber);
+				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
 				
+				if(axis == XboxAxis.LeftTrigger || axis == XboxAxis.RightTrigger)
+				{
+					r = XInputGetAxisState(ctrlrState.Triggers, axis);
+				}
+				else
+				{
+					r = XInputGetAxisState(ctrlrState.ThumbSticks, axis);
+				}
 			}
 			
 			else
@@ -391,7 +423,17 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				XInputUpdateSingleStateRaw();
+				GamePadState ctrlrState = XInputGetSingleState();
 				
+				if(axis == XboxAxis.LeftTrigger || axis == XboxAxis.RightTrigger)
+				{
+					r = XInputGetAxisState(ctrlrState.Triggers, axis);
+				}
+				else
+				{
+					r = XInputGetAxisState(ctrlrState.ThumbSticks, axis);
+				}
 			}
 			
 			else
@@ -414,7 +456,17 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				XInputUpdatePaticularStateRaw(controllerNumber);
+				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
 				
+				if(axis == XboxAxis.LeftTrigger || axis == XboxAxis.RightTrigger)
+				{
+					r = XInputGetAxisState(ctrlrState.Triggers, axis);
+				}
+				else
+				{
+					r = XInputGetAxisState(ctrlrState.ThumbSticks, axis);
+				}
 			}
 			
 			else
@@ -888,6 +940,51 @@ namespace XboxCtrlrInput
 				case XboxButton.RightBumper: 	stateToReturn = xiButtons.RightShoulder; break;
 				case XboxButton.LeftStick: 		stateToReturn = xiButtons.LeftStick; break;
 				case XboxButton.RightStick: 	stateToReturn = xiButtons.RightStick; break;
+			}
+			
+			return stateToReturn;
+		}
+		
+		private static ButtonState XInputGetDPadState(GamePadDPad xiDPad, XboxDPad xciDPad)
+		{
+			ButtonState stateToReturn = ButtonState.Released;
+			
+			switch(xciDPad)
+			{
+				case XboxDPad.Up: 				stateToReturn = xiDPad.Up; break;
+				case XboxDPad.Down: 			stateToReturn = xiDPad.Down; break;
+				case XboxDPad.Left: 			stateToReturn = xiDPad.Left; break;
+				case XboxDPad.Right: 			stateToReturn = xiDPad.Right; break;
+			}
+			
+			return stateToReturn;
+		}
+		
+		private static float XInputGetAxisState(GamePadTriggers xiTriggers, XboxAxis xciAxis)
+		{
+			float stateToReturn = 0.0f;
+			
+			switch(xciAxis)
+			{
+				case XboxAxis.LeftTrigger: 		stateToReturn = xiTriggers.Left; break;
+				case XboxAxis.RightTrigger: 	stateToReturn = xiTriggers.Right; break;
+				default:						stateToReturn = 0.0f; break;
+			}
+			
+			return stateToReturn;
+		}
+		
+		private static float XInputGetAxisState(GamePadThumbSticks xiThumbSticks, XboxAxis xciAxis)
+		{
+			float stateToReturn = 0.0f;
+			
+			switch(xciAxis)
+			{
+				case XboxAxis.LeftStickX: 		stateToReturn = xiThumbSticks.Left.X; break;
+				case XboxAxis.LeftStickY: 		stateToReturn = xiThumbSticks.Left.Y; break;
+				case XboxAxis.RightStickX: 		stateToReturn = xiThumbSticks.Right.X; break;
+				case XboxAxis.RightStickY: 		stateToReturn = xiThumbSticks.Right.Y; break;
+				default:						stateToReturn = 0.0f; break;
 			}
 			
 			return stateToReturn;
