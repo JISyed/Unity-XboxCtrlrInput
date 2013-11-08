@@ -57,6 +57,7 @@ namespace XboxCtrlrInput
 		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
 		private static int xiPrevFrameCount = 0;
 		private static bool xiUpdateAlreadyCalled = false;
+		private static bool xiNumOfCtrlrsQueried = false;
 		
 		// ------------ Methods --------------- //
 		
@@ -540,25 +541,55 @@ namespace XboxCtrlrInput
 		}
 		
 		// >>> Other important functions <<< //
-		// NOTE: These need inprovement/refactoring. Not recommended to use these yet.
-		/*
-		/// <summary> For testing. Not recommended to use. </summary>
+		
+		/// <summary> Returns the number of Xbox controllers plugged to the computer. </summary>
 		public static int GetNumPluggedCtrlrs()
 		{
-			return Input.GetJoystickNames().Length;
+			int r = 0;
+			
+			if(OnWindowsNative())
+			{
+				if(!xiNumOfCtrlrsQueried || !XInputStillInCurrFrame())
+				{
+					xiNumOfCtrlrsQueried = true;
+					XInputUpdateAllStates();
+				}
+				
+				for(int i = 0; i < 4; i++)
+				{
+					if(xInputCtrlrs[i].IsConnected)
+					{
+						r++;
+					}
+				}
+			}
+			
+			else
+			{
+				string[] ctrlrNames = Input.GetJoystickNames();
+				for(int i = 0; i < ctrlrNames.Length; i++)
+				{
+					if(ctrlrNames[i].Contains("Xbox") || ctrlrNames[i].Contains("XBOX"))
+					{
+						r++;
+					}
+				}
+			}
+			
+			return r;
 		}
 		
-		/// <summary> For testing. Not recommended to use. </summary>
-		public static void DEBUGLogControllerNames()
+		/// <summary> DEBUG function. Log all controller names to Unity's console. </summary>
+		public static void DEBUG_LogControllerNames()
 		{
 			string[] cNames = Input.GetJoystickNames();
 			
 			for(int i = 0; i < cNames.Length; i++)
 			{
-				Debug.Log(i.ToString()+ ": " + cNames[i]);
+				Debug.Log("Ctrlr " + i.ToString() + ": " + cNames[i]);
 			}
 		}
-		*/
+		
 		
 		// ------------- Private Methods -------------- //
 		
@@ -930,45 +961,11 @@ namespace XboxCtrlrInput
 		}
 		
 		
-		// ------------- Private XInput Wrappers (for Windows only) -------------- //
+		// ------------- Private XInput Wrappers (for Windows Native player and editor only) -------------- //
 		
 		
 		//>> For updating states <<
-		/*
-		private static void XInputUpdateSingleState()
-		{
-			XInputUpdatePaticularState(1);
-		}
 		
-		private static void XInputUpdatePaticularState(int ctrlNum)
-		{
-			if(xiUpdateAlreadyCalled) return;
-			if (!IsControllerNumberValid(ctrlNum)) return;
-			
-			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
-			xInputCtrlrsPrev[ctrlNum-1] = xInputCtrlrs[ctrlNum-1];
-			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum);
-			
-			xiUpdateAlreadyCalled = true;
-		}
-		
-		private static void XInputUpdateSingleStateRaw()
-		{
-			XInputUpdatePaticularStateRaw(1);
-		}
-		
-		private static void XInputUpdatePaticularStateRaw(int ctrlNum)
-		{
-			if(xiUpdateAlreadyCalled) return;
-			if (!IsControllerNumberValid(ctrlNum)) return;
-			
-			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
-			xInputCtrlrsPrev[ctrlNum-1] = xInputCtrlrs[ctrlNum-1];
-			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum, GamePadDeadZone.None);
-			
-			xiUpdateAlreadyCalled = true;
-		}
-		*/
 		private static void XInputUpdateAllStates()
 		{
 			if(xiUpdateAlreadyCalled) return;

@@ -32,6 +32,7 @@ public class MovePlayer : MonoBehaviour
 	private float dpLeftBulletTimer = MAX_BUL_TME * 2;
 	private float dpUpBulletTimer = MAX_BUL_TME * 2;
 	private float dpDownBulletTimer = MAX_BUL_TME * 2;
+	private static bool didQueryNumOfCtrlrs = false;
 	
 	
 	// Start
@@ -48,6 +49,27 @@ public class MovePlayer : MonoBehaviour
 		}
 		
 		newPosition = transform.position;
+		
+		if(!didQueryNumOfCtrlrs)
+		{
+			didQueryNumOfCtrlrs = true;
+			
+			int queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+			if(queriedNumberOfCtrlrs == 1)
+			{
+				Debug.Log("Only " + queriedNumberOfCtrlrs + " Xbox controller plugged in.");
+			}
+			else if (queriedNumberOfCtrlrs == 0)
+			{
+				Debug.Log("No Xbox controllers plugged in!");
+			}
+			else
+			{
+				Debug.Log(queriedNumberOfCtrlrs + " Xbox controllers plugged in.");
+			}
+			
+			XCI.DEBUG_LogControllerNames();
+		}
 	}
 	
 	
