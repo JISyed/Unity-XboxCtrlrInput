@@ -3,7 +3,6 @@
 XboxCtrlrInput for Unity
 ========================
 
-__*Note: This is a work in progress! It's not ready for production use.*__  
 Feel free to contribute. The example project requires at least Unity 4.2 or greater. The wrapper itself should work in older versions.
 
 ### Decription
@@ -29,22 +28,29 @@ The goals of `XboxCtrlrInput` are:
 
 2. Next, take the a copy of Unity's Input Manager (either as a [text asset](https://raw.github.com/JISyed/Unity-XboxCtrlrInput/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/InputManager%20Copies/InputManagerText.asset) or as a [binary asset](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/InputManager%20Copies/InputManagerBinary.asset) ) (Right Click -> Save As...). If you're using the free version of Unity 4.1 or older, be sure to download the binary copy. Place the copy into your project's [`/ProjectSettings`](https://github.com/JISyed/Unity-XboxCtrlrInput/tree/master/XboxCtrlrInput/ProjectSettings) folder. Then rename it `InputManager.asset`, this will replace the original file that was there. 
 
-3. For any C# script where you want to Xbox input, place `using XboxCtrlrInput;` at the top of the script under `using UnityEngine;`.
+3. Download [XInputInterface.dll](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/XboxCtrlrInput/XInputInterface.dll) and put it in the base folder of your Unity project (the same folder that contains `/Assets` and `/ProjectSettings`).
 
-4. The `XboxCtrlrInput` namespace includes the class [`XCI`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/Coding-Reference#the-xci-class), which you will use to get Xbox input, such as:
+4. Download [XInputDotNetPure.dll](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/XboxCtrlrInput/Assets/Plugins/XInputDotNetPure.dll) and put it in `/Assets/Plugins` relative to your project. If the `Plugins` folder does not exist in your `/Assets` folder, you'll have to make one.
+
+5. For any C# script where you want to Xbox input, place `using XboxCtrlrInput;` at the top of the script under `using UnityEngine;`.
+
+6. The `XboxCtrlrInput` namespace includes the class [`XCI`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/Coding-Reference#the-xci-class), which you will use to get Xbox input, such as:
 ```csharp
 bool didPressA = XCI.GetButton(XboxButton.A);
 ```
 
+**Note for Windows users:** When making a Windows build, you must take [XInputInterface.dll](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/XboxCtrlrInput/XInputInterface.dll) and put it in the same folder as your .exe, otherwise input won't work. This doesn't apply for web builds.
+
 **Note for Mac users:** Be sure to install the latest version of the [Tattie Bogle drivers](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver).
 
-**Note for Linux users:** All of my Linux testing was done on Ubuntu 13.04 64-bit. To test 32-bit Unity builds on a 64-bit OS, I ran `sudo apt-get install ia32-libs` in a terminal. I am using the default Xbox controller driver that came with Ubuntu, which is known as [xpad](http://lxr.free-electrons.com/source/drivers/input/joystick/xpad.c). I could not get Unity builds to cooperate with [xboxdrv](http://pingus.seul.org/~grumbel/xboxdrv/). Your milage may vary.
+**Note for Linux users:** All of my Linux testing was done on Ubuntu 13.04 64-bit. To test 32-bit Unity builds on a 64-bit OS, I ran `sudo apt-get install ia32-libs` in a terminal. I am using the default Xbox controller driver that came with Ubuntu, which is known as [xpad](http://lxr.free-electrons.com/source/drivers/input/joystick/xpad.c). I could not get Unity builds to cooperate with [xboxdrv](http://pingus.seul.org/~grumbel/xboxdrv/). Your milage may vary. For best results, make sure all your Xbox controllers are connected before testing anything.
 
 
 ### What Works?
 
 If you want to find out what currently works (such as button mappings), refer to the [What Works](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/What-Works) page on the wiki. Compatability information can also be found there.
 
+*Update 11/7/13:* Just so everyone knows, using the triggers with multiple controllers on a Windows web build won't probably work. Unfortunately this is a limitation of Microsoft's implementation of DirectInput. One controller will work fine though.
 
 
 ### Documentation
