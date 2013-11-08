@@ -32,7 +32,7 @@ The goals of `XboxCtrlrInput` are:
 
 4. Download [XInputDotNetPure.dll](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/XboxCtrlrInput/Assets/Plugins/XInputDotNetPure.dll) and put it in `/Assets/Plugins` relative to your project. If the `Plugins` folder does not exist in your `/Assets` folder, you'll have to make one.
 
-5. For any C# script where you want to Xbox input, place `using XboxCtrlrInput;` at the top of the script under `using UnityEngine;`.
+5. For any C# script where you want to use Xbox input, place `using XboxCtrlrInput;` at the top of the script under `using UnityEngine;`.
 
 6. The `XboxCtrlrInput` namespace includes the class [`XCI`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/Coding-Reference#the-xci-class), which you will use to get Xbox input, such as:
 ```csharp
@@ -50,7 +50,7 @@ bool didPressA = XCI.GetButton(XboxButton.A);
 
 If you want to find out what currently works (such as button mappings), refer to the [What Works](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/What-Works) page on the wiki. Compatability information can also be found there.
 
-*Update 11/7/13:* Just so everyone knows, using the triggers with multiple controllers on a Windows web build won't probably work. Unfortunately this is a limitation of Microsoft's implementation of DirectInput. One controller will work fine though.
+*Update 11/7/13:* Just so everyone knows, using the triggers with multiple controllers on a Windows web build won't probably work. Unfortunately this is a limitation of Microsoft's implementation of DirectInput. One controller will work fine though. See [Issue #10](https://github.com/JISyed/Unity-XboxCtrlrInput/issues/10).
 
 
 ### Documentation
