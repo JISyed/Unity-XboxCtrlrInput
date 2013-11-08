@@ -56,6 +56,7 @@ namespace XboxCtrlrInput
 		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
 		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
 		private static int xiPrevFrameCount = 0;
+		private static bool xiUpdateAlreadyCalled = false;
 		
 		// ------------ Methods --------------- //
 		
@@ -67,7 +68,10 @@ namespace XboxCtrlrInput
 		{
 			if(OnWindowsNative())
 			{
-				XInputUpdateSingleState();
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdateSingleState();
+				}
 				GamePadState ctrlrState = XInputGetSingleState();
 				
 				if( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed )
@@ -98,7 +102,11 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
-				XInputUpdatePaticularState(controllerNumber);
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+				}
+				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
 				
 				if( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Pressed )
@@ -126,7 +134,11 @@ namespace XboxCtrlrInput
 		{
 			if(OnWindowsNative())
 			{
-				XInputUpdateSingleState();
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdateSingleState();
+				}
+				
 				GamePadState ctrlrState = XInputGetSingleState();
 				GamePadState ctrlrStatePrev = XInputGetSingleStatePrev();
 				
@@ -159,7 +171,11 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
-				XInputUpdatePaticularState(controllerNumber);
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+				}
+				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
 				GamePadState ctrlrStatePrev = XInputGetPaticularStatePrev(controllerNumber);
 				
@@ -189,7 +205,16 @@ namespace XboxCtrlrInput
 		{
 			if(OnWindowsNative())
 			{
-				XInputUpdateSingleState();
+				if(Time.frameCount < 2)
+				{
+					return false;
+				}
+				
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdateSingleState();
+				}
+				
 				GamePadState ctrlrState = XInputGetSingleState();
 				GamePadState ctrlrStatePrev = XInputGetSingleStatePrev();
 				
@@ -222,15 +247,24 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
-					XInputUpdatePaticularState(controllerNumber);
-					GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
-					GamePadState ctrlrStatePrev = XInputGetPaticularStatePrev(controllerNumber);
-					
-					if( ( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Released ) &&
-					    ( XInputGetButtonState(ctrlrStatePrev.Buttons, button) == ButtonState.Pressed ) )
-					{
-						return true;
-					}
+				if(Time.frameCount < 2)
+				{
+					return false;
+				}
+				
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+				}
+				
+				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
+				GamePadState ctrlrStatePrev = XInputGetPaticularStatePrev(controllerNumber);
+				
+				if( ( XInputGetButtonState(ctrlrState.Buttons, button) == ButtonState.Released ) &&
+				    ( XInputGetButtonState(ctrlrStatePrev.Buttons, button) == ButtonState.Pressed ) )
+				{
+					return true;
+				}
 			}
 			
 			else
@@ -256,7 +290,11 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
-				XInputUpdateSingleState();
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdateSingleState();
+				}
+				
 				GamePadState ctrlrState = XInputGetSingleState();
 				
 				if( XInputGetDPadState(ctrlrState.DPad, padDirection) == ButtonState.Pressed )
@@ -307,7 +345,11 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
-				XInputUpdatePaticularState(controllerNumber);
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+				}
+				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
 				
 				if( XInputGetDPadState(ctrlrState.DPad, padDirection) == ButtonState.Pressed )
@@ -359,7 +401,11 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
-				XInputUpdateSingleState();
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdateSingleState();
+				}
+				
 				GamePadState ctrlrState = XInputGetSingleState();
 				
 				if(axis == XboxAxis.LeftTrigger || axis == XboxAxis.RightTrigger)
@@ -392,7 +438,11 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
-				XInputUpdatePaticularState(controllerNumber);
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+				}
+				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
 				
 				if(axis == XboxAxis.LeftTrigger || axis == XboxAxis.RightTrigger)
@@ -424,7 +474,11 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
-				XInputUpdateSingleStateRaw();
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdateSingleStateRaw();
+				}
+				
 				GamePadState ctrlrState = XInputGetSingleState();
 				
 				if(axis == XboxAxis.LeftTrigger || axis == XboxAxis.RightTrigger)
@@ -457,7 +511,11 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
-				XInputUpdatePaticularStateRaw(controllerNumber);
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularStateRaw(controllerNumber);
+				}
+					
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
 				
 				if(axis == XboxAxis.LeftTrigger || axis == XboxAxis.RightTrigger)
@@ -876,6 +934,7 @@ namespace XboxCtrlrInput
 		
 		
 		//>> For updating states <<
+		/*
 		private static void XInputUpdateSingleState()
 		{
 			XInputUpdatePaticularState(1);
@@ -883,12 +942,14 @@ namespace XboxCtrlrInput
 		
 		private static void XInputUpdatePaticularState(int ctrlNum)
 		{
-			//if(XInputStillInCurrFrame()) return;
+			if(xiUpdateAlreadyCalled) return;
 			if (!IsControllerNumberValid(ctrlNum)) return;
 			
 			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
 			xInputCtrlrsPrev[ctrlNum-1] = xInputCtrlrs[ctrlNum-1];
 			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum);
+			
+			xiUpdateAlreadyCalled = true;
 		}
 		
 		private static void XInputUpdateSingleStateRaw()
@@ -898,12 +959,28 @@ namespace XboxCtrlrInput
 		
 		private static void XInputUpdatePaticularStateRaw(int ctrlNum)
 		{
-			//if(XInputStillInCurrFrame()) return;
+			if(xiUpdateAlreadyCalled) return;
 			if (!IsControllerNumberValid(ctrlNum)) return;
 			
 			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
 			xInputCtrlrsPrev[ctrlNum-1] = xInputCtrlrs[ctrlNum-1];
 			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum, GamePadDeadZone.None);
+			
+			xiUpdateAlreadyCalled = true;
+		}
+		*/
+		private static void XInputUpdateAllStates()
+		{
+			if(xiUpdateAlreadyCalled) return;
+			
+			for(int i = 0; i < 4; i++)
+			{
+				PlayerIndex plyNum = (PlayerIndex) i;
+				xInputCtrlrsPrev[i] = xInputCtrlrs[i];
+				xInputCtrlrs[i] = GamePad.GetState(plyNum, GamePadDeadZone.IndependentAxes);
+			}
+			
+			xiUpdateAlreadyCalled = true;
 		}
 		
 		
@@ -1010,6 +1087,11 @@ namespace XboxCtrlrInput
 			if(xiPrevFrameCount == currFrame)
 			{
 				r = true;
+			}
+			else
+			{
+				r = false;
+				xiUpdateAlreadyCalled = false;
 			}
 			
 			// Assign the previous frame count regardless of whether it's the same or not.
