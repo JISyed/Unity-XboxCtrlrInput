@@ -55,6 +55,7 @@ namespace XboxCtrlrInput
 		
 		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
 		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
+		private static int xiPrevFrameCount = 0;
 		
 		// ------------ Methods --------------- //
 		
@@ -546,6 +547,8 @@ namespace XboxCtrlrInput
 		
 		private static bool IsControllerWireless(int ctrlNum)
 		{	
+			if (ctrlNum < 0 || ctrlNum > 4) return false;
+			
 			// If 0 is passed in, that assumes that only 1 controller is plugged in.
 			if(ctrlNum == 0)
 			{
@@ -557,7 +560,7 @@ namespace XboxCtrlrInput
 		
 		private static bool IsControllerNumberValid(int ctrlrNum)
 		{
-			if(ctrlrNum >= 0 && ctrlrNum <= 4)
+			if(ctrlrNum > 0 && ctrlrNum <= 4)
 			{
 				return true;
 			}
@@ -875,13 +878,14 @@ namespace XboxCtrlrInput
 		//>> For updating states <<
 		private static void XInputUpdateSingleState()
 		{
-			PlayerIndex plyNum = PlayerIndex.One;
-			xInputCtrlrsPrev[0] = xInputCtrlrs[0];
-			xInputCtrlrs[0] = GamePad.GetState(plyNum);
+			XInputUpdatePaticularState(1);
 		}
 		
 		private static void XInputUpdatePaticularState(int ctrlNum)
 		{
+			//if(XInputStillInCurrFrame()) return;
+			if (!IsControllerNumberValid(ctrlNum)) return;
+			
 			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
 			xInputCtrlrsPrev[ctrlNum-1] = xInputCtrlrs[ctrlNum-1];
 			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum);
@@ -889,13 +893,14 @@ namespace XboxCtrlrInput
 		
 		private static void XInputUpdateSingleStateRaw()
 		{
-			PlayerIndex plyNum = PlayerIndex.One;
-			xInputCtrlrsPrev[0] = xInputCtrlrs[0];
-			xInputCtrlrs[0] = GamePad.GetState(plyNum, GamePadDeadZone.None);
+			XInputUpdatePaticularStateRaw(1);
 		}
 		
 		private static void XInputUpdatePaticularStateRaw(int ctrlNum)
 		{
+			//if(XInputStillInCurrFrame()) return;
+			if (!IsControllerNumberValid(ctrlNum)) return;
+			
 			PlayerIndex plyNum = (PlayerIndex) (ctrlNum-1);
 			xInputCtrlrsPrev[ctrlNum-1] = xInputCtrlrs[ctrlNum-1];
 			xInputCtrlrs[ctrlNum-1] = GamePad.GetState(plyNum, GamePadDeadZone.None);
@@ -910,6 +915,8 @@ namespace XboxCtrlrInput
 		
 		private static GamePadState XInputGetPaticularState(int ctrlNum)
 		{
+			if (!IsControllerNumberValid(ctrlNum)) return xInputCtrlrs[0];
+			
 			return xInputCtrlrs[ctrlNum-1];
 		}
 		
@@ -920,13 +927,15 @@ namespace XboxCtrlrInput
 		
 		private static GamePadState XInputGetPaticularStatePrev(int ctrlNum)
 		{
+			if (!IsControllerNumberValid(ctrlNum)) return xInputCtrlrsPrev[0];
+			
 			return xInputCtrlrsPrev[ctrlNum-1];
 		}
 		
 		//>> For getting input <<
 		private static ButtonState XInputGetButtonState(GamePadButtons xiButtons, XboxButton xciBtn)
 		{
-			ButtonState stateToReturn = ButtonState.Released;
+			ButtonState stateToReturn = ButtonState.Pressed;
 			
 			switch(xciBtn)
 			{
@@ -988,6 +997,25 @@ namespace XboxCtrlrInput
 			}
 			
 			return stateToReturn;
+		}
+		
+		private static bool XInputStillInCurrFrame()
+		{
+			bool r = false;
+			
+			// Get the current frame
+			int currFrame = Time.frameCount;
+			
+			// Are we still in the current frame?
+			if(xiPrevFrameCount == currFrame)
+			{
+				r = true;
+			}
+			
+			// Assign the previous frame count regardless of whether it's the same or not.
+			xiPrevFrameCount = currFrame;
+			
+			return r;
 		}
 	}
 }
