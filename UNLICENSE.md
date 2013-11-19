@@ -1,3 +1,8 @@
+**NOTE:** The only piece of software where this license does not apply is [XInput.NET](https://github.com/speps/XInputDotNet),
+which is under the MIT License and is Copyright (c) 2009 Remi Gillig.
+
+---------------------------------------------------------------
+
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
