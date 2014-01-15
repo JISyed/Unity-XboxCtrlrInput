@@ -3,7 +3,7 @@
 XboxCtrlrInput for Unity
 ========================
 
-Feel free to contribute. The example project requires at least Unity 4.2 or greater. The wrapper itself should work in older versions.
+Feel free to contribute. The example project requires at least Unity 4.3 or greater. The wrapper itself should work in older versions.
 
 ### Decription
 
@@ -67,6 +67,6 @@ Everything in this repository is public domain, including the code and documenta
 
 ### About the Example Project
 
-`XboxCtrlrInput` includes a demo Unity project that requires Unity 4.2 or above. For more information about the demo, refer to the [Example Unity Project](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/The-Example-Unity-Project) page on the wiki.
+`XboxCtrlrInput` includes a demo Unity project that requires Unity 4.3 or above. For more information about the demo, refer to the [Example Unity Project](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/The-Example-Unity-Project) page on the wiki.
 
 ![demoScreenshot](http://jibransyed.files.wordpress.com/2013/09/screen-shot-2013-09-09-at-3-24-24-pm.png?w=600)
