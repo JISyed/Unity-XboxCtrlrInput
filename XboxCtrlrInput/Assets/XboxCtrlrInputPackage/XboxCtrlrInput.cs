@@ -55,11 +55,6 @@ namespace XboxCtrlrInput
 		
 		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
 		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
-		private static bool[][] GamePadPressed = { new bool[4]{false, false, false, false}, 
-													new bool[4]{false, false, false, false},
-													new bool[4]{false, false, false, false},
-													new bool[4]{false, false, false, false},
-													new bool[4]{false, false, false, false} };
 		private static int xiPrevFrameCount = 0;
 		private static bool xiUpdateAlreadyCalled = false;
 		private static bool xiNumOfCtrlrsQueried = false;
@@ -443,6 +438,7 @@ namespace XboxCtrlrInput
 				}
 				else
 				{
+					//Place Holder for Wired Linux
 					r = false;
 				}					
 			}
@@ -496,6 +492,7 @@ namespace XboxCtrlrInput
 				}
 				else
 				{
+					//Place Holder for Wired Linux
 					r = false;
 				}
 			}
@@ -549,6 +546,7 @@ namespace XboxCtrlrInput
 				}
 				else
 				{
+					//Place Holder for Wired Linux
 					r = false;
 				}
 			}
@@ -602,7 +600,8 @@ namespace XboxCtrlrInput
 				}
 				else
 				{
-					return false;
+					//Place Holder for Wired Linux
+					r = false;
 				}
 			}
 			
