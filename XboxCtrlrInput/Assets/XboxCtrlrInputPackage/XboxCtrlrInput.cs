@@ -55,6 +55,11 @@ namespace XboxCtrlrInput
 		
 		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
 		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
+		private static bool[][] GamePadPressed = { new bool[4]{false, false, false, false}, 
+													new bool[4]{false, false, false, false},
+													new bool[4]{false, false, false, false},
+													new bool[4]{false, false, false, false},
+													new bool[4]{false, false, false, false} };
 		private static int xiPrevFrameCount = 0;
 		private static bool xiUpdateAlreadyCalled = false;
 		private static bool xiNumOfCtrlrsQueried = false;
@@ -394,6 +399,7 @@ namespace XboxCtrlrInput
 		
 		/// <summary> Returns <c>true</c> at the frame the specified button is released. </summary>
 		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
 		public static bool GetDPadUp(XboxDPad padDirection)
 		{
 			
@@ -437,18 +443,8 @@ namespace XboxCtrlrInput
 				}
 				else
 				{
-					inputCode = DetermineDPad(padDirection, 0);
-					
-					switch(padDirection)
-					{
-					case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
-					case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
-						
-					default: r = false; break;
-					}
-				}
+					r = false;
+				}					
 			}
 			
 			return r;
@@ -500,17 +496,7 @@ namespace XboxCtrlrInput
 				}
 				else
 				{
-					inputCode = DetermineDPad(padDirection, controllerNumber);
-					
-					switch(padDirection)
-					{
-					case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
-					case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
-						
-					default: r = false; break;
-					}
+					r = false;
 				}
 			}
 			
@@ -519,6 +505,7 @@ namespace XboxCtrlrInput
 		
 		/// <summary> Returns <c>true</c> at the frame the specified button is Pressed. </summary>
 		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
 		public static bool GetDPadDown(XboxDPad padDirection)
 		{
 			
@@ -562,17 +549,7 @@ namespace XboxCtrlrInput
 				}
 				else
 				{
-					inputCode = DetermineDPad(padDirection, 0);
-					
-					switch(padDirection)
-					{
-					case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
-					case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
-						
-					default: r = false; break;
-					}
+					r = false;
 				}
 			}
 			
@@ -625,17 +602,7 @@ namespace XboxCtrlrInput
 				}
 				else
 				{
-					inputCode = DetermineDPad(padDirection, controllerNumber);
-					
-					switch(padDirection)
-					{
-					case XboxDPad.Up: 		r = Input.GetAxis(inputCode) > 0; break;
-					case XboxDPad.Down: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Left: 	r = Input.GetAxis(inputCode) < 0; break;
-					case XboxDPad.Right:	r = Input.GetAxis(inputCode) > 0; break;
-						
-					default: r = false; break;
-					}
+					return false;
 				}
 			}
 			
