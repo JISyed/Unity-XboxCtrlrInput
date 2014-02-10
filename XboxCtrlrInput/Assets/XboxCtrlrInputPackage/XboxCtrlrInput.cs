@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using XInputDotNetPure;
 
 namespace XboxCtrlrInput
@@ -352,7 +352,7 @@ namespace XboxCtrlrInput
 				}
 				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
-				
+
 				if( XInputGetDPadState(ctrlrState.DPad, padDirection) == ButtonState.Pressed )
 				{
 					return true;
@@ -386,6 +386,222 @@ namespace XboxCtrlrInput
 						
 						default: r = false; break;
 					}
+				}
+			}
+			
+			return r;
+		}
+		
+		/// <summary> Returns <c>true</c> at the frame the specified button is released. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+		public static bool GetDPadUp(XboxDPad padDirection)
+		{
+			
+			bool r = false;
+			
+			if(OnWindowsNative())
+			{
+				if(Time.frameCount < 2)
+				{
+					return false;
+				}
+				
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+				}
+				
+				GamePadState ctrlrState = XInputGetSingleState();
+				GamePadState ctrlrStatePrev = XInputGetSingleStatePrev();
+				
+				if( ( XInputGetDPadState(ctrlrState.DPad, padDirection) == ButtonState.Released ) &&
+				   ( XInputGetDPadState(ctrlrStatePrev.DPad, padDirection) == ButtonState.Pressed ) )
+				{
+					return true;
+				}
+			}
+			
+			else
+			{
+				string inputCode = "";
+				
+				if(OnMac())
+				{
+					inputCode = DetermineDPadMac(padDirection, 0);
+					r = Input.GetKeyUp(inputCode);
+				}
+				else if(OnLinux() && IsControllerWireless())
+				{
+					inputCode = DetermineDPadWirelessLinux(padDirection, 0);
+					r = Input.GetKeyUp(inputCode);
+				}
+				else
+				{
+					//Place Holder for Wired Linux
+					r = false;
+				}					
+			}
+			
+			return r;
+		}
+		
+		/// <summary> Returns <c>true</c> at the frame the specified button is released by a specified controller. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+		public static bool GetDPadUp(XboxDPad padDirection, int controllerNumber)
+		{
+			
+			bool r = false;
+			
+			if(OnWindowsNative())
+			{
+				if(Time.frameCount < 2)
+				{
+					return false;
+				}
+				
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+				}
+				
+				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
+				GamePadState ctrlrStatePrev = XInputGetPaticularStatePrev(controllerNumber);
+				
+				if( ( XInputGetDPadState(ctrlrState.DPad, padDirection) == ButtonState.Released ) &&
+				   ( XInputGetDPadState(ctrlrStatePrev.DPad, padDirection) == ButtonState.Pressed ) )
+				{
+					return true;
+				}
+			}
+			
+			else
+			{
+				string inputCode = "";
+				
+				if(OnMac())
+				{
+					inputCode = DetermineDPadMac(padDirection, controllerNumber);
+					r = Input.GetKeyUp(inputCode);
+				}
+				else if(OnLinux() && IsControllerWireless(controllerNumber))
+				{
+					inputCode = DetermineDPadWirelessLinux(padDirection, controllerNumber);
+					r = Input.GetKeyUp(inputCode);
+				}
+				else
+				{
+					//Place Holder for Wired Linux
+					r = false;
+				}
+			}
+			
+			return r;
+		}
+		
+		/// <summary> Returns <c>true</c> at the frame the specified button is Pressed. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+		public static bool GetDPadDown(XboxDPad padDirection)
+		{
+			
+			bool r = false;
+			
+			if(OnWindowsNative())
+			{
+				if(Time.frameCount < 2)
+				{
+					return false;
+				}
+				
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+				}
+				
+				GamePadState ctrlrState = XInputGetSingleState();
+				GamePadState ctrlrStatePrev = XInputGetSingleStatePrev();
+				
+				if( ( XInputGetDPadState(ctrlrState.DPad, padDirection) == ButtonState.Pressed ) &&
+				   ( XInputGetDPadState(ctrlrStatePrev.DPad, padDirection) == ButtonState.Released ) )
+				{
+					return true;
+				}
+			}
+			
+			else
+			{
+				string inputCode = "";
+				
+				if(OnMac())
+				{
+					inputCode = DetermineDPadMac(padDirection, 0);
+					r = Input.GetKeyDown(inputCode);
+				}
+				else if(OnLinux() && IsControllerWireless())
+				{
+					inputCode = DetermineDPadWirelessLinux(padDirection, 0);
+					r = Input.GetKeyDown(inputCode);
+				}
+				else
+				{
+					//Place Holder for Wired Linux
+					r = false;
+				}
+			}
+			
+			return r;
+		}
+		
+		/// <summary> Returns <c>true</c> at the frame the specified button is Pressed by a specified controller. </summary>
+		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+		public static bool GetDPadDown(XboxDPad padDirection, int controllerNumber)
+		{
+			
+			bool r = false;
+			
+			if(OnWindowsNative())
+			{
+				if(Time.frameCount < 2)
+				{
+					return false;
+				}
+				
+				if(!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+				}
+				
+				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
+				GamePadState ctrlrStatePrev = XInputGetPaticularStatePrev(controllerNumber);
+				
+				if( ( XInputGetDPadState(ctrlrState.DPad, padDirection) == ButtonState.Pressed ) &&
+				   ( XInputGetDPadState(ctrlrStatePrev.DPad, padDirection) == ButtonState.Released ) )
+				{
+					return true;
+				}
+			}
+			
+			else
+			{
+				string inputCode = "";
+				
+				if(OnMac())
+				{
+					inputCode = DetermineDPadMac(padDirection, controllerNumber);
+					r = Input.GetKeyDown(inputCode);
+				}
+				else if(OnLinux() && IsControllerWireless(controllerNumber))
+				{
+					inputCode = DetermineDPadWirelessLinux(padDirection, controllerNumber);
+					r = Input.GetKeyDown(inputCode);
+				}
+				else
+				{
+					//Place Holder for Wired Linux
+					r = false;
 				}
 			}
 			
