@@ -3,7 +3,7 @@
 XboxCtrlrInput for Unity
 ========================
 
-Feel free to contribute. The example project requires at least Unity 4.3 or greater. The wrapper itself should work in older versions.
+Feel free to contribute. The example project requires at least Unity 4.3 or greater. 64-bit Mac native builds require at least Unity 4.5 or greater. The wrapper itself should work in older versions.
 
 ### Decription
 
@@ -41,7 +41,7 @@ bool didPressA = XCI.GetButton(XboxButton.A);
 
 **Note for Windows users:** When making a Windows build, you must take [XInputInterface.dll](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/XboxCtrlrInput/XInputInterface.dll) and put it in the same folder as your .exe, otherwise input won't work. This doesn't apply for web builds.
 
-**Note for Mac users:** Be sure to install the latest version of the [Tattie Bogle drivers](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver).
+**Note for Mac users:** Be sure to install the latest version of the [Tattie Bogle drivers](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver). If you are making a native Mac build with either 64-bit or Universal binary, you need Unity 4.5 or greater. Input will not work if using older versions of Unity.
 
 **Note for Linux users:** All of my Linux testing was done on Ubuntu 13.04 64-bit. To test 32-bit Unity builds on a 64-bit OS, I ran `sudo apt-get install ia32-libs` in a terminal. I am using the default Xbox controller driver that came with Ubuntu, which is known as [xpad](http://lxr.free-electrons.com/source/drivers/input/joystick/xpad.c). I could not get Unity builds to cooperate with [xboxdrv](http://pingus.seul.org/~grumbel/xboxdrv/). Your milage may vary. For best results, make sure all your Xbox controllers are connected before testing anything.
 
