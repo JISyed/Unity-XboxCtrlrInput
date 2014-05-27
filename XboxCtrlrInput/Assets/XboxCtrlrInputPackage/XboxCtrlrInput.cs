@@ -785,7 +785,7 @@ namespace XboxCtrlrInput
 				string[] ctrlrNames = Input.GetJoystickNames();
 				for(int i = 0; i < ctrlrNames.Length; i++)
 				{
-					if(ctrlrNames[i].Contains("Xbox") || ctrlrNames[i].Contains("XBOX"))
+					if(ctrlrNames[i].Contains("Xbox") || ctrlrNames[i].Contains("XBOX") || ctrlrNames[i].Contains("Microsoft"))
 					{
 						r++;
 					}
