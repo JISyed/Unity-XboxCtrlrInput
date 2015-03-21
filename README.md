@@ -5,7 +5,7 @@ XboxCtrlrInput for Unity
 
 Feel free to contribute. The example project requires at least Unity 4.3 or greater. 64-bit Mac native builds require at least Unity 4.5 or greater. The wrapper itself should work in older versions.
 
-**Warning:** If you rely on XboxCtrlrInput, then do NOT upgrade to Unity 5! It will not work for Windows (due to missing DLL exception with XInputInterface.dll). Other platforms not tested for Unity 5 compatibility.
+**Warning:** If you rely on XboxCtrlrInput, then do NOT upgrade to Unity 5! It will not work for Windows (due to missing DLL exception with XInputInterface.dll). Other platforms not tested for Unity 5 compatibility. See [Issue #12](https://github.com/JISyed/Unity-XboxCtrlrInput/issues/12) for more information.
 
 ### Decription
 
