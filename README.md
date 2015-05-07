@@ -3,15 +3,13 @@
 XboxCtrlrInput for Unity
 ========================
 
-Feel free to contribute. The example project requires at least Unity 4.3 or greater. 64-bit Mac native builds require at least Unity 4.5 or greater. The wrapper itself should work in older versions.
-
-**Warning:** If you rely on XboxCtrlrInput, then do NOT upgrade to Unity 5! It will not work for Windows (due to missing DLL exception with XInputInterface.dll). Other platforms not tested for Unity 5 compatibility. See [Issue #12](https://github.com/JISyed/Unity-XboxCtrlrInput/issues/12) for more information.
+Feel free to contribute. Requires at least Unity 5.0 or greater. Unfortunately older versions of Unity are no longer supported (it may work or not, but your miliage will vary).
 
 ### Decription
 
 `XboxCtrlrInput` is a wrapper written in C# for Unity3D that handles Xbox 360 controller input. It's used in the same way as Unity's [`Input`](http://docs.unity3d.com/Documentation/ScriptReference/Input.html) class. My reasons for starting this project can be read [here](http://jibransyed.wordpress.com/2013/09/07/the-motivation-behind-xboxctrlrinput/).
 
-[`XboxCtrlrInput.cs`](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/XboxCtrlrInput.cs) itself is not a Unity script and thus does not need to be attached to any GameObject, since it contains no [`MonoBehavior`](http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html) derived classes in it. It should work on older versions of Unity that support joystick input.
+[`XboxCtrlrInput.cs`](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/XboxCtrlrInput.cs) itself is not a Unity script and thus does not need to be attached to any GameObject, since it contains no [`MonoBehavior`](http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html) derived classes in it.
 
 `XboxCtrlrInput.cs` includes a C# namespace called `XboxCtrlrInput`. In that namespace there are three enumerations, [`XboxButton`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/XboxButton), [`XboxDPad`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/XboxDPad), and [`XboxAxis`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/XboxAxis). Most importantly, there is a static class called [`XCI`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/Coding-Reference#the-xci-class) that is used to get Xbox input.
 
@@ -28,7 +26,7 @@ The goals of `XboxCtrlrInput` are:
 
 1. Download the [XboxCtrlrInput C# file](https://raw.github.com/JISyed/Unity-XboxCtrlrInput/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/XboxCtrlrInput.cs) (Right Click -> Save As...) and then put it into your Unity project under the [`Assets/`](https://github.com/JISyed/Unity-XboxCtrlrInput/tree/master/XboxCtrlrInput/Assets) folder. It can be anywhere in that folder.
 
-2. Next, take the a copy of Unity's Input Manager (either as a [text asset](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/InputManager%20Copies/InputManagerText.asset) or as a [binary asset](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/InputManager%20Copies/InputManagerBinary.asset) ) (Right Click -> Save As...). If you're using the free version of Unity 4.1 or older, be sure to download the binary copy. Place the copy into your project's [`/ProjectSettings`](https://github.com/JISyed/Unity-XboxCtrlrInput/tree/master/XboxCtrlrInput/ProjectSettings) folder. Then rename it `InputManager.asset`, this will replace the original file that was there. 
+2. Next, take the a copy of Unity's Input Manager (either as a [text asset](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/InputManager%20Copies/InputManagerText.asset) or as a [binary asset](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/InputManager%20Copies/InputManagerBinary.asset) ) (Right Click -> Save As...). Place the copy into your project's [`/ProjectSettings`](https://github.com/JISyed/Unity-XboxCtrlrInput/tree/master/XboxCtrlrInput/ProjectSettings) folder. Then rename it `InputManager.asset`, this will replace the original file that was there. 
 
 3. Download [XInputInterface.dll](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/XboxCtrlrInput/XInputInterface.dll) and put it in the base folder of your Unity project (the same folder that contains `/Assets` and `/ProjectSettings`).
 

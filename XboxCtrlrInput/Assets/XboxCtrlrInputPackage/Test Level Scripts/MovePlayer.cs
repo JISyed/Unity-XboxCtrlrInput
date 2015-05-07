@@ -42,10 +42,10 @@ public class MovePlayer : MonoBehaviour
 		
 		switch(playerNumber)
 		{
-			case 1: renderer.material = matRed; break;
-			case 2: renderer.material = matGreen; break;
-			case 3: renderer.material = matBlue; break;
-			case 4: renderer.material = matYellow; break;
+			case 1: GetComponent<Renderer>().material = matRed; break;
+			case 2: GetComponent<Renderer>().material = matGreen; break;
+			case 3: GetComponent<Renderer>().material = matBlue; break;
+			case 4: GetComponent<Renderer>().material = matYellow; break;
 		}
 		
 		newPosition = transform.position;
@@ -82,13 +82,13 @@ public class MovePlayer : MonoBehaviour
 		if(XCI.GetButtonDown(XboxButton.LeftStick, playerNumber) && canJump)
 		{
 			canJump = false;
-			rigidbody.AddRelativeForce(0.0f, jumpImpulse, 0.0f, ForceMode.Impulse);
+			GetComponent<Rigidbody>().AddRelativeForce(0.0f, jumpImpulse, 0.0f, ForceMode.Impulse);
 		}
 		
 		// Slam (Right Stick)
 		if(XCI.GetButtonDown(XboxButton.RightStick, playerNumber) && !canJump)
 		{
-			rigidbody.AddRelativeForce(0.0f, (-jumpImpulse * 1.5f), 0.0f, ForceMode.Impulse);
+			GetComponent<Rigidbody>().AddRelativeForce(0.0f, (-jumpImpulse * 1.5f), 0.0f, ForceMode.Impulse);
 		}
 		
 		
