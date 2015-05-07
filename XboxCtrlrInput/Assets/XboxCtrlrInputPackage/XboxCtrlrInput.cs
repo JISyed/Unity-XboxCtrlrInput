@@ -55,7 +55,7 @@ namespace XboxCtrlrInput
 		
 		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
 		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
-		private static int xiPrevFrameCount = 0;
+		private static int xiPrevFrameCount = -1;
 		private static bool xiUpdateAlreadyCalled = false;
 		private static bool xiNumOfCtrlrsQueried = false;
 		
@@ -63,15 +63,19 @@ namespace XboxCtrlrInput
 		
 		// >>> For Buttons <<< //
 		
-		/// <summary> Returns <c>true</c> if the specified button is held down by any controller. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <summary> 
+		/// 	Returns <c>true</c> if the specified button is held down by any controller. 
+		/// </summary>
+		/// <param name='button'>
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
 		public static bool GetButton(XboxButton button)
 		{
 			if(OnWindowsNative())
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdateSingleState();
+					XInputUpdateAllStates();
 				}
 				GamePadState ctrlrState = XInputGetSingleState();
 				
