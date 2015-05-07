@@ -7,7 +7,7 @@ namespace XboxCtrlrInput
 	// ================= Enumerations ==================== //
 	
 	/// <summary>
-	/// List of enumerated identifiers for Xbox buttons.
+	/// 	List of enumerated identifiers for Xbox buttons.
 	/// </summary>
 	public enum XboxButton
 	{
@@ -24,7 +24,7 @@ namespace XboxCtrlrInput
 	}
 	
 	/// <summary>
-	/// List of enumerated identifiers for Xbox D-Pad directions.
+	/// 	List of enumerated identifiers for Xbox D-Pad directions.
 	/// </summary>
 	public enum XboxDPad
 	{
@@ -35,7 +35,7 @@ namespace XboxCtrlrInput
 	}
 	
 	/// <summary>
-	/// List of enumerated identifiers for Xbox axis.
+	/// 	List of enumerated identifiers for Xbox axis.
 	/// </summary>
 	public enum XboxAxis
 	{
@@ -98,9 +98,15 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
-		/// <summary> Returns <c>true</c> if the specified button is held down by a specified controller. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+		/// <summary> 
+		/// 	Returns <c>true</c> if the specified button is held down by a specified controller. 
+		/// </summary>
+		/// <param name='button'> 
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// </param>
 		public static bool GetButton(XboxButton button, int controllerNumber)
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
@@ -109,7 +115,7 @@ namespace XboxCtrlrInput
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
@@ -133,15 +139,19 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
-		/// <summary> Returns <c>true</c> at the frame the specified button starts to press down (not held down) by any controller. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <summary> 
+		/// 	Returns <c>true</c> at the frame the specified button starts to press down (not held down) by any controller. 
+		/// </summary>
+		/// <param name='button'> 
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
 		public static bool GetButtonDown(XboxButton button)
 		{
 			if(OnWindowsNative())
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdateSingleState();
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetSingleState();
@@ -167,9 +177,15 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
-		/// <summary> Returns <c>true</c> at the frame the specified button starts to press down (not held down) by a specified controller. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+		/// <summary> 
+		/// 	Returns <c>true</c> at the frame the specified button starts to press down (not held down) by a specified controller. 
+		/// </summary>
+		/// <param name='button'> 
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// </param>
 		public static bool GetButtonDown(XboxButton button, int controllerNumber)
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
@@ -178,7 +194,7 @@ namespace XboxCtrlrInput
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
@@ -204,8 +220,12 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
-		/// <summary> Returns <c>true</c> at the frame the specified button is released by any controller. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
+		/// <summary> 
+		/// 	Returns <c>true</c> at the frame the specified button is released by any controller. 
+		/// </summary>
+		/// <param name='button'> 
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
 		public static bool GetButtonUp(XboxButton button)
 		{
 			if(OnWindowsNative())
@@ -217,7 +237,7 @@ namespace XboxCtrlrInput
 				
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdateSingleState();
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetSingleState();
@@ -243,9 +263,15 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
-		/// <summary> Returns <c>true</c> at the frame the specified button is released by a specified controller. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+		/// <summary> 
+		/// 	Returns <c>true</c> at the frame the specified button is released by a specified controller. 
+		/// </summary>
+		/// <param name='button'> 
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// </param>
 		public static bool GetButtonUp(XboxButton button, int controllerNumber)
 		{
 			if(!IsControllerNumberValid(controllerNumber))  return false;
@@ -259,7 +285,7 @@ namespace XboxCtrlrInput
 				
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
@@ -287,8 +313,12 @@ namespace XboxCtrlrInput
 		
 		// >>> For D-Pad <<< //
 		
-		/// <summary> Returns <c>true</c> if the specified D-Pad direction is pressed down by any controller. </summary>
-		/// <param name='padDirection'> An identifier for the specified D-Pad direction to be tested. </param>
+		/// <summary> 
+		/// 	Returns <c>true</c> if the specified D-Pad direction is pressed down by any controller. 
+		/// </summary>
+		/// <param name='padDirection'> 
+		/// 	An identifier for the specified D-Pad direction to be tested. 
+		/// </param>
 		public static bool GetDPad(XboxDPad padDirection)
 		{
 			bool r = false;
@@ -297,7 +327,7 @@ namespace XboxCtrlrInput
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdateSingleState();
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetSingleState();
@@ -322,7 +352,7 @@ namespace XboxCtrlrInput
 					inputCode = DetermineDPadWirelessLinux(padDirection, 0);
 					r = Input.GetKey(inputCode);
 				}
-				else
+				else // Windows Web Player and Linux Wired Controller
 				{
 					inputCode = DetermineDPad(padDirection, 0);
 					
@@ -341,9 +371,15 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
-		/// <summary> Returns <c>true</c> if the specified D-Pad direction is pressed down by a specified controller. </summary>
-		/// <param name='padDirection'> An identifier for the specified D-Pad direction to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the D-Pad. An int between 1 and 4. </param>
+		/// <summary> 
+		/// 	Returns <c>true</c> if the specified D-Pad direction is pressed down by a specified controller. 
+		/// </summary>
+		/// <param name='padDirection'> 
+		/// 	An identifier for the specified D-Pad direction to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the D-Pad. An int between 1 and 4. 
+		/// </param>
 		public static bool GetDPad(XboxDPad padDirection, int controllerNumber)
 		{
 			bool r = false;
@@ -352,7 +388,7 @@ namespace XboxCtrlrInput
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
@@ -377,7 +413,7 @@ namespace XboxCtrlrInput
 					inputCode = DetermineDPadWirelessLinux(padDirection, controllerNumber);
 					r = Input.GetKey(inputCode);
 				}
-				else
+				else // Windows Web Player and Linux Wired Controller
 				{
 					inputCode = DetermineDPad(padDirection, controllerNumber);
 					
@@ -395,10 +431,18 @@ namespace XboxCtrlrInput
 			
 			return r;
 		}
-		
-		/// <summary> Returns <c>true</c> at the frame the specified button is released. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+
+		// From @ProjectEnder
+		/// <summary> 
+		/// 	Returns <c>true</c> at the frame the specified button is released.
+		/// 	Does NOT work on Linux with Wired Controllers.
+		/// </summary>
+		/// <param name='button'> 
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// </param>
 		public static bool GetDPadUp(XboxDPad padDirection)
 		{
 			
@@ -413,7 +457,7 @@ namespace XboxCtrlrInput
 				
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetSingleState();
@@ -449,10 +493,18 @@ namespace XboxCtrlrInput
 			
 			return r;
 		}
-		
-		/// <summary> Returns <c>true</c> at the frame the specified button is released by a specified controller. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+
+		// From @ProjectEnder
+		/// <summary> 
+		/// 	Returns <c>true</c> at the frame the specified button is released by a specified controller.
+		/// 	Does NOT work on Linux with Wired Controllers.
+		/// </summary>
+		/// <param name='button'> 
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// </param>
 		public static bool GetDPadUp(XboxDPad padDirection, int controllerNumber)
 		{
 			
@@ -467,7 +519,7 @@ namespace XboxCtrlrInput
 				
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
@@ -503,10 +555,18 @@ namespace XboxCtrlrInput
 			
 			return r;
 		}
-		
-		/// <summary> Returns <c>true</c> at the frame the specified button is Pressed. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+
+		// From @ProjectEnder
+		/// <summary> 
+		/// 	Returns <c>true</c> at the frame the specified button is Pressed.
+		/// 	Does NOT work on Linux with Wired Controllers.
+		/// </summary>
+		/// <param name='button'> 
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// </param>
 		public static bool GetDPadDown(XboxDPad padDirection)
 		{
 			
@@ -521,7 +581,7 @@ namespace XboxCtrlrInput
 				
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetSingleState();
@@ -557,10 +617,18 @@ namespace XboxCtrlrInput
 			
 			return r;
 		}
-		
-		/// <summary> Returns <c>true</c> at the frame the specified button is Pressed by a specified controller. </summary>
-		/// <param name='button'> Identifier for the Xbox button to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the button. An int between 1 and 4. </param>
+
+		// From @ProjectEnder
+		/// <summary> 
+		/// 	Returns <c>true</c> at the frame the specified button is Pressed by a specified controller. 
+		/// 	Does NOT work on Linux with Wired Controllers.
+		/// </summary>
+		/// <param name='button'> 
+		/// 	Identifier for the Xbox button to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// </param>
 		public static bool GetDPadDown(XboxDPad padDirection, int controllerNumber)
 		{
 			
@@ -575,7 +643,7 @@ namespace XboxCtrlrInput
 				
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
@@ -614,8 +682,12 @@ namespace XboxCtrlrInput
 		
 		// >>> For Axis <<< //
 		
-		/// <summary> Returns the analog number of the specified axis from any controller. </summary>
-		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
+		/// <summary> 
+		/// 	Returns the analog number of the specified axis from any controller. 
+		/// </summary>
+		/// <param name='axis'> 
+		/// 	An identifier for the specified Xbox axis to be tested. 
+		/// </param>
 		public static float GetAxis(XboxAxis axis)
 		{
 			float r = 0.0f;
@@ -624,7 +696,7 @@ namespace XboxCtrlrInput
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdateSingleState();
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetSingleState();
@@ -650,9 +722,15 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
-		/// <summary> Returns the float number of the specified axis from a specified controller. </summary>
-		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the axis. An int between 1 and 4. </param>
+		/// <summary> 
+		/// 	Returns the float number of the specified axis from a specified controller. 
+		/// </summary>
+		/// <param name='axis'> 
+		/// 	An identifier for the specified Xbox axis to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the axis. An int between 1 and 4. 
+		/// </param>
 		public static float GetAxis(XboxAxis axis, int controllerNumber)
 		{
 			float r = 0.0f;
@@ -661,7 +739,7 @@ namespace XboxCtrlrInput
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularState(controllerNumber);
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
@@ -687,8 +765,12 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
-		/// <summary> Returns the float number of the specified axis from any controller without Unity's smoothing filter. </summary>
-		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
+		/// <summary> 
+		/// 	Returns the float number of the specified axis from any controller without Unity's smoothing filter. 
+		/// </summary>
+		/// <param name='axis'> 
+		/// 	An identifier for the specified Xbox axis to be tested. 
+		/// </param>
 		public static float GetAxisRaw(XboxAxis axis)
 		{
 			float r = 0.0f;
@@ -697,7 +779,7 @@ namespace XboxCtrlrInput
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdateSingleStateRaw();
+					XInputUpdateAllStates();
 				}
 				
 				GamePadState ctrlrState = XInputGetSingleState();
@@ -723,9 +805,15 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
-		/// <summary> Returns the float number of the specified axis from a specified controller without Unity's smoothing filter. </summary>
-		/// <param name='axis'> An identifier for the specified Xbox axis to be tested. </param>
-		/// <param name='controllerNumber'> An identifier for the specific controller on which to test the axis. An int between 1 and 4. </param>
+		/// <summary> 
+		/// 	Returns the float number of the specified axis from a specified controller without Unity's smoothing filter. 
+		/// </summary>
+		/// <param name='axis'> 
+		/// 	An identifier for the specified Xbox axis to be tested. 
+		/// </param>
+		/// <param name='controllerNumber'> 
+		/// 	An identifier for the specific controller on which to test the axis. An int between 1 and 4. 
+		/// </param>
 		public static float GetAxisRaw(XboxAxis axis, int controllerNumber)
 		{
 			float r = 0.0f;
@@ -734,7 +822,7 @@ namespace XboxCtrlrInput
 			{
 				if(!XInputStillInCurrFrame())
 				{
-					XInputUpdateAllStates(); //XInputUpdatePaticularStateRaw(controllerNumber);
+					XInputUpdateAllStates();
 				}
 					
 				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
@@ -762,7 +850,9 @@ namespace XboxCtrlrInput
 		
 		// >>> Other important functions <<< //
 		
-		/// <summary> Returns the number of Xbox controllers plugged to the computer. </summary>
+		/// <summary> 
+		/// 	Returns the number of Xbox controllers plugged to the computer. 
+		/// </summary>
 		public static int GetNumPluggedCtrlrs()
 		{
 			int r = 0;
@@ -799,7 +889,9 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
-		/// <summary> DEBUG function. Log all controller names to Unity's console. </summary>
+		/// <summary> 
+		/// 	DEBUG function. Log all controller names to Unity's console. 
+		/// </summary>
 		public static void DEBUG_LogControllerNames()
 		{
 			string[] cNames = Input.GetJoystickNames();
@@ -808,6 +900,32 @@ namespace XboxCtrlrInput
 			{
 				Debug.Log("Ctrlr " + i.ToString() + ": " + cNames[i]);
 			}
+		}
+
+		// From @xoorath
+		/// <summary>
+		/// 	Determines if the controller is plugged in the specified controllerNumber.
+		/// 	CAUTION: Only works on Windows Native (Desktop and Editor, not Web)!
+		/// </summary>
+		/// <param name="controllerNumber">
+		/// 	An identifier for the specific controller on which to test the axis. An int between 1 and 4.
+		/// </param>
+		public static bool IsPluggedIn(int controllerNumber)
+		{
+			if(OnWindowsNative())
+			{
+				if (!XInputStillInCurrFrame())
+				{
+					XInputUpdateAllStates();
+				}
+				
+				GamePadState ctrlrState = XInputGetPaticularState(controllerNumber);
+				
+				return ctrlrState.IsConnected;
+			}
+
+			// NOT IMPLEMENTED for other platforms
+			return false;
 		}
 		
 		
@@ -941,7 +1059,7 @@ namespace XboxCtrlrInput
 					default: invalidCode = true; break;
 				}
 			}
-			else
+			else  // Windows Web Player
 			{
 				switch(btn)
 				{
@@ -1006,7 +1124,7 @@ namespace XboxCtrlrInput
 					default: invalidCode = true; break;
 				}
 			}
-			else
+			else // Windows Web Player
 			{
 				switch(axs)
 				{
@@ -1085,7 +1203,7 @@ namespace XboxCtrlrInput
 					default: invalidCode = true; break;
 				}
 			}
-			else
+			else  // Windows Web Player
 			{
 				switch(padDir)
 				{
