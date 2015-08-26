@@ -22,19 +22,20 @@ The goals of `XboxCtrlrInput` are:
 2.   And to be able to handle multiple Xbox controllers that works as you expect.
 
 
+### Installation
+
+1. Download the latest .unitypackage [release](https://github.com/JISyed/Unity-XboxCtrlrInput/releases).
+2. Import the package:  
+   Assets ▶ Import Package ▶ Custom Package...
+3. Update InputManager.asset file (to configure input axis and buttons):  
+   Window ▶ XboxCtrlrInput ▶ Replace InputManager.asset...
+
+
 ### How to Use
 
-1. Download the [XboxCtrlrInput C# file](https://raw.github.com/JISyed/Unity-XboxCtrlrInput/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/XboxCtrlrInput.cs) (Right Click -> Save As...) and then put it into your Unity project under the [`Assets/`](https://github.com/JISyed/Unity-XboxCtrlrInput/tree/master/XboxCtrlrInput/Assets) folder. It can be anywhere in that folder.
+1. For any C# script where you want to use Xbox input, place `using XboxCtrlrInput;` at the top of the script under `using UnityEngine;`.
 
-2. Next, take the a copy of Unity's Input Manager (either as a [text asset](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/InputManager%20Copies/InputManagerText.asset) or as a [binary asset](https://github.com/JISyed/Unity-XboxCtrlrInput/raw/master/InputManager%20Copies/InputManagerBinary.asset) ) (Right Click -> Save As...). Place the copy into your project's [`/ProjectSettings`](https://github.com/JISyed/Unity-XboxCtrlrInput/tree/master/XboxCtrlrInput/ProjectSettings) folder. Then rename it `InputManager.asset`, this will replace the original file that was there. 
-
-3. If your Unity project doesn't have an `/Assets/Plugins/` folder, make sure you make one.
-
-4. Download everything from [this repo's Plugins folder](https://github.com/JISyed/Unity-XboxCtrlrInput/tree/master/XboxCtrlrInput/Assets/Plugins) (except .meta files) and put the contents into your `/Assets/Plugins/` folder. The folder structure must be the same because of the way Unity 5 processes .dll files.
-
-5. For any C# script where you want to use Xbox input, place `using XboxCtrlrInput;` at the top of the script under `using UnityEngine;`.
-
-6. The `XboxCtrlrInput` namespace includes the class [`XCI`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/Coding-Reference#the-xci-class), which you will use to get Xbox input, such as:
+2. The `XboxCtrlrInput` namespace includes the class [`XCI`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/Coding-Reference#the-xci-class), which you will use to get Xbox input, such as:
 ```csharp
 bool didPressA = XCI.GetButton(XboxButton.A);
 ```
