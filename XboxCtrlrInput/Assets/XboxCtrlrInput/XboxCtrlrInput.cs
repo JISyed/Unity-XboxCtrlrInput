@@ -51,15 +51,7 @@ namespace XboxCtrlrInput
 	
 	public sealed class XCI 
 	{
-		// ------------ Members --------------- //
-		
-		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
-		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
-		private static int xiPrevFrameCount = -1;
-		private static bool xiUpdateAlreadyCalled = false;
-		private static bool xiNumOfCtrlrsQueried = false;
-		
-		// ------------ Methods --------------- //
+		// ------------ Public Methods --------------- //
 		
 		// >>> For Buttons <<< //
 		
@@ -716,7 +708,7 @@ namespace XboxCtrlrInput
 				string axisCode = DetermineAxisCode(axis, 0);
 				
 				r = Input.GetAxis(axisCode);
-				r = AdjustAxisValues(r, axis);
+				r = AdjustAxisValues(r, axis, 0);
 			}
 				
 			return r;
@@ -759,7 +751,7 @@ namespace XboxCtrlrInput
 				string axisCode = DetermineAxisCode(axis, controllerNumber);
 				
 				r = Input.GetAxis(axisCode);
-				r = AdjustAxisValues(r, axis);
+				r = AdjustAxisValues(r, axis, controllerNumber);
 			}
 			
 			return r;
@@ -799,7 +791,7 @@ namespace XboxCtrlrInput
 				string axisCode = DetermineAxisCode(axis, 0);
 				
 				r = Input.GetAxisRaw(axisCode);
-				r = AdjustAxisValues(r, axis);
+				r = AdjustAxisValues(r, axis, 0);
 			}
 				
 			return r;
@@ -842,7 +834,7 @@ namespace XboxCtrlrInput
 				string axisCode = DetermineAxisCode(axis, controllerNumber);
 				
 				r = Input.GetAxisRaw(axisCode);
-				r = AdjustAxisValues(r, axis);
+				r = AdjustAxisValues(r, axis, controllerNumber);
 			}
 				
 			return r;
@@ -928,10 +920,35 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
+
+
+
+		////
+		// ------------- Private -------------- //
+		////
+
+		// ------------ Members --------------- //
 		
-		// ------------- Private Methods -------------- //
+		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
+		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
+		private static int xiPrevFrameCount = -1;
+		private static bool xiUpdateAlreadyCalled = false;
+		private static bool xiNumOfCtrlrsQueried = false;
 		
-		
+		private static bool u3dTrigger0LeftIsTouched = false;
+		private static bool u3dTrigger0RightIsTouched = false;
+		private static bool u3dTrigger1LeftIsTouched = false;
+		private static bool u3dTrigger1RightIsTouched = false;
+		private static bool u3dTrigger2LeftIsTouched = false;
+		private static bool u3dTrigger2RightIsTouched = false;
+		private static bool u3dTrigger3LeftIsTouched = false;
+		private static bool u3dTrigger3RightIsTouched = false;
+		private static bool u3dTrigger4LeftIsTouched = false;
+		private static bool u3dTrigger4RightIsTouched = false;
+
+
+		// ------------ Methods --------------- //
+
 		private static bool OnMac()
 		{
 			// All Mac mappings are based off TattieBogle Xbox Controller drivers
@@ -999,11 +1016,182 @@ namespace XboxCtrlrInput
 			return false;
 		}
 		
-		private static float RefactorRange(float oldRangeValue)
+		private static float RefactorRange(float oldRangeValue, int ctrlrNum, XboxAxis axis)
 		{
+			// HACK: On OS X, Left and right trigger under OSX return 0.5 until touched
+			// Issue #16 on Github: https://github.com/JISyed/Unity-XboxCtrlrInput/issues/16
+			if(XCI.OnMac())
+			{
+				if(axis == XboxAxis.LeftTrigger)
+				{
+					switch(ctrlrNum)
+					{
+						case 0:
+						{
+							if(!XCI.u3dTrigger0LeftIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger0LeftIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						case 1:
+						{
+							if(!XCI.u3dTrigger1LeftIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger1LeftIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						case 2:
+						{
+							if(!XCI.u3dTrigger2LeftIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger2LeftIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						case 3:
+						{
+							if(!XCI.u3dTrigger3LeftIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger3LeftIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						case 4:
+						{
+							if(!XCI.u3dTrigger4LeftIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger4LeftIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						default:
+							break;
+					}
+				}
+				else if(axis == XboxAxis.RightTrigger)
+				{
+					switch(ctrlrNum)
+					{
+						case 0:
+						{
+							if(!XCI.u3dTrigger0RightIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger0RightIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						case 1:
+						{
+							if(!XCI.u3dTrigger1RightIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger1RightIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						case 2:
+						{
+							if(!XCI.u3dTrigger2RightIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger2RightIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						case 3:
+						{
+							if(!XCI.u3dTrigger3RightIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger3RightIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						case 4:
+						{
+							if(!XCI.u3dTrigger4RightIsTouched)
+							{
+								if(oldRangeValue != 0.0f)
+								{
+									XCI.u3dTrigger4RightIsTouched = true;
+								}
+								else
+								{
+									return 0.0f;
+								}
+							}
+							break;
+						}
+						default:
+							break;
+					}
+				}
+			}
+
 			// Assumes you want to take a number from -1 to 1 range
 			// And turn it into a number from a 0 to 1 range
-			
 			return ((oldRangeValue + 1.0f) / 2.0f );
 		}
 		
@@ -1149,7 +1337,7 @@ namespace XboxCtrlrInput
 			return r;
 		}
 		
-		private static float AdjustAxisValues(float axisValue, XboxAxis axis)
+		private static float AdjustAxisValues(float axisValue, XboxAxis axis, int ctrlrNum)
 		{
 			float newAxisValue = axisValue;
 			
@@ -1158,11 +1346,11 @@ namespace XboxCtrlrInput
 				if(axis == XboxAxis.LeftTrigger)
 				{
 					newAxisValue = -newAxisValue;
-					newAxisValue = RefactorRange(newAxisValue);
+					newAxisValue = RefactorRange(newAxisValue, ctrlrNum, axis);
 				}
 				else if(axis == XboxAxis.RightTrigger)
 				{
-					newAxisValue = RefactorRange(newAxisValue);
+					newAxisValue = RefactorRange(newAxisValue, ctrlrNum, axis);
 				}
 				else if(axis == XboxAxis.RightStickY)
 				{
@@ -1173,11 +1361,11 @@ namespace XboxCtrlrInput
 			{
 				if(axis == XboxAxis.RightTrigger)
 				{
-					newAxisValue = RefactorRange(newAxisValue);
+					newAxisValue = RefactorRange(newAxisValue, ctrlrNum, axis);
 				}
 				else if(axis == XboxAxis.LeftTrigger)
 				{
-					newAxisValue = RefactorRange(newAxisValue);
+					newAxisValue = RefactorRange(newAxisValue, ctrlrNum, axis);
 				}
 			}
 			
