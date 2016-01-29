@@ -7,7 +7,7 @@ public class MovePlayer : MonoBehaviour
 	
 	public float jumpImpulse;
 	public float maxMoveSpeed;
-	public int playerNumber = 0;
+	public XboxController controller;
 	
 	public Material matRed;
 	public Material matGreen;
@@ -38,14 +38,12 @@ public class MovePlayer : MonoBehaviour
 	// Start
 	void Start () 
 	{
-		playerNumber = Mathf.Clamp(playerNumber, 1, 4);
-		
-		switch(playerNumber)
+		switch(controller)
 		{
-			case 1: GetComponent<Renderer>().material = matRed; break;
-			case 2: GetComponent<Renderer>().material = matGreen; break;
-			case 3: GetComponent<Renderer>().material = matBlue; break;
-			case 4: GetComponent<Renderer>().material = matYellow; break;
+			case XboxController.First: GetComponent<Renderer>().material = matRed; break;
+			case XboxController.Second: GetComponent<Renderer>().material = matGreen; break;
+			case XboxController.Third: GetComponent<Renderer>().material = matBlue; break;
+			case XboxController.Fourth: GetComponent<Renderer>().material = matYellow; break;
 		}
 		
 		newPosition = transform.position;
@@ -79,14 +77,14 @@ public class MovePlayer : MonoBehaviour
 		GameObject bulletReference = null;
 		
 		// Jump (Left Stick)
-		if(XCI.GetButtonDown(XboxButton.LeftStick, playerNumber) && canJump)
+		if(XCI.GetButtonDown(XboxButton.LeftStick, controller) && canJump)
 		{
 			canJump = false;
 			GetComponent<Rigidbody>().AddRelativeForce(0.0f, jumpImpulse, 0.0f, ForceMode.Impulse);
 		}
 		
 		// Slam (Right Stick)
-		if(XCI.GetButtonDown(XboxButton.RightStick, playerNumber) && !canJump)
+		if(XCI.GetButtonDown(XboxButton.RightStick, controller) && !canJump)
 		{
 			GetComponent<Rigidbody>().AddRelativeForce(0.0f, (-jumpImpulse * 1.5f), 0.0f, ForceMode.Impulse);
 		}
@@ -100,22 +98,22 @@ public class MovePlayer : MonoBehaviour
 		
 		if(bulletTimer <= 0.0f)
 		{
-			if(XCI.GetButton(XboxButton.A, playerNumber))
+			if(XCI.GetButton(XboxButton.A, controller))
 			{
 				Instantiate(laserAPrefab, transform.position, laserAPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
 			}
-			if(XCI.GetButton(XboxButton.B, playerNumber))
+			if(XCI.GetButton(XboxButton.B, controller))
 			{
 				Instantiate(laserBPrefab, transform.position, laserBPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
 			}
-			if(XCI.GetButton(XboxButton.X, playerNumber))
+			if(XCI.GetButton(XboxButton.X, controller))
 			{
 				Instantiate(laserXPrefab, transform.position, laserXPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
 			}
-			if(XCI.GetButton(XboxButton.Y, playerNumber))
+			if(XCI.GetButton(XboxButton.Y, controller))
 			{
 				Instantiate(laserYPrefab, transform.position, laserYPrefab.transform.rotation);
 				bulletTimer = MAX_BUL_TME;
@@ -124,8 +122,8 @@ public class MovePlayer : MonoBehaviour
 		
 		// Left stick movement
 		newPosition = transform.position;
-		float axisX = XCI.GetAxis(XboxAxis.LeftStickX, playerNumber);
-		float axisY = XCI.GetAxis(XboxAxis.LeftStickY, playerNumber);
+		float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
+		float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controller);
 		float newPosX = newPosition.x + (axisX * maxMoveSpeed * Time.deltaTime);
 		float newPosZ = newPosition.z + (axisY * maxMoveSpeed * Time.deltaTime);
 		newPosition = new Vector3(newPosX, transform.position.y, newPosZ);
@@ -134,8 +132,8 @@ public class MovePlayer : MonoBehaviour
 		
 		// Right stick movement
 		newPosition = transform.position;
-		axisX = XCI.GetAxis(XboxAxis.RightStickX, playerNumber);
-		axisY = XCI.GetAxis(XboxAxis.RightStickY, playerNumber);
+		axisX = XCI.GetAxis(XboxAxis.RightStickX, controller);
+		axisY = XCI.GetAxis(XboxAxis.RightStickY, controller);
 		newPosX = newPosition.x + (axisX * maxMoveSpeed * 0.3f * Time.deltaTime);
 		newPosZ = newPosition.z + (axisY * maxMoveSpeed * 0.3f * Time.deltaTime);
 		newPosition = new Vector3(newPosX, transform.position.y, newPosZ);
@@ -161,7 +159,7 @@ public class MovePlayer : MonoBehaviour
 		}
 		if(dpUpBulletTimer <= 0.0f)
 		{
-			if(XCI.GetDPad(XboxDPad.Up, playerNumber))
+			if(XCI.GetDPad(XboxDPad.Up, controller))
 			{
 				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserYPrefab.transform.rotation) as GameObject;
 				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
@@ -170,7 +168,7 @@ public class MovePlayer : MonoBehaviour
 		}
 		if(dpDownBulletTimer <= 0.0f)
 		{
-			if(XCI.GetDPad(XboxDPad.Down, playerNumber))
+			if(XCI.GetDPad(XboxDPad.Down, controller))
 			{
 				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserAPrefab.transform.rotation) as GameObject;
 				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
@@ -179,7 +177,7 @@ public class MovePlayer : MonoBehaviour
 		}
 		if(dpLeftBulletTimer <= 0.0f)
 		{
-			if(XCI.GetDPad(XboxDPad.Left, playerNumber))
+			if(XCI.GetDPad(XboxDPad.Left, controller))
 			{
 				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserXPrefab.transform.rotation) as GameObject;
 				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
@@ -188,7 +186,7 @@ public class MovePlayer : MonoBehaviour
 		}
 		if(dpRightBulletTimer <= 0.0f)
 		{
-			if(XCI.GetDPad(XboxDPad.Right, playerNumber))
+			if(XCI.GetDPad(XboxDPad.Right, controller))
 			{
 				bulletReference = Instantiate(laserBumpPrefab, transform.position, laserBPrefab.transform.rotation) as GameObject;
 				bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
@@ -200,30 +198,30 @@ public class MovePlayer : MonoBehaviour
 		// Trigger input
 		float trigSclX = triggerLeftPrefab.transform.localScale.x;
 		float trigSclZ = triggerLeftPrefab.transform.localScale.z;
-		float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.LeftTrigger, playerNumber));
-		float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, playerNumber));
+		float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.LeftTrigger, controller));
+		float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
 		triggerLeftPrefab.transform.localScale = new Vector3(trigSclX, leftTrigHeight, trigSclZ);
 		triggerRightPrefab.transform.localScale = new Vector3(trigSclX, rightTrigHeight, trigSclZ);
 		
 		
 		// Bumper input
-		if(XCI.GetButtonDown(XboxButton.LeftBumper, playerNumber))
+		if(XCI.GetButtonDown(XboxButton.LeftBumper, controller))
 		{
 			Instantiate(laserBumpPrefab, triggerLeftPrefab.transform.position, laserBumpPrefab.transform.rotation);
 		}
-		if(XCI.GetButtonDown(XboxButton.RightBumper, playerNumber))
+		if(XCI.GetButtonDown(XboxButton.RightBumper, controller))
 		{
 			Instantiate(laserBumpPrefab, triggerRightPrefab.transform.position, laserBumpPrefab.transform.rotation);
 		}
 		
 		
 		// Start and back, same as bumpers but smaller bullets
-		if(XCI.GetButtonUp(XboxButton.Back, playerNumber))
+		if(XCI.GetButtonUp(XboxButton.Back, controller))
 		{
 			bulletReference = Instantiate(laserBumpPrefab, triggerLeftPrefab.transform.position, laserBumpPrefab.transform.rotation) as GameObject;
 			bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 		}
-		if(XCI.GetButtonUp(XboxButton.Start, playerNumber))
+		if(XCI.GetButtonUp(XboxButton.Start, controller))
 		{
 			bulletReference = Instantiate(laserBumpPrefab, triggerRightPrefab.transform.position, laserBumpPrefab.transform.rotation) as GameObject;
 			bulletReference.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
@@ -260,13 +258,13 @@ public class MovePlayer : MonoBehaviour
 	// Gizmo Drawing
 	void OnDrawGizmos()
 	{
-		switch (playerNumber)
+		switch (controller)
 		{
-			case 1:		Gizmos.color = Color.red; break;
-			case 2:		Gizmos.color = Color.green; break;
-			case 3:		Gizmos.color = Color.blue; break;
-			case 4:		Gizmos.color = Color.yellow; break;
-			default:	Gizmos.color = Color.white; break;
+			case XboxController.First:  Gizmos.color = Color.red; break;
+			case XboxController.Second: Gizmos.color = Color.green; break;
+			case XboxController.Third:  Gizmos.color = Color.blue; break;
+			case XboxController.Fourth: Gizmos.color = Color.yellow; break;
+			default:                    Gizmos.color = Color.white; break;
 		}
 		
 		Gizmos.color = new Color(Gizmos.color.r, Gizmos.color.g, Gizmos.color.b, 0.5f);

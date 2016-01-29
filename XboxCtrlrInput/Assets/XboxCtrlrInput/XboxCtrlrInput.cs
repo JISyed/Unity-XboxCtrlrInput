@@ -7,6 +7,18 @@ namespace XboxCtrlrInput
 	// ================= Enumerations ==================== //
 	
 	/// <summary>
+	///     List of enumerated identifiers for Xbox controllers.
+	/// </summary>
+	public enum XboxController
+	{
+		All = 0,
+		First = 1,
+		Second = 2,
+		Third = 3,
+		Fourth = 4
+	}
+
+	/// <summary>
 	/// 	List of enumerated identifiers for Xbox buttons.
 	/// </summary>
 	public enum XboxButton
@@ -20,7 +32,11 @@ namespace XboxCtrlrInput
 		LeftStick,
 		RightStick,
 		LeftBumper,
-		RightBumper
+		RightBumper,
+		DPadUp,
+		DPadDown,
+		DPadLeft,
+		DPadRight
 	}
 	
 	/// <summary>
@@ -47,9 +63,33 @@ namespace XboxCtrlrInput
 		RightTrigger
 	}
 	
-	// ================= Class ==================== //
-	
-	public sealed class XCI 
+	// ================ Classes =================== //
+
+	public static class XboxButtonExtensions
+	{
+		public static bool IsDPad(this XboxButton button)
+		{
+			return (button == XboxButton.DPadUp ||
+				button == XboxButton.DPadDown ||
+				button == XboxButton.DPadLeft ||
+				button == XboxButton.DPadRight);
+		}
+
+		public static XboxDPad ToDPad(this XboxButton button)
+		{
+			if (button == XboxButton.DPadUp)
+				return XboxDPad.Up;
+			if (button == XboxButton.DPadDown)
+				return XboxDPad.Down;
+			if (button == XboxButton.DPadLeft)
+				return XboxDPad.Left;
+			if (button == XboxButton.DPadRight)
+				return XboxDPad.Right;
+			return default(XboxDPad);
+		}
+	}
+
+	public sealed class XCI
 	{
 		// ------------ Public Methods --------------- //
 		
@@ -63,6 +103,9 @@ namespace XboxCtrlrInput
 		/// </param>
 		public static bool GetButton(XboxButton button)
 		{
+			if (button.IsDPad())
+				return GetDPad(button.ToDPad());
+
 			if(OnWindowsNative())
 			{
 				if(!XInputStillInCurrFrame())
@@ -96,12 +139,18 @@ namespace XboxCtrlrInput
 		/// <param name='button'> 
 		/// 	Identifier for the Xbox button to be tested. 
 		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// <param name='controller'>
+		/// 	An identifier for the specific controller on which to test the button.
 		/// </param>
-		public static bool GetButton(XboxButton button, int controllerNumber)
+		public static bool GetButton(XboxButton button, XboxController controller)
 		{
-			if(!IsControllerNumberValid(controllerNumber))  return false;
+			if (button.IsDPad())
+				return GetDPad(button.ToDPad(), controller);
+
+			if (controller == XboxController.All)
+				return GetButton(button);
+
+			int controllerNumber = (int)controller;
 			
 			if(OnWindowsNative())
 			{
@@ -139,6 +188,9 @@ namespace XboxCtrlrInput
 		/// </param>
 		public static bool GetButtonDown(XboxButton button)
 		{
+			if (button.IsDPad())
+				return GetDPadDown(button.ToDPad());
+
 			if(OnWindowsNative())
 			{
 				if(!XInputStillInCurrFrame())
@@ -175,13 +227,19 @@ namespace XboxCtrlrInput
 		/// <param name='button'> 
 		/// 	Identifier for the Xbox button to be tested. 
 		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// <param name='controller'>
+		/// 	An identifier for the specific controller on which to test the button.
 		/// </param>
-		public static bool GetButtonDown(XboxButton button, int controllerNumber)
+		public static bool GetButtonDown(XboxButton button, XboxController controller)
 		{
-			if(!IsControllerNumberValid(controllerNumber))  return false;
-			
+			if (button.IsDPad())
+				return GetDPadDown(button.ToDPad(), controller);
+
+			if (controller == XboxController.All)
+				return GetButtonDown(button);
+
+			int controllerNumber = (int)controller;
+
 			if(OnWindowsNative())
 			{
 				if(!XInputStillInCurrFrame())
@@ -220,6 +278,9 @@ namespace XboxCtrlrInput
 		/// </param>
 		public static bool GetButtonUp(XboxButton button)
 		{
+			if (button.IsDPad())
+				return GetDPadUp(button.ToDPad());
+
 			if(OnWindowsNative())
 			{
 				if(Time.frameCount < 2)
@@ -261,13 +322,19 @@ namespace XboxCtrlrInput
 		/// <param name='button'> 
 		/// 	Identifier for the Xbox button to be tested. 
 		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// <param name='controller'>
+		/// 	An identifier for the specific controller on which to test the button.
 		/// </param>
-		public static bool GetButtonUp(XboxButton button, int controllerNumber)
+		public static bool GetButtonUp(XboxButton button, XboxController controller)
 		{
-			if(!IsControllerNumberValid(controllerNumber))  return false;
-			
+			if (button.IsDPad())
+				return GetDPadUp(button.ToDPad(), controller);
+
+			if (controller == XboxController.All)
+				return GetButtonUp(button);
+
+			int controllerNumber = (int)controller;
+
 			if(OnWindowsNative())
 			{
 				if(Time.frameCount < 2)
@@ -369,11 +436,16 @@ namespace XboxCtrlrInput
 		/// <param name='padDirection'> 
 		/// 	An identifier for the specified D-Pad direction to be tested. 
 		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the D-Pad. An int between 1 and 4. 
+		/// <param name='controller'>
+		/// 	An identifier for the specific controller on which to test the D-Pad.
 		/// </param>
-		public static bool GetDPad(XboxDPad padDirection, int controllerNumber)
+		public static bool GetDPad(XboxDPad padDirection, XboxController controller)
 		{
+			if (controller == XboxController.All)
+				return GetDPad(padDirection);
+
+			int controllerNumber = (int)controller;
+
 			bool r = false;
 			
 			if(OnWindowsNative())
@@ -431,9 +503,6 @@ namespace XboxCtrlrInput
 		/// </summary>
 		/// <param name='button'> 
 		/// 	Identifier for the Xbox button to be tested. 
-		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
 		/// </param>
 		public static bool GetDPadUp(XboxDPad padDirection)
 		{
@@ -494,12 +563,16 @@ namespace XboxCtrlrInput
 		/// <param name='button'> 
 		/// 	Identifier for the Xbox button to be tested. 
 		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// <param name='controller'>
+		/// 	An identifier for the specific controller on which to test the button.
 		/// </param>
-		public static bool GetDPadUp(XboxDPad padDirection, int controllerNumber)
+		public static bool GetDPadUp(XboxDPad padDirection, XboxController controller)
 		{
-			
+			if (controller == XboxController.All)
+				return GetDPadUp(padDirection);
+
+			int controllerNumber = (int)controller;
+
 			bool r = false;
 			
 			if(OnWindowsNative())
@@ -555,9 +628,6 @@ namespace XboxCtrlrInput
 		/// </summary>
 		/// <param name='button'> 
 		/// 	Identifier for the Xbox button to be tested. 
-		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
 		/// </param>
 		public static bool GetDPadDown(XboxDPad padDirection)
 		{
@@ -618,12 +688,16 @@ namespace XboxCtrlrInput
 		/// <param name='button'> 
 		/// 	Identifier for the Xbox button to be tested. 
 		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the button. An int between 1 and 4. 
+		/// <param name='controller'>
+		/// 	An identifier for the specific controller on which to test the button.
 		/// </param>
-		public static bool GetDPadDown(XboxDPad padDirection, int controllerNumber)
+		public static bool GetDPadDown(XboxDPad padDirection, XboxController controller)
 		{
-			
+			if (controller == XboxController.All)
+				return GetDPadDown(padDirection);
+
+			int controllerNumber = (int)controller;
+
 			bool r = false;
 			
 			if(OnWindowsNative())
@@ -720,11 +794,16 @@ namespace XboxCtrlrInput
 		/// <param name='axis'> 
 		/// 	An identifier for the specified Xbox axis to be tested. 
 		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the axis. An int between 1 and 4. 
+		/// <param name='controller'>
+		/// 	An identifier for the specific controller on which to test the axis.
 		/// </param>
-		public static float GetAxis(XboxAxis axis, int controllerNumber)
+		public static float GetAxis(XboxAxis axis, XboxController controller)
 		{
+			if (controller == XboxController.All)
+				return GetAxis(axis);
+
+			int controllerNumber = (int)controller;
+
 			float r = 0.0f;
 			
 			if(OnWindowsNative())
@@ -803,11 +882,16 @@ namespace XboxCtrlrInput
 		/// <param name='axis'> 
 		/// 	An identifier for the specified Xbox axis to be tested. 
 		/// </param>
-		/// <param name='controllerNumber'> 
-		/// 	An identifier for the specific controller on which to test the axis. An int between 1 and 4. 
+		/// <param name='controller'>
+		/// 	An identifier for the specific controller on which to test the axis.
 		/// </param>
-		public static float GetAxisRaw(XboxAxis axis, int controllerNumber)
+		public static float GetAxisRaw(XboxAxis axis, XboxController controller)
 		{
+			if (controller == XboxController.All)
+				return GetAxisRaw(axis);
+
+			int controllerNumber = (int)controller;
+
 			float r = 0.0f;
 			
 			if(OnWindowsNative())
