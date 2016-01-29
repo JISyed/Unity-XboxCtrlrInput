@@ -65,31 +65,7 @@ namespace XboxCtrlrInput
 	
 	// ================ Classes =================== //
 
-	public static class XboxButtonExtensions
-	{
-		public static bool IsDPad(this XboxButton button)
-		{
-			return (button == XboxButton.DPadUp ||
-				button == XboxButton.DPadDown ||
-				button == XboxButton.DPadLeft ||
-				button == XboxButton.DPadRight);
-		}
-
-		public static XboxDPad ToDPad(this XboxButton button)
-		{
-			if (button == XboxButton.DPadUp)
-				return XboxDPad.Up;
-			if (button == XboxButton.DPadDown)
-				return XboxDPad.Down;
-			if (button == XboxButton.DPadLeft)
-				return XboxDPad.Left;
-			if (button == XboxButton.DPadRight)
-				return XboxDPad.Right;
-			return default(XboxDPad);
-		}
-	}
-
-	public sealed class XCI
+	public static class XCI
 	{
 		// ------------ Public Methods --------------- //
 		
@@ -1018,17 +994,6 @@ namespace XboxCtrlrInput
 		private static int xiPrevFrameCount = -1;
 		private static bool xiUpdateAlreadyCalled = false;
 		private static bool xiNumOfCtrlrsQueried = false;
-		
-		private static bool u3dTrigger0LeftIsTouched = false;
-		private static bool u3dTrigger0RightIsTouched = false;
-		private static bool u3dTrigger1LeftIsTouched = false;
-		private static bool u3dTrigger1RightIsTouched = false;
-		private static bool u3dTrigger2LeftIsTouched = false;
-		private static bool u3dTrigger2RightIsTouched = false;
-		private static bool u3dTrigger3LeftIsTouched = false;
-		private static bool u3dTrigger3RightIsTouched = false;
-		private static bool u3dTrigger4LeftIsTouched = false;
-		private static bool u3dTrigger4RightIsTouched = false;
 
 
 		// ------------ Methods --------------- //
@@ -1112,11 +1077,11 @@ namespace XboxCtrlrInput
 					{
 						case 0:
 						{
-							if(!XCI.u3dTrigger0LeftIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger0LeftIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger0LeftIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger0LeftIsTouched = true;
 								}
 								else
 								{
@@ -1127,11 +1092,11 @@ namespace XboxCtrlrInput
 						}
 						case 1:
 						{
-							if(!XCI.u3dTrigger1LeftIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger1LeftIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger1LeftIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger1LeftIsTouched = true;
 								}
 								else
 								{
@@ -1142,11 +1107,11 @@ namespace XboxCtrlrInput
 						}
 						case 2:
 						{
-							if(!XCI.u3dTrigger2LeftIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger2LeftIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger2LeftIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger2LeftIsTouched = true;
 								}
 								else
 								{
@@ -1157,11 +1122,11 @@ namespace XboxCtrlrInput
 						}
 						case 3:
 						{
-							if(!XCI.u3dTrigger3LeftIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger3LeftIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger3LeftIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger3LeftIsTouched = true;
 								}
 								else
 								{
@@ -1172,11 +1137,11 @@ namespace XboxCtrlrInput
 						}
 						case 4:
 						{
-							if(!XCI.u3dTrigger4LeftIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger4LeftIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger4LeftIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger4LeftIsTouched = true;
 								}
 								else
 								{
@@ -1195,11 +1160,11 @@ namespace XboxCtrlrInput
 					{
 						case 0:
 						{
-							if(!XCI.u3dTrigger0RightIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger0RightIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger0RightIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger0RightIsTouched = true;
 								}
 								else
 								{
@@ -1210,11 +1175,11 @@ namespace XboxCtrlrInput
 						}
 						case 1:
 						{
-							if(!XCI.u3dTrigger1RightIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger1RightIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger1RightIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger1RightIsTouched = true;
 								}
 								else
 								{
@@ -1225,11 +1190,11 @@ namespace XboxCtrlrInput
 						}
 						case 2:
 						{
-							if(!XCI.u3dTrigger2RightIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger2RightIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger2RightIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger2RightIsTouched = true;
 								}
 								else
 								{
@@ -1240,11 +1205,11 @@ namespace XboxCtrlrInput
 						}
 						case 3:
 						{
-							if(!XCI.u3dTrigger3RightIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger3RightIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger3RightIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger3RightIsTouched = true;
 								}
 								else
 								{
@@ -1255,11 +1220,11 @@ namespace XboxCtrlrInput
 						}
 						case 4:
 						{
-							if(!XCI.u3dTrigger4RightIsTouched)
+							if(!XCI.XciHandler.Instance.u3dTrigger4RightIsTouched)
 							{
 								if(oldRangeValue != 0.0f)
 								{
-									XCI.u3dTrigger4RightIsTouched = true;
+									XCI.XciHandler.Instance.u3dTrigger4RightIsTouched = true;
 								}
 								else
 								{
@@ -1705,6 +1670,96 @@ namespace XboxCtrlrInput
 			xiPrevFrameCount = currFrame;
 			
 			return r;
+		}
+
+
+		// -------------------------- Handler Script -------------------
+
+		// Secret Private Script that does some maintainace work for XCI states. User should not use this script at all.
+		private class XciHandler : MonoBehaviour
+		{
+			private static XciHandler instance = null;
+
+			public bool u3dTrigger0LeftIsTouched = false;
+			public bool u3dTrigger0RightIsTouched = false;
+			public bool u3dTrigger1LeftIsTouched = false;
+			public bool u3dTrigger1RightIsTouched = false;
+			public bool u3dTrigger2LeftIsTouched = false;
+			public bool u3dTrigger2RightIsTouched = false;
+			public bool u3dTrigger3LeftIsTouched = false;
+			public bool u3dTrigger3RightIsTouched = false;
+			public bool u3dTrigger4LeftIsTouched = false;
+			public bool u3dTrigger4RightIsTouched = false;
+
+			void Awake()
+			{
+				if(XciHandler.instance != null)
+				{
+					GameObject.Destroy(this.gameObject);
+				}
+
+				XciHandler.instance = this;
+
+				// Lives for the life of the game
+				DontDestroyOnLoad(this.gameObject);
+			}
+
+			void OnLevelWasLoaded(int level)
+			{
+				this.ResetTriggerTouches();
+			}
+
+			private void ResetTriggerTouches()
+			{
+				this.u3dTrigger0LeftIsTouched = false;
+				this.u3dTrigger0RightIsTouched = false;
+				this.u3dTrigger1LeftIsTouched = false;
+				this.u3dTrigger1RightIsTouched = false;
+				this.u3dTrigger2LeftIsTouched = false;
+				this.u3dTrigger2RightIsTouched = false;
+				this.u3dTrigger3LeftIsTouched = false;
+				this.u3dTrigger3RightIsTouched = false;
+				this.u3dTrigger4LeftIsTouched = false;
+				this.u3dTrigger4RightIsTouched = false;
+			}
+
+			public static XciHandler Instance
+			{
+				get
+				{
+					if(XciHandler.instance == null)
+					{
+						GameObject xciHandleObj = new GameObject("XboxCtrlrInput Handler Script");
+						xciHandleObj.AddComponent<XciHandler>();
+					}
+
+					return XciHandler.instance;
+				}
+			}
+		} // end of XciHandler
+	} // end of XCI
+
+	public static class XboxButtonExtensions
+	{
+		public static bool IsDPad(this XboxButton button)
+		{
+			return (button == XboxButton.DPadUp ||
+			        button == XboxButton.DPadDown ||
+			        button == XboxButton.DPadLeft ||
+			        button == XboxButton.DPadRight);
+		}
+		
+		public static XboxDPad ToDPad(this XboxButton button)
+		{
+			if (button == XboxButton.DPadUp)
+				return XboxDPad.Up;
+			if (button == XboxButton.DPadDown)
+				return XboxDPad.Down;
+			if (button == XboxButton.DPadLeft)
+				return XboxDPad.Left;
+			if (button == XboxButton.DPadRight)
+				return XboxDPad.Right;
+			return default(XboxDPad);
 		}
 	}
 }
