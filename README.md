@@ -26,9 +26,9 @@ The goals of `XboxCtrlrInput` are:
 
 1. Download the latest .unitypackage [release](https://github.com/JISyed/Unity-XboxCtrlrInput/releases).
 2. Import the package:  
-   Assets ▶ Import Package ▶ Custom Package...
+   `Assets ▶ Import Package ▶ Custom Package...`
 3. Update InputManager.asset file (to configure input axis and buttons):  
-   Window ▶ XboxCtrlrInput ▶ Replace InputManager.asset...
+   `Window ▶ XboxCtrlrInput ▶ Replace InputManager.asset...`
 
 
 ### How to Use
