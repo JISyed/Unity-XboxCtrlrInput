@@ -1709,6 +1709,14 @@ namespace XboxCtrlrInput
 				this.ResetTriggerTouches();
 			}
 
+			void OnApplicationFocus(bool isWindowInFocusNow)
+			{
+				if(!isWindowInFocusNow)
+				{
+					this.ResetTriggerTouches();
+				}
+			}
+
 			private void ResetTriggerTouches()
 			{
 				this.u3dTrigger0LeftIsTouched = false;
