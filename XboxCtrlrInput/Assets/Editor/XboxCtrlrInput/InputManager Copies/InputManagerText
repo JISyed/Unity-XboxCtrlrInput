@@ -5,13 +5,285 @@ InputManager:
   m_ObjectHideFlags: 0
   m_Axes:
   - serializedVersion: 3
+    m_Name: Horizontal
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton: left
+    positiveButton: right
+    altNegativeButton: a
+    altPositiveButton: d
+    gravity: 3
+    dead: .00100000005
+    sensitivity: 3
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Vertical
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton: down
+    positiveButton: up
+    altNegativeButton: s
+    altPositiveButton: w
+    gravity: 3
+    dead: .00100000005
+    sensitivity: 3
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Fire1
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton: left ctrl
+    altNegativeButton:
+    altPositiveButton: mouse 0
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Fire2
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton: left alt
+    altNegativeButton:
+    altPositiveButton: mouse 1
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Fire3
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton: left cmd
+    altNegativeButton:
+    altPositiveButton: mouse 2
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Jump
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton: space
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Mouse X
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 0
+    dead: 0
+    sensitivity: .100000001
+    snap: 0
+    invert: 0
+    type: 1
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Mouse Y
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 0
+    dead: 0
+    sensitivity: .100000001
+    snap: 0
+    invert: 0
+    type: 1
+    axis: 1
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Mouse ScrollWheel
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 0
+    dead: 0
+    sensitivity: .100000001
+    snap: 0
+    invert: 0
+    type: 1
+    axis: 2
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Window Shake X
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 0
+    dead: 0
+    sensitivity: .100000001
+    snap: 0
+    invert: 0
+    type: 3
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Window Shake Y
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 0
+    dead: 0
+    sensitivity: .100000001
+    snap: 0
+    invert: 0
+    type: 3
+    axis: 1
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Horizontal
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 0
+    dead: .189999998
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Vertical
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 0
+    dead: .189999998
+    sensitivity: 1
+    snap: 0
+    invert: 1
+    type: 2
+    axis: 1
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Fire1
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton: joystick button 0
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Fire2
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton: joystick button 1
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Fire3
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton: joystick button 2
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Jump
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton: joystick button 3
+    altNegativeButton:
+    altPositiveButton:
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
     m_Name: XboxAxisXJoy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -22,12 +294,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxisYJoy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -38,12 +310,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxis3Joy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -54,12 +326,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxis4Joy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -70,12 +342,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxis5Joy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -86,12 +358,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxis6Joy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -102,12 +374,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxis7Joy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -118,12 +390,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxisXJoy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -134,12 +406,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxisYJoy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -150,12 +422,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxis3Joy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -166,12 +438,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxis4Joy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -182,12 +454,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxis5Joy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -198,12 +470,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxis6Joy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -214,12 +486,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxis7Joy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -230,12 +502,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxisXJoy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -246,12 +518,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxisYJoy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -262,12 +534,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxis3Joy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -278,12 +550,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxis4Joy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -294,12 +566,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxis5Joy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -310,12 +582,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxis6Joy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -326,12 +598,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxis7Joy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -342,12 +614,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxisXJoy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -358,12 +630,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxisYJoy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -374,12 +646,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxis3Joy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -390,12 +662,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxis4Joy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -406,12 +678,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxis5Joy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -422,12 +694,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxis6Joy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -438,12 +710,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxis7Joy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -454,12 +726,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxisXJoy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -470,12 +742,12 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: XboxAxisYJoy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -486,12 +758,12 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: XboxAxis3Joy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -502,12 +774,12 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: XboxAxis4Joy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -518,12 +790,12 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: XboxAxis5Joy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -534,12 +806,12 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: XboxAxis6Joy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -550,12 +822,12 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: XboxAxis7Joy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -566,12 +838,12 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: XboxAxis9Joy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -582,12 +854,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxis10Joy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -598,12 +870,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxis9Joy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -614,12 +886,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxis10Joy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -630,12 +902,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxis9Joy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -646,12 +918,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxis10Joy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -662,12 +934,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxis9Joy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -678,12 +950,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxis10Joy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -694,12 +966,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxis9Joy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -710,12 +982,12 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: XboxAxis10Joy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -726,12 +998,12 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: XboxAxis8Joy0
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -742,12 +1014,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: XboxAxis8Joy1
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -758,12 +1030,12 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: XboxAxis8Joy2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -774,12 +1046,12 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: XboxAxis8Joy3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
@@ -790,12 +1062,12 @@ InputManager:
     joyNum: 3
   - serializedVersion: 3
     m_Name: XboxAxis8Joy4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    descriptiveName:
+    descriptiveNegativeName:
+    negativeButton:
+    positiveButton:
+    altNegativeButton:
+    altPositiveButton:
     gravity: 0
     dead: .189999998
     sensitivity: 1
