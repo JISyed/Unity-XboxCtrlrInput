@@ -74,7 +74,8 @@ namespace XboxCtrlrInput.Editor
 			// Now save the Input Manager clone to file
 
 			// Hard-coded path (always replaces what was originally there) (Do NOT change!)
-			string finalAssetPath = "Assets/Plugins/XboxCtrlrInput_Helpers/InputManagerClone.asset";
+			//string finalAssetPath = "Assets/Plugins/XboxCtrlrInput_Helpers/InputManagerClone.asset";
+			string finalAssetPath = "Assets/Resources/XboxCtrlrInput/InputManagerClone.asset";
 
 			// Create a new data asset into a file on the chosen path
 			AssetDatabase.CreateAsset(inputManagerClone, finalAssetPath);

@@ -47,5 +47,13 @@ namespace XboxCtrlrInput
 	public class XciInputManagerClone : ScriptableObject 
 	{
 		[SerializeField] public InputManagerEntry[] inputManagerEntries;
+
+		public int NumberOfEntries
+		{
+			get
+			{
+				return this.inputManagerEntries.Length;
+			}
+		}
 	}
 }

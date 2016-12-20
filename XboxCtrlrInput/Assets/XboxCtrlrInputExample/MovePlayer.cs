@@ -33,6 +33,8 @@ public class MovePlayer : MonoBehaviour
 	private float dpUpBulletTimer = MAX_BUL_TME * 2;
 	private float dpDownBulletTimer = MAX_BUL_TME * 2;
 	private static bool didQueryNumOfCtrlrs = false;
+
+	private XciInputManagerClone inputManager;	// TEMPORARY for testing
 	
 	
 	// Start
@@ -45,7 +47,29 @@ public class MovePlayer : MonoBehaviour
 			case XboxController.Third: GetComponent<Renderer>().material = matBlue; break;
 			case XboxController.Fourth: GetComponent<Renderer>().material = matYellow; break;
 		}
-		
+
+
+		// TEMPORARY test of the Input Manager clone
+		if(this.controller == XboxController.First)
+		{
+			this.inputManager = XciInputManagerReader.Instance.InputManager;
+
+			if(this.inputManager == null)
+			{
+				Debug.LogError("Freak out!");
+			}
+
+			InputManagerEntry imEntry = null;
+			int imSize = this.inputManager.NumberOfEntries;
+			for(int i = 0; i < imSize; i++)
+			{
+				imEntry = this.inputManager.inputManagerEntries[i];
+
+				Debug.Log(imEntry.name);
+			}
+		}
+
+
 		newPosition = transform.position;
 		
 		if(!didQueryNumOfCtrlrs)
