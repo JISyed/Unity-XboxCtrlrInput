@@ -46,13 +46,39 @@ namespace XboxCtrlrInput
 	[System.Serializable]
 	public class XciInputManagerClone : ScriptableObject 
 	{
-		[SerializeField] public InputManagerEntry[] inputManagerEntries;
+		[SerializeField] private InputManagerEntry[] inputManagerEntries;
 
 		public int NumberOfEntries
 		{
 			get
 			{
+				if(this.inputManagerEntries == null)
+				{
+					return -1;
+				}
+
 				return this.inputManagerEntries.Length;
+			}
+		}
+
+		public InputManagerEntry this[int index]
+		{
+			get
+			{
+				return this.inputManagerEntries[index];
+			}
+		}
+
+		/// <summary>
+		/// 	WARNING: Clears entire Input Manager Clone
+		/// </summary>
+		public void Alloc(int numberOfEntries)
+		{
+			this.inputManagerEntries = new InputManagerEntry[numberOfEntries];
+
+			for(int i = 0; i < numberOfEntries; i++)
+			{
+				this.inputManagerEntries[i] = new InputManagerEntry();
 			}
 		}
 	}

@@ -42,16 +42,16 @@ namespace XboxCtrlrInput.Editor
 
 			// Find the number of entries in the InputManager and allocate space in the clone
 			int NumOfEntries = originalInputEntriesCollection.arraySize;
-			inputManagerClone.inputManagerEntries = new InputManagerEntry[NumOfEntries];
+			inputManagerClone.Alloc(NumOfEntries);
 
 			// Loop through every input entry and copy them into the clone
 			InputManagerEntry currentEntry = null;
 			SerializedProperty originalEntry = null;
 			for(int i = 0; i < NumOfEntries; ++i)
 			{
-				inputManagerClone.inputManagerEntries[i] = new InputManagerEntry();
-				currentEntry = inputManagerClone.inputManagerEntries[i];
 				originalEntry = originalInputEntriesCollection.GetArrayElementAtIndex(i);
+				currentEntry = inputManagerClone[i];
+
 
 				currentEntry.name = InputManagerCloner.GetChildProperty(originalEntry, "m_Name").stringValue;
 				currentEntry.descriptiveName = InputManagerCloner.GetChildProperty(originalEntry, "descriptiveName").stringValue;
@@ -74,7 +74,6 @@ namespace XboxCtrlrInput.Editor
 			// Now save the Input Manager clone to file
 
 			// Hard-coded path (always replaces what was originally there) (Do NOT change!)
-			//string finalAssetPath = "Assets/Plugins/XboxCtrlrInput_Helpers/InputManagerClone.asset";
 			string finalAssetPath = "Assets/Resources/XboxCtrlrInput/InputManagerClone.asset";
 
 			// Create a new data asset into a file on the chosen path
