@@ -1737,7 +1737,7 @@ namespace XboxCtrlrInput
 				{
 					if(XciHandler.instance == null)
 					{
-						GameObject xciHandleObj = new GameObject("XboxCtrlrInput Handler Script");
+						GameObject xciHandleObj = new GameObject("XboxCtrlrInput Handler Object");
 						xciHandleObj.AddComponent<XciHandler>();
 					}
 
