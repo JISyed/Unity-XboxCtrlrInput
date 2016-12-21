@@ -40,10 +40,11 @@ The goals of `XboxCtrlrInput` are:
 bool didPressA = XCI.GetButton(XboxButton.A);
 ```
 
+**Note for Windows user:** If you edit any values in Unity's Input Manager (especially the deadzone values), you must select `Window ▶ XboxCtrlrInput ▶ Clone Input Manager` in order for changes to apply. If you didn't modify any values in the Input Manager, no further action is required. When developing macOS or Linux games, cloning the Input Manager is not used by the XCI system.
 
-**Note for OSX users:** Be sure to install the latest version of the [Tattie Bogle drivers](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver). If you are making a native Mac build with either 64-bit or Universal binary, you need Unity 4.5 or greater. Input will not work if using older versions of Unity.
+**Note for macOS users:** Be sure to install the latest version of the [Tattie Bogle drivers](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver). If you are making a native Mac build with either 64-bit or Universal binary, you need Unity 4.5 or greater. Input will not work if using older versions of Unity.
 
-**Note for OSX Yosemite users:** Above download to Tattie Bogle drivers don't seem to work on Yosemite. Follow [this blog post](http://www.jacobtomlinson.co.uk/2014/10/17/use-xbox-360-pad-with-yosemite/) to help get Xbox controllers to work on Yosemite.
+**Note for macOS Yosemite users:** Above download to Tattie Bogle drivers don't seem to work on Yosemite. Follow [this blog post](http://www.jacobtomlinson.co.uk/2014/10/17/use-xbox-360-pad-with-yosemite/) to help get Xbox controllers to work on Yosemite.
 
 **Note for Linux users:** All of my Linux testing was done on Ubuntu 13.04 64-bit. To test 32-bit Unity builds on a 64-bit OS, I ran `sudo apt-get install ia32-libs` in a terminal. I am using the default Xbox controller driver that came with Ubuntu, which is known as [xpad](http://lxr.free-electrons.com/source/drivers/input/joystick/xpad.c). I could not get Unity builds to cooperate with [xboxdrv](http://pingus.seul.org/~grumbel/xboxdrv/). Your milage may vary. For best results, make sure all your Xbox controllers are connected before testing anything.
 
