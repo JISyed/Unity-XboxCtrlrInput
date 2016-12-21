@@ -751,8 +751,9 @@ namespace XboxCtrlrInput
 				{
 					r = XInputGetAxisState(ctrlrState.ThumbSticks, axis);
 				}
+
+				r = XInputApplyDeadzone(r, axis, XboxController.All);
 			}
-			
 			else
 			{
 				string axisCode = DetermineAxisCode(axis, 0);
@@ -799,8 +800,9 @@ namespace XboxCtrlrInput
 				{
 					r = XInputGetAxisState(ctrlrState.ThumbSticks, axis);
 				}
+
+				r = XInputApplyDeadzone(r, axis, controller);
 			}
-			
 			else
 			{
 				string axisCode = DetermineAxisCode(axis, controllerNumber);
@@ -1672,6 +1674,51 @@ namespace XboxCtrlrInput
 			return r;
 		}
 
+		private static float XInputApplyDeadzone(float rawAxisValue, XboxAxis axis, XboxController controller)
+		{
+			float finalValue = rawAxisValue;
+			float deadzone = 0.0f;
+
+			// Find the deadzone
+			switch(axis)
+			{
+			case XboxAxis.LeftStickX:
+				deadzone = XciHandler.Instance.Deadzones.LeftStickX[(int) controller];
+				break;
+			case XboxAxis.LeftStickY:
+				deadzone = XciHandler.Instance.Deadzones.LeftStickY[(int) controller];
+				break;
+			case XboxAxis.RightStickX:
+				deadzone = XciHandler.Instance.Deadzones.RightStickX[(int) controller];
+				break;
+			case XboxAxis.RightStickY:
+				deadzone = XciHandler.Instance.Deadzones.RightStickY[(int) controller];
+				break;
+			case XboxAxis.LeftTrigger:
+				deadzone = XciHandler.Instance.Deadzones.LeftTrigger[(int) controller];
+				break;
+			case XboxAxis.RightTrigger:
+				deadzone = XciHandler.Instance.Deadzones.RightTrigger[(int) controller];
+				break;
+			}
+
+
+			// Clear axis value if less than the deadzone
+			if(Mathf.Abs(rawAxisValue) < deadzone)
+			{
+				finalValue = 0.0f;
+			}
+			// Remap the axis value from interval [0,1] to [deadzone,1]
+			else
+			{
+				finalValue = (Mathf.Abs(rawAxisValue) * (1 - deadzone)) + deadzone;
+				finalValue = finalValue * Mathf.Sign(rawAxisValue);
+			}
+
+
+			return finalValue;
+		}
+
 
 		// -------------------------- Handler Script -------------------
 
@@ -1690,6 +1737,7 @@ namespace XboxCtrlrInput
 			public bool u3dTrigger3RightIsTouched = false;
 			public bool u3dTrigger4LeftIsTouched = false;
 			public bool u3dTrigger4RightIsTouched = false;
+			private XciAxisDeadzoneData deadZones = null;
 
 			void Awake()
 			{
@@ -1699,6 +1747,9 @@ namespace XboxCtrlrInput
 				}
 
 				XciHandler.instance = this;
+
+				this.deadZones = new XciAxisDeadzoneData();
+				this.deadZones.Init(XciInputManagerReader.Instance.InputManager);
 
 				// Lives for the life of the game
 				DontDestroyOnLoad(this.gameObject);
@@ -1714,6 +1765,14 @@ namespace XboxCtrlrInput
 				if(!isWindowInFocusNow)
 				{
 					this.ResetTriggerTouches();
+				}
+			}
+
+			public XciAxisDeadzoneData Deadzones
+			{
+				get
+				{
+					return this.deadZones;
 				}
 			}
 

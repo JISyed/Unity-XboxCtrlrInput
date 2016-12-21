@@ -70,6 +70,29 @@ namespace XboxCtrlrInput
 		}
 
 		/// <summary>
+		/// 	Searchs by the name of the input.
+		/// </summary>
+		public InputManagerEntry SearchInputByName(string entryName)
+		{
+			InputManagerEntry foundEntry = null;
+
+			InputManagerEntry currentEntry = null;
+			int numEntries = this.NumberOfEntries;
+			for(int i = 0; i < numEntries; i++)
+			{
+				currentEntry = this.inputManagerEntries[i];
+
+				if(currentEntry.name.Equals(entryName))
+				{
+					foundEntry = currentEntry;
+					break;
+				}
+			}
+
+			return foundEntry;
+		}
+
+		/// <summary>
 		/// 	WARNING: Clears entire Input Manager Clone
 		/// </summary>
 		public void Alloc(int numberOfEntries)
