@@ -3,7 +3,7 @@
 XboxCtrlrInput for Unity
 ========================
 
-Feel free to contribute. Requires at least Unity 5.0 or greater. Unfortunately older versions of Unity are no longer supported (it may work or not, but your miliage will vary).
+Feel free to contribute. Requires at least Unity 5.3 or greater. Unfortunately older versions of Unity are no longer supported (it may work or not, but your miliage will vary).
 
 ### Decription
 
@@ -40,11 +40,9 @@ The goals of `XboxCtrlrInput` are:
 bool didPressA = XCI.GetButton(XboxButton.A);
 ```
 
-**Note for Windows user:** If you edit any values in Unity's Input Manager (especially the deadzone values), you must select `Window ▶ XboxCtrlrInput ▶ Clone Input Manager` in order for changes to apply. If you didn't modify any values in the Input Manager, no further action is required. When developing macOS or Linux games, cloning the Input Manager is not used by the XCI system.
+**Note for Windows user:** If you edit any values in Unity's Input Manager (especially the deadzone values), you must select `Window ▶ XboxCtrlrInput ▶ Clone Input Manager` in order for changes to apply. If you didn't modify any values in the Input Manager, cloning the Input Manager is not necessary. When developing macOS or Linux games, cloning the Input Manager is not used by the XCI system.
 
-**Note for macOS users:** Be sure to install the latest version of the [Tattie Bogle drivers](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver). If you are making a native Mac build with either 64-bit or Universal binary, you need Unity 4.5 or greater. Input will not work if using older versions of Unity.
-
-**Note for macOS Yosemite users:** Above download to Tattie Bogle drivers don't seem to work on Yosemite. Follow [this blog post](http://www.jacobtomlinson.co.uk/2014/10/17/use-xbox-360-pad-with-yosemite/) to help get Xbox controllers to work on Yosemite.
+**Note for macOS users:** Be sure to install the latest stable version of the [360Controller drivers](https://github.com/360Controller/360Controller/releases).
 
 **Note for Linux users:** All of my Linux testing was done on Ubuntu 13.04 64-bit. To test 32-bit Unity builds on a 64-bit OS, I ran `sudo apt-get install ia32-libs` in a terminal. I am using the default Xbox controller driver that came with Ubuntu, which is known as [xpad](http://lxr.free-electrons.com/source/drivers/input/joystick/xpad.c). I could not get Unity builds to cooperate with [xboxdrv](http://pingus.seul.org/~grumbel/xboxdrv/). Your milage may vary. For best results, make sure all your Xbox controllers are connected before testing anything.
 
@@ -52,8 +50,6 @@ bool didPressA = XCI.GetButton(XboxButton.A);
 ### What Works?
 
 If you want to find out what currently works (such as button mappings), refer to the [What Works](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/What-Works) page on the wiki. Compatability information can also be found there.
-
-*Update 11/7/13:* Just so everyone knows, using the triggers with multiple controllers on a Windows *web build* won't probably work. Unfortunately this is a limitation of Microsoft's implementation of DirectInput. One controller will work fine though. See [Issue #10](https://github.com/JISyed/Unity-XboxCtrlrInput/issues/10).
 
 
 ### Documentation
