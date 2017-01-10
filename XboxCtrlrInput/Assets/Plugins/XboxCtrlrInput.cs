@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using XInputDotNetPure;
 
 namespace XboxCtrlrInput
@@ -1006,26 +1007,19 @@ namespace XboxCtrlrInput
 			// http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver
 			// http://wiki.unity3d.com/index.php?title=Xbox360Controller
 			return (Application.platform == RuntimePlatform.OSXEditor || 
-				    Application.platform == RuntimePlatform.OSXPlayer ||
-				    Application.platform == RuntimePlatform.OSXWebPlayer);
+				    Application.platform == RuntimePlatform.OSXPlayer   );
 		}
 		
 		private static bool OnWindows()
 		{
 			return (Application.platform == RuntimePlatform.WindowsEditor || 
-				    Application.platform == RuntimePlatform.WindowsPlayer ||
-				    Application.platform == RuntimePlatform.WindowsWebPlayer);
+				    Application.platform == RuntimePlatform.WindowsPlayer   );
 		}
-		
-		private static bool OnWindowsWebPlayer()
-		{
-			return (Application.platform == RuntimePlatform.WindowsWebPlayer);
-		}
-		
-		private static bool OnWindowsNative()
+
+        private static bool OnWindowsNative()
 		{
 			return (Application.platform == RuntimePlatform.WindowsEditor || 
-				    Application.platform == RuntimePlatform.WindowsPlayer);
+				    Application.platform == RuntimePlatform.WindowsPlayer   );
 		}
 		
 		private static bool OnLinux()
@@ -1755,10 +1749,21 @@ namespace XboxCtrlrInput
 				DontDestroyOnLoad(this.gameObject);
 			}
 
-			void OnLevelWasLoaded(int level)
-			{
-				this.ResetTriggerTouches();
-			}
+            void OnEnable()
+            {
+                SceneManager.sceneLoaded += OnSceneFinishedLoading;
+            }
+
+            void OnDisable()
+            {
+                SceneManager.sceneLoaded -= OnSceneFinishedLoading;
+            }
+
+            // Callback made to replace obsolete method OnLevelWasLoaded(int)
+            void OnSceneFinishedLoading(Scene currentScene, LoadSceneMode mode)
+            {
+                this.ResetTriggerTouches();
+            }
 
 			void OnApplicationFocus(bool isWindowInFocusNow)
 			{

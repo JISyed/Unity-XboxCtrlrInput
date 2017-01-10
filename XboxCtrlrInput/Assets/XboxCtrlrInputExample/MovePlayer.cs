@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 using XboxCtrlrInput;		// Be sure to include this if you want an object to have Xbox input
 
 public class MovePlayer : MonoBehaviour 
@@ -243,7 +243,7 @@ public class MovePlayer : MonoBehaviour
 	{
 		if(other.gameObject.CompareTag("KillField"))
 		{
-			Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 	}
 	
