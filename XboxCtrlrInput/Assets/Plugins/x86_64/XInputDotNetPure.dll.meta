@@ -5,39 +5,60 @@ PluginImporter:
   iconMap: {}
   executionOrder: {}
   isPreloaded: 0
+  isOverridable: 0
   platformData:
     Any:
       enabled: 1
-      settings: {}
+      settings:
+        Exclude Editor: 0
+        Exclude Linux: 1
+        Exclude Linux64: 1
+        Exclude LinuxUniversal: 1
+        Exclude OSXIntel: 1
+        Exclude OSXIntel64: 1
+        Exclude OSXUniversal: 1
+        Exclude SamsungTV: 0
+        Exclude WebGL: 0
+        Exclude Win: 1
+        Exclude Win64: 0
+        Exclude WindowsStoreApps: 0
     Editor:
-      enabled: 0
+      enabled: 1
       settings:
         CPU: x86_64
         DefaultValueInitialized: true
+        OS: Windows
     Linux:
       enabled: 0
       settings:
         CPU: None
     Linux64:
-      enabled: 1
+      enabled: 0
       settings:
-        CPU: x86_64
+        CPU: None
     LinuxUniversal:
       enabled: 0
       settings:
-        CPU: x86_64
+        CPU: None
     OSXIntel:
       enabled: 0
       settings:
         CPU: None
     OSXIntel64:
-      enabled: 1
+      enabled: 0
       settings:
-        CPU: AnyCPU
+        CPU: None
     OSXUniversal:
       enabled: 0
       settings:
-        CPU: x86_64
+        CPU: None
+    SamsungTV:
+      enabled: 1
+      settings:
+        STV_MODEL: STANDARD_15
+    WebGL:
+      enabled: 1
+      settings: {}
     Win:
       enabled: 0
       settings:
@@ -47,9 +68,13 @@ PluginImporter:
       settings:
         CPU: AnyCPU
     WindowsStoreApps:
-      enabled: 0
+      enabled: 1
       settings:
         CPU: AnyCPU
+        DontProcess: False
+        PlaceholderPath: 
+        SDK: AnySDK
+        ScriptingBackend: AnyScriptingBackend
   userData: 
   assetBundleName: 
   assetBundleVariant: 
