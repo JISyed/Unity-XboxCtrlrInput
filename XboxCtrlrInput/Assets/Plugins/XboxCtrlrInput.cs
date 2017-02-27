@@ -1545,7 +1545,7 @@ namespace XboxCtrlrInput
 			{
 				PlayerIndex plyNum = (PlayerIndex) i;
 				xInputCtrlrsPrev[i] = xInputCtrlrs[i];
-				xInputCtrlrs[i] = GamePad.GetState(plyNum, GamePadDeadZone.IndependentAxes);
+				xInputCtrlrs[i] = GamePad.GetState(plyNum, GamePadDeadZone.Circular);
 			}
 			
 			xiUpdateAlreadyCalled = true;
