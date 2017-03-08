@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 using XInputDotNetPure;
+#endif
 
 namespace XboxCtrlrInput
 {
@@ -85,6 +88,7 @@ namespace XboxCtrlrInput
 
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -95,6 +99,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -131,6 +136,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -142,6 +148,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -170,6 +177,7 @@ namespace XboxCtrlrInput
 
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -183,6 +191,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -219,6 +228,7 @@ namespace XboxCtrlrInput
 
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -232,6 +242,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -260,6 +271,7 @@ namespace XboxCtrlrInput
 
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(Time.frameCount < 2)
 				{
 					return false;
@@ -278,6 +290,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -314,6 +327,7 @@ namespace XboxCtrlrInput
 
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(Time.frameCount < 2)
 				{
 					return false;
@@ -332,6 +346,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -361,6 +376,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -372,6 +388,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -427,6 +444,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -438,6 +456,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -488,6 +507,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(Time.frameCount < 2)
 				{
 					return false;
@@ -506,6 +526,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -554,6 +575,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(Time.frameCount < 2)
 				{
 					return false;
@@ -572,6 +594,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -613,6 +636,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(Time.frameCount < 2)
 				{
 					return false;
@@ -631,6 +655,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -679,6 +704,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(Time.frameCount < 2)
 				{
 					return false;
@@ -697,6 +723,7 @@ namespace XboxCtrlrInput
 				{
 					return true;
 				}
+				#endif
 			}
 			
 			else
@@ -737,6 +764,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -754,6 +782,7 @@ namespace XboxCtrlrInput
 				}
 
 				r = XInputApplyDeadzone(r, axis, XboxController.All);
+				#endif
 			}
 			else
 			{
@@ -786,6 +815,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -803,6 +833,7 @@ namespace XboxCtrlrInput
 				}
 
 				r = XInputApplyDeadzone(r, axis, controller);
+				#endif
 			}
 			else
 			{
@@ -827,6 +858,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -842,6 +874,7 @@ namespace XboxCtrlrInput
 				{
 					r = XInputGetAxisState(ctrlrState.ThumbSticks, axis);
 				}
+				#endif
 			}
 			
 			else
@@ -875,6 +908,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!XInputStillInCurrFrame())
 				{
 					XInputUpdateAllStates();
@@ -890,6 +924,7 @@ namespace XboxCtrlrInput
 				{
 					r = XInputGetAxisState(ctrlrState.ThumbSticks, axis);
 				}
+				#endif
 			}
 			
 			else
@@ -914,6 +949,7 @@ namespace XboxCtrlrInput
 			
 			if(OnWindowsNative())
 			{
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 				if(!xiNumOfCtrlrsQueried || !XInputStillInCurrFrame())
 				{
 					xiNumOfCtrlrsQueried = true;
@@ -927,6 +963,7 @@ namespace XboxCtrlrInput
 						r++;
 					}
 				}
+				#endif
 			}
 			
 			else
@@ -957,16 +994,21 @@ namespace XboxCtrlrInput
 			}
 		}
 
+
+
+
+
 		// From @xoorath
 		/// <summary>
 		/// 	Determines if the controller is plugged in the specified controllerNumber.
-		/// 	CAUTION: Only works on Windows Native (Desktop and Editor, not Web)!
+		/// 	CAUTION: Only works on Windows Native (Desktop and Editor)!
 		/// </summary>
 		/// <param name="controllerNumber">
 		/// 	An identifier for the specific controller on which to test the axis. An int between 1 and 4.
 		/// </param>
 		public static bool IsPluggedIn(int controllerNumber)
 		{
+			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 			if(OnWindowsNative())
 			{
 				if (!XInputStillInCurrFrame())
@@ -978,11 +1020,12 @@ namespace XboxCtrlrInput
 				
 				return ctrlrState.IsConnected;
 			}
+			#endif
 
 			// NOT IMPLEMENTED for other platforms
 			return false;
 		}
-		
+
 
 
 
@@ -991,13 +1034,15 @@ namespace XboxCtrlrInput
 		////
 
 		// ------------ Members --------------- //
-		
+
+		// Windows only subsystem
+		#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
 		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
 		private static int xiPrevFrameCount = -1;
 		private static bool xiUpdateAlreadyCalled = false;
 		private static bool xiNumOfCtrlrsQueried = false;
-
+		#endif
 
 		// ------------ Methods --------------- //
 
@@ -1533,7 +1578,8 @@ namespace XboxCtrlrInput
 		
 		
 		// ------------- Private XInput Wrappers (for Windows Native player and editor only) -------------- //
-		
+
+		#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 		
 		//>> For updating states <<
 		
@@ -1712,6 +1758,10 @@ namespace XboxCtrlrInput
 
 			return finalValue;
 		}
+		#endif
+
+		// END of Windows only subsystem
+
 
 
 		// -------------------------- Handler Script -------------------
@@ -1833,5 +1883,9 @@ namespace XboxCtrlrInput
 				return XboxDPad.Right;
 			return default(XboxDPad);
 		}
+
+
 	}
+	
+	
 }
