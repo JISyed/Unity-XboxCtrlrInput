@@ -48,7 +48,7 @@ public class MovePlayer : MonoBehaviour
 
 
 		newPosition = transform.position;
-		
+		//*
 		if(!didQueryNumOfCtrlrs)
 		{
 			didQueryNumOfCtrlrs = true;
@@ -69,6 +69,7 @@ public class MovePlayer : MonoBehaviour
 			
 			XCI.DEBUG_LogControllerNames();
 		}
+        //*/
 	}
 	
 	
