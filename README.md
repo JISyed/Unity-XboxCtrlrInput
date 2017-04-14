@@ -3,7 +3,7 @@
 XboxCtrlrInput for Unity
 ========================
 
-Feel free to contribute. Requires at least Unity 5.3 or greater. Unfortunately older versions of Unity are no longer supported (it may work or not, but your miliage will vary).
+Feel free to contribute. Requires at least Unity 5.3 (64-bit editor only) or greater. Unfortunately older versions of Unity are no longer supported (it may work or not, but your miliage will vary). 32-bit editor is no longer supported (but 32-bit game builds are still supported).
 
 ### Decription
 
@@ -27,7 +27,7 @@ The goals of `XboxCtrlrInput` are:
 1. Download the latest .unitypackage [release](https://github.com/JISyed/Unity-XboxCtrlrInput/releases).
 2. Import the package:  
    `Assets ▶ Import Package ▶ Custom Package...`
-3. Update InputManager.asset file (to configure input axis and buttons):  
+3. Update InputManager.asset file (to configure Xbox 360 input axis and buttons):  
    `Window ▶ XboxCtrlrInput ▶ Replace InputManager.asset...`
 
 
@@ -39,8 +39,6 @@ The goals of `XboxCtrlrInput` are:
 ```csharp
 bool didPressA = XCI.GetButton(XboxButton.A);
 ```
-
-**Note for Windows user:** If you edit any values in Unity's Input Manager (especially the deadzone values), you must select `Window ▶ XboxCtrlrInput ▶ Clone Input Manager` in order for changes to apply. If you didn't modify any values in the Input Manager, cloning the Input Manager is not necessary. When developing macOS or Linux games, cloning the Input Manager is not used by the XCI system.
 
 **Note for macOS users:** Be sure to install the latest stable version of the [360Controller drivers](https://github.com/360Controller/360Controller/releases).
 
