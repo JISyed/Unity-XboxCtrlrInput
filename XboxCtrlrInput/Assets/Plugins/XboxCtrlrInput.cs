@@ -1031,17 +1031,6 @@ namespace XboxCtrlrInput
 		// ------------- Private -------------- //
 		////
 
-		// ------------ Members --------------- //
-
-		// Windows only subsystem
-		#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-		private static GamePadState[] xInputCtrlrs = new GamePadState[4];
-		private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
-		private static int xiPrevFrameCount = -1;
-		private static bool xiUpdateAlreadyCalled = false;
-		private static bool xiNumOfCtrlrsQueried = false;
-		#endif
-
 		// ------------ Methods --------------- //
 
 		private static bool OnMac()
@@ -1578,14 +1567,69 @@ namespace XboxCtrlrInput
         // ------------- Private XInput Wrappers (for Windows Native player and editor only) -------------- //
 
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+        
+        // ------------ Inner Class ------------//
 
-        //>> For updating states <<
+        // Used to setup XInput for Windows
+        class XciXInputInitializer
+        {
+            // Ctor
+            public XciXInputInitializer()
+            {
+                // Only runs once.
+                // Setup XInput here...
+
+
+                // Call input states twice in order to make sure that 
+                // the previous states and current states are the same.
+                // This is needed to prevent errors where GetButtonUp will trigger unexpectledly
+
+                for (int i = 0; i < 4; i++)
+                {
+                    PlayerIndex plyNum = (PlayerIndex)i;
+                    xInputCtrlrsPrev[i] = xInputCtrlrs[i];
+                    xInputCtrlrs[i] = GamePad.GetState(plyNum, XCI.WindowsDeadzoneMethod);
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    PlayerIndex plyNum = (PlayerIndex)i;
+                    xInputCtrlrsPrev[i] = xInputCtrlrs[i];
+                    xInputCtrlrs[i] = GamePad.GetState(plyNum, XCI.WindowsDeadzoneMethod);
+                }
+
+            }
+
+            public void Dummy()
+            {
+                // Intentionally does nothing to prevent warnings
+            }
+        }
+
+
+
+        // ------------ Members --------------- //
+
+        // Windows variables
+        private static GamePadState[] xInputCtrlrs = new GamePadState[4];
+        private static GamePadState[] xInputCtrlrsPrev = new GamePadState[4];
+        private static int xiPrevFrameCount = -1;
+        private static bool xiUpdateAlreadyCalled = false;
+        private static bool xiNumOfCtrlrsQueried = false;
+        private static XciXInputInitializer xinputInitalizer = new XCI.XciXInputInitializer();
+
+        
 
         // This can be set to something different if you want
         private const GamePadDeadZone WindowsDeadzoneMethod = GamePadDeadZone.Circular;
 
 
-		private static void XInputUpdateAllStates()
+
+        // ------------ Methods --------------- //
+
+        //>> For updating states <<
+
+        private static void XInputUpdateAllStates()
 		{
 			if(xiUpdateAlreadyCalled) return;
 			
@@ -1695,7 +1739,8 @@ namespace XboxCtrlrInput
 		private static bool XInputStillInCurrFrame()
 		{
 			bool r = false;
-			
+            xinputInitalizer.Dummy();   // Stop warnings about not using the initilaizer
+
 			// Get the current frame
 			int currFrame = Time.frameCount;
 			
@@ -1719,7 +1764,7 @@ namespace XboxCtrlrInput
 		
 		#endif
 
-		// END of Windows only subsystem
+		// END of Windows only subsystem ==========================================
 
 
 

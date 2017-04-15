@@ -48,12 +48,14 @@ public class MovePlayer : MonoBehaviour
 
 
 		newPosition = transform.position;
-		//*
+		
+
+        // Call for the number of connected controllers once
 		if(!didQueryNumOfCtrlrs)
 		{
 			didQueryNumOfCtrlrs = true;
 			
-			int queriedNumberOfCtrlrs = 1;//XCI.GetNumPluggedCtrlrs();
+			int queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 			
 			if(queriedNumberOfCtrlrs == 1)
 			{
@@ -70,7 +72,7 @@ public class MovePlayer : MonoBehaviour
 			
 			XCI.DEBUG_LogControllerNames();
 		}
-        //*/
+
 	}
 	
 	
@@ -80,14 +82,14 @@ public class MovePlayer : MonoBehaviour
 		GameObject bulletReference = null;
 		
 		// Jump (Left Stick)
-		if(XCI.GetButtonUp(XboxButton.LeftStick, controller) && canJump)
+		if(XCI.GetButtonDown(XboxButton.LeftStick, controller) && canJump)
 		{
 			canJump = false;
 			GetComponent<Rigidbody>().AddRelativeForce(0.0f, jumpImpulse, 0.0f, ForceMode.Impulse);
 		}
 		
 		// Slam (Right Stick)
-		if(XCI.GetButtonUp(XboxButton.RightStick, controller) && !canJump)
+		if(XCI.GetButtonDown(XboxButton.RightStick, controller) && !canJump)
 		{
 			GetComponent<Rigidbody>().AddRelativeForce(0.0f, (-jumpImpulse * 1.5f), 0.0f, ForceMode.Impulse);
 		}
