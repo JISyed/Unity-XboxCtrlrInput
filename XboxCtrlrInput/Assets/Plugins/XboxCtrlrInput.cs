@@ -13,9 +13,19 @@ namespace XboxCtrlrInput
 	/// <summary>
 	///     List of enumerated identifiers for Xbox controllers.
 	/// </summary>
+    /// <remarks>
+    ///     Do NOT change enum values
+    /// </remarks>
 	public enum XboxController
 	{
-		All = 0,
+        /// <summary>
+        ///     "All" Controllers is deprecated! Use "Any" instead.
+        /// </summary>
+        [System.Obsolete("Instead use XboxController.Any")]
+        All = 0,
+
+        Any = 0,
+
 		First = 1,
 		Second = 2,
 		Third = 3,
@@ -129,7 +139,7 @@ namespace XboxCtrlrInput
 			if (button.IsDPad())
 				return GetDPad(button.ToDPad(), controller);
 
-			if (controller == XboxController.All)
+			if (controller == XboxController.Any)
 				return GetButton(button);
 
 			int controllerNumber = (int)controller;
@@ -221,7 +231,7 @@ namespace XboxCtrlrInput
 			if (button.IsDPad())
 				return GetDPadDown(button.ToDPad(), controller);
 
-			if (controller == XboxController.All)
+			if (controller == XboxController.Any)
 				return GetButtonDown(button);
 
 			int controllerNumber = (int)controller;
@@ -320,7 +330,7 @@ namespace XboxCtrlrInput
 			if (button.IsDPad())
 				return GetDPadUp(button.ToDPad(), controller);
 
-			if (controller == XboxController.All)
+			if (controller == XboxController.Any)
 				return GetButtonUp(button);
 
 			int controllerNumber = (int)controller;
@@ -435,7 +445,7 @@ namespace XboxCtrlrInput
 		/// </param>
 		public static bool GetDPad(XboxDPad padDirection, XboxController controller)
 		{
-			if (controller == XboxController.All)
+			if (controller == XboxController.Any)
 				return GetDPad(padDirection);
 
 			int controllerNumber = (int)controller;
@@ -566,7 +576,7 @@ namespace XboxCtrlrInput
 		/// </param>
 		public static bool GetDPadUp(XboxDPad padDirection, XboxController controller)
 		{
-			if (controller == XboxController.All)
+			if (controller == XboxController.Any)
 				return GetDPadUp(padDirection);
 
 			int controllerNumber = (int)controller;
@@ -695,7 +705,7 @@ namespace XboxCtrlrInput
 		/// </param>
 		public static bool GetDPadDown(XboxDPad padDirection, XboxController controller)
 		{
-			if (controller == XboxController.All)
+			if (controller == XboxController.Any)
 				return GetDPadDown(padDirection);
 
 			int controllerNumber = (int)controller;
@@ -805,7 +815,7 @@ namespace XboxCtrlrInput
 		/// </param>
 		public static float GetAxis(XboxAxis axis, XboxController controller)
 		{
-			if (controller == XboxController.All)
+			if (controller == XboxController.Any)
 				return GetAxis(axis);
 
 			int controllerNumber = (int)controller;
@@ -897,7 +907,7 @@ namespace XboxCtrlrInput
 		/// </param>
 		public static float GetAxisRaw(XboxAxis axis, XboxController controller)
 		{
-			if (controller == XboxController.All)
+			if (controller == XboxController.Any)
 				return GetAxisRaw(axis);
 
 			int controllerNumber = (int)controller;
@@ -998,12 +1008,14 @@ namespace XboxCtrlrInput
 
 		// From @xoorath
 		/// <summary>
-		/// 	Determines if the controller is plugged in the specified controllerNumber.
+		/// 	DEPRECATED: 
+        ///     Determines if the controller is plugged in the specified controllerNumber.
 		/// 	CAUTION: Only works on Windows Native (Desktop and Editor)!
 		/// </summary>
 		/// <param name="controllerNumber">
 		/// 	An identifier for the specific controller on which to test the axis. An int between 1 and 4.
 		/// </param>
+        [System.Obsolete("Instead use IsPluggedIn(XboxController)")]
 		public static bool IsPluggedIn(int controllerNumber)
 		{
 			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
@@ -1025,15 +1037,72 @@ namespace XboxCtrlrInput
 		}
 
 
+        // Based off @xoorath 's implementation
+        /// <summary>
+		/// 	Determines if the controller is plugged in the specified controllerNumber.
+        /// 	Passing Any will evaluate if any controller is connected.
+		/// 	CAUTION: Only works on Windows Native (Desktop and Editor)!
+		/// </summary>
+		/// <param name="controllerNumber">
+		/// 	An identifier for the specific controller on which to test the axis.
+        /// 	Passing Any will evaluate if any controller is connected.
+		/// </param>
+		public static bool IsPluggedIn(XboxController controllerNumber)
+        {
+            #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+            {
+                if (OnWindowsNative())
+                {
+                    if (!XInputStillInCurrFrame())
+                    {
+                        XInputUpdateAllStates();
+                    }
+
+                    GamePadState ctrlrState;
 
 
-		////
-		// ------------- Private -------------- //
-		////
+                    // If inquiring about any controller
+                   
+                    // TODO: Remove condition for XboxController.All when the time comes
+                    // Users of XCI: Feel free to remove XboxController.All if you like having no warnings
+                    if(controllerNumber == XboxController.Any || controllerNumber == XboxController.All)
+                    {
+                        // Examine all controllers it see if any are connected
+                        for(int i = 1; i <= 4; i++)
+                        {
+                            ctrlrState = XInputGetPaticularState(i);
+                            if(ctrlrState.IsConnected)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    
 
-		// ------------ Methods --------------- //
+                    // If specifying a specific controller
 
-		private static bool OnMac()
+                    // Note: Casting only works if XboxController enums are values 1 to 4 (First, Second, Third, Fourth)
+                    ctrlrState = XInputGetPaticularState((int)controllerNumber);
+
+                    return ctrlrState.IsConnected;
+                }
+            }
+            #endif
+
+            // NOT IMPLEMENTED for other platforms
+            return false;
+        }
+
+
+
+
+        ////
+        // ------------- Private -------------- //
+        ////
+
+        // ------------ Methods --------------- //
+
+        private static bool OnMac()
 		{
 			// All Mac mappings are based off TattieBogle Xbox Controller drivers
 			// http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver
