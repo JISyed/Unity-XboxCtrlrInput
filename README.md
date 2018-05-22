@@ -9,7 +9,7 @@ Feel free to contribute. Requires at least Unity 5.3 (64-bit editor only) or gre
 
 `XboxCtrlrInput` is a wrapper written in C# for Unity3D that handles Xbox 360 controller input. It's used in the same way as Unity's [`Input`](http://docs.unity3d.com/Documentation/ScriptReference/Input.html) class. My reasons for starting this project can be read [here](http://jibransyed.wordpress.com/2013/09/07/the-motivation-behind-xboxctrlrinput/).
 
-[`XboxCtrlrInput.cs`](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/XboxCtrlrInput/Assets/XboxCtrlrInputPackage/XboxCtrlrInput.cs) itself is not a Unity script and thus does not need to be attached to any GameObject, since it contains no [`MonoBehavior`](http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html) derived classes in it.
+[`XboxCtrlrInput.cs`](https://github.com/JISyed/Unity-XboxCtrlrInput/blob/master/XboxCtrlrInput/Assets/Plugins/XboxCtrlrInput.cs) itself is not a Unity script and thus does not need to be attached to any GameObject, since it contains no [`MonoBehavior`](http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html) derived classes in it.
 
 `XboxCtrlrInput.cs` includes a C# namespace called `XboxCtrlrInput`. In that namespace there are three enumerations, [`XboxButton`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/XboxButton), [`XboxDPad`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/XboxDPad), and [`XboxAxis`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/XboxAxis). Most importantly, there is a static class called [`XCI`](https://github.com/JISyed/Unity-XboxCtrlrInput/wiki/Coding-Reference#the-xci-class) that is used to get Xbox input.
 
