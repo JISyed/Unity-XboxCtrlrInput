@@ -3,9 +3,14 @@
 XboxCtrlrInput for Unity
 ========================
 
-Feel free to contribute. Requires at least Unity 5.3 (64-bit editor only) or greater. Unfortunately older versions of Unity are no longer supported (it may work or not, but your miliage will vary). 32-bit editor is no longer supported (but 32-bit game builds are still supported).
+### No Longer Maintained
+
+The Unity tools are moving very fast, and there are most likely more suitable alternatives to this old library. I thank everyone who used or contributed to this code. If someone wants to maintain this, feel free to fork.
+
 
 ### Decription
+
+Required at least Unity 5.3 (64-bit editor only) or greater. Unfortunately older versions of Unity are no longer supported (it may work or not, but your miliage will vary). 32-bit editor is no longer supported (but 32-bit game builds are still supported).
 
 `XboxCtrlrInput` is a wrapper written in C# for Unity3D that handles Xbox 360 controller input. It's used in the same way as Unity's [`Input`](http://docs.unity3d.com/Documentation/ScriptReference/Input.html) class. My reasons for starting this project can be read [here](http://jibransyed.wordpress.com/2013/09/07/the-motivation-behind-xboxctrlrinput/).
 
